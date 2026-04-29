@@ -9,8 +9,21 @@ Route::get('/', function () {
     ]);
 }); 
 
-Route::get('/order', function () {
-    return Inertia::render('Order', [
+Route::get('/informasi-modul', function () {
+    return Inertia::render('InformasiModul', [
+        'message' => 'Selamat datang!'
+    ]);
+}); 
+
+
+Route::get('/emodul/materi', function () {
+    return Inertia::render('Emodule', [
+        'message' => 'Selamat datang!'
+    ]);
+}); 
+
+Route::get('/pembelajaran/materi', function () {
+    return Inertia::render('Materi', [
         'message' => 'Selamat datang!'
     ]);
 }); 

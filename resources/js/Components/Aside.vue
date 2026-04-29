@@ -1,6 +1,11 @@
 <script setup>
 import { Link, usePage } from '@inertiajs/vue3';
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
+import { 
+    LayoutDashboard, 
+    Info, 
+    BookOpen, 
+} from 'lucide-vue-next';
 
 const props = defineProps({
     show: Boolean
@@ -16,6 +21,15 @@ const isUrl = (...urls) => {
         return currentUrl === '/';
     }
     return urls.filter(url => currentUrl.startsWith(url)).length > 0;
+};
+
+const dropdowns = ref({
+    emodul: isUrl('/emodul'),
+    pembelajaran: isUrl('/pembelajaran'),
+});
+
+const toggleDropdown = (key) => {
+    dropdowns.value[key] = !dropdowns.value[key];
 };
 </script>
 
@@ -37,7 +51,7 @@ const isUrl = (...urls) => {
     >
         <!-- Brand -->
         <div class="flex items-center justify-between px-5 py-4 border-b border-white/5">
-            <span class="font-semibold text-sm tracking-wide text-white/90">Admin Dashboard</span>
+            <span class="font-semibold text-sm tracking-wide text-white/90">E-Modul Biologi</span>
             <!-- Close button (mobile only) -->
             <button
                 class="lg:hidden p-1 rounded text-white/40 hover:text-white hover:bg-white/10 transition-colors"
@@ -50,39 +64,45 @@ const isUrl = (...urls) => {
         </div>
 
         <!-- Navigation -->
-        <nav class="flex-1 px-3 py-4 space-y-0.5">
+        <nav class="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto custom-scrollbar">
             <Link href="/" :class="[isUrl('/') ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white hover:bg-white/5', 'flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors']">
-                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-                    <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
-                </svg>
+                <LayoutDashboard class="w-4 h-4 shrink-0" />
                 Dashboard
             </Link>
-            <Link href="/order" :class="[isUrl('/order') ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white hover:bg-white/5', 'flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors']">
-                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-                </svg>
-                Orders
+
+            <Link href="/informasi-modul" :class="[isUrl('/informasi-modul') ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white hover:bg-white/5', 'flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors']">
+                <Info class="w-4 h-4 shrink-0" />
+                Informasi Modul
             </Link>
-            <Link href="#" :class="[isUrl('/products') ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white hover:bg-white/5', 'flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors']">
-                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
-                </svg>
-                Products
-            </Link>
-            <Link href="#" :class="[isUrl('/customers') ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white hover:bg-white/5', 'flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors']">
-                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
-                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
-                </svg>
-                Customers
-            </Link>
-            <Link href="#" :class="[isUrl('/analytics') ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white hover:bg-white/5', 'flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors']">
-                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-                </svg>
-                Analytics
-            </Link>
+
+            <div>
+                <button
+                    @click="toggleDropdown('pembelajaran')"
+                    :class="[
+                        isUrl('/pembelajaran') ? 'text-white' : 'text-white/50 hover:text-white hover:bg-white/5',
+                        'w-full flex items-center justify-between px-3 py-2.5 rounded-md text-sm font-medium transition-colors group'
+                    ]"
+                >
+                    <div class="flex items-center gap-3">
+                        <BookOpen class="w-4 h-4 shrink-0" />
+                        Pembelajaran
+                    </div>
+                    <svg
+                        :class="['w-3.5 h-3.5 text-white/20 group-hover:text-white/40 transition-transform duration-200', dropdowns.pembelajaran ? 'rotate-180' : '']"
+                        fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                    >
+                        <path d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div v-show="dropdowns.pembelajaran" class="mt-1 ml-4 pl-3 border-l border-white/5 space-y-0.5">
+                    <Link href="/pembelajaran/materi" :class="[isUrl('/pembelajaran/materi') ? 'text-white bg-white/5' : 'text-white/40 hover:text-white hover:bg-white/5', 'block px-3 py-2 rounded-md text-sm transition-colors']">
+                        Materi
+                    </Link>
+                    <Link href="#" :class="[isUrl('/pembelajaran/lkm-grafting') ? 'text-white bg-white/5' : 'text-white/40 hover:text-white hover:bg-white/5', 'block px-3 py-2 rounded-md text-sm transition-colors']">
+                        LKM-Grafting
+                    </Link>
+                </div>
+            </div>
         </nav>
 
         <!-- User Profile -->
@@ -100,3 +120,19 @@ const isUrl = (...urls) => {
         </div>
     </aside>
 </template>
+
+<style scoped>
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+</style>
