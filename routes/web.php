@@ -8,3 +8,9 @@ Route::get('/', function () {
         'message' => 'Selamat datang!'
     ]);
 }); 
+
+Route::get('/order', function () {
+    return Inertia::render('Order', [
+        'message' => 'Selamat datang!'
+    ]);
+}); 

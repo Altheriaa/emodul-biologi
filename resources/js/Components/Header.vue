@@ -1,5 +1,5 @@
 <script setup>
-
+defineEmits(['open-sidebar']);
 </script>
 
 <template>
@@ -8,7 +8,7 @@
             <!-- Hamburger (mobile only) -->
             <button
                 class="lg:hidden p-1.5 rounded-md text-white/50 hover:text-white hover:bg-white/10 transition-colors"
-                @click="sidebarOpen = true"
+                @click="$emit('open-sidebar')"
             >
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path d="M4 6h16M4 12h16M4 18h16"/>
