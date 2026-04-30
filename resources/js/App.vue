@@ -7,7 +7,7 @@
 </script>
 
 <template>
-    <div class="flex h-screen bg-[#0f0f0f] text-white overflow-hidden font-sans">
+    <div class="flex h-screen bg-[#0f0f0f] text-white overflow-hidden font-sans dark">
         <Aside :show="sidebarOpen" @close="sidebarOpen = false" />
         <!-- Main Content -->
         <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
