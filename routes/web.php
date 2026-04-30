@@ -27,3 +27,11 @@ Route::get('/pembelajaran/materi', function () {
         'message' => 'Selamat datang!'
     ]);
 }); 
+
+Route::get('/login', function () {
+    return Inertia::render('Auth/Login');
+}); 
+
+Route::get('/register', function () {
+    return Inertia::render('Auth/Register');
+}); 

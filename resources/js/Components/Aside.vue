@@ -7,6 +7,8 @@ import {
     BookOpen, 
 } from 'lucide-vue-next';
 
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
+
 const props = defineProps({
     show: Boolean
 });

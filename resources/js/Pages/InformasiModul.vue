@@ -130,7 +130,7 @@ import { Check } from 'lucide-vue-next';
                     </li>
                     <li class="flex items-start gap-2">
                         <Check class="w-4 h-4 text-green-500 shrink-0 mt-0.5" /> 
-                        Mampu memahami dan menjelaskan tentang proses polinasi dan fertilisasi pada tumbuahan.
+                        Mampu memahami dan menjelaskan tentang proses polinasi dan fertilisasi pada tumbuhan.
                     </li>
                 </ol>
             </div>
