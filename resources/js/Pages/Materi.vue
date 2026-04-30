@@ -1,8 +1,13 @@
 <script setup>
 import Layout from '../App.vue';
 import { Button } from '@/components/ui/button';
-
 import { Check, ArrowRight, StickyNote } from 'lucide-vue-next';
+import { router } from '@inertiajs/vue3';
+
+const OpenFlipping = () => {
+    router.visit("/pembelajaran/materi/flipping-book");
+}
+
 </script>
 
 <template>
@@ -31,7 +36,7 @@ import { Check, ArrowRight, StickyNote } from 'lucide-vue-next';
                         <StickyNote class="w-4 h-4" />
                         <span class="text-xs sm:text-sm text-white">45 Halaman</span>
                     </div>
-                    <Button variant="outline" class="text-xs sm:text-sm justify-self-end border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10">
+                    <Button variant="outline" @click="OpenFlipping" class="text-xs sm:text-sm justify-self-end border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10">
                         <ArrowRight class="w-4 h-4 sm:w-2 sm:h-2" />
                         Mulai Belajar
                     </Button>
@@ -53,7 +58,7 @@ import { Check, ArrowRight, StickyNote } from 'lucide-vue-next';
                         <StickyNote class="w-4 h-4" />
                         <span class="text-xs sm:text-sm text-white">45 Halaman</span>
                     </div>
-                    <Button variant="outline" class="text-xs sm:text-sm justify-self-end border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10">
+                    <Button variant="outline" @click="OpenFlipping" class="text-xs sm:text-sm justify-self-end border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10">
                         <ArrowRight class="w-4 h-4 sm:w-2 sm:h-2" />
                         Mulai Belajar
                     </Button>

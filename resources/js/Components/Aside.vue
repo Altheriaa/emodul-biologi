@@ -26,7 +26,7 @@ const isUrl = (...urls) => {
 };
 
 const dropdowns = ref({
-    emodul: isUrl('/emodul'),
+    informasiModul: isUrl('/informasi-modul'),
     pembelajaran: isUrl('/pembelajaran'),
 });
 
@@ -72,10 +72,34 @@ const toggleDropdown = (key) => {
                 Dashboard
             </Link>
 
-            <Link href="/informasi-modul" :class="[isUrl('/informasi-modul') ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white hover:bg-white/5', 'flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors']">
-                <Info class="w-4 h-4 shrink-0" />
-                Informasi Modul
-            </Link>
+            <div>
+                <button
+                    @click="toggleDropdown('informasiModul')"
+                    :class="[
+                        isUrl('/informasi-modul') ? 'text-white' : 'text-white/50 hover:text-white hover:bg-white/5',
+                        'w-full flex items-center justify-between px-3 py-2.5 rounded-md text-sm font-medium transition-colors group'
+                    ]"
+                >
+                    <div class="flex items-center gap-3">
+                        <Info class="w-4 h-4 shrink-0" />
+                        Informasi Modul
+                    </div>
+                    <svg
+                        :class="['w-3.5 h-3.5 text-white/20 group-hover:text-white/40 transition-transform duration-200', dropdowns.informasiModul ? 'rotate-180' : '']"
+                        fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                    >
+                        <path d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div v-show="dropdowns.informasiModul" class="mt-1 ml-4 pl-3 border-l border-white/5 space-y-0.5">
+                    <Link href="/informasi-modul/identitas-modul" :class="[isUrl('/informasi-modul/identitas-modul') ? 'text-white bg-white/5' : 'text-white/40 hover:text-white hover:bg-white/5', 'block px-3 py-2 rounded-md text-sm transition-colors']">
+                        Identitas Modul
+                    </Link>
+                    <Link href="/informasi-modul/cpl-cpmk" :class="[isUrl('/informasi-modul/cpl-cpmk') ? 'text-white bg-white/5' : 'text-white/40 hover:text-white hover:bg-white/5', 'block px-3 py-2 rounded-md text-sm transition-colors']">
+                        CPL & CPMK
+                    </Link>
+                </div>
+            </div>
 
             <div>
                 <button

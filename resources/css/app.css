@@ -5,6 +5,10 @@
 
 @import "tw-animate-css";
 
+/* * {
+    border: 1px solid red;
+} */
+
 @custom-variant dark (&:is(.dark *));
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';

@@ -15,31 +15,14 @@ import { Check } from 'lucide-vue-next';
     <Layout>
         <div class="grid grid-cols-1 gap-3 sm:gap-4 mb-4 sm:mb-6">
             <div class="bg-[#1a1a1a] border border-white/5 rounded-xl p-3 sm:p-4">
-                <p class="text-lg sm:text-2xl font-bold text-white tracking-tight">Informasi E-Modul Biologi</p>
-                <p class="text-xs sm:text-sm text-emerald-400 mt-1">Panduan lengkap mengenai identitas, tujuan dan capaian pembelajaran materi Biologi</p>
+                <p class="text-lg sm:text-2xl font-bold text-white tracking-tight">Informasi CPL dan CPMK E-Modul Anatomi Tumbuhan</p>
+                <p class="text-xs sm:text-sm text-emerald-400 mt-1">Panduan lengkap mengenai capaian pembelajaran lulusan dan capaian pembelajaran mata kuliah materi Anatomi Tumbuhan</p>
             </div>
         </div>
 
-        <!-- grid 1 -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div class="col-span-1 row-span-2 bg-[#1a1a1a] border border-white/5 rounded-xl p-4 sm:p-5">
-                <h2 class="font-bold text-md text-white">Identitas Modul</h2> 
-                <hr class="border-white/10 mt-2 mb-2">
-
-                <span class="opacity-25 lg:text-xs xl:text-sm text-xs sm:text-base text-white">Nama Modul</span>
-                <p class="text-xs sm:text-base text-white mb-2">Anatomi Tumbuhan</p>
-
-                <span class="opacity-25 lg:text-xs xl:text-sm text-xs sm:text-base text-white">Kode Mata Kuliah</span>
-                <p class="text-xs sm:text-base text-white mb-2">PBA303</p>
-
-                <span class="opacity-25 lg:text-xs xl:text-sm text-xs sm:text-base text-white">Semester</span>
-                <p class="text-xs sm:text-base text-white mb-2">III</p>
-
-                <span class="opacity-25 lg:text-xs xl:text-sm text-xs sm:text-base text-white">SKS</span>
-                <p class="text-xs sm:text-base text-white mb-2">3 SKS (2 Teori, 1 Praktikum)</p>
-            </div>
-
-            <div class="col-span-1 sm:col-span-2 sm:col-start-2 bg-[#1a1a1a] border border-white/5 rounded-xl p-4 sm:p-5">
+        <div class="grid grid-cols-4 sm:grid-cols-1 gap-4">
+            <!-- grid -->
+            <div class="col-start-1 col-span-4 row-start-1 row-span-1 bg-[#1a1a1a] border border-white/5 rounded-xl p-4 sm:p-5">
                 <h2 class="font-bold text-md text-white">Capaian Pembelajaran Lulusan (CPL)</h2> 
                 <hr class="border-white/10 mt-3">
                 <div class="space-y-2">
@@ -91,7 +74,8 @@ import { Check } from 'lucide-vue-next';
                 </div>
             </div>
             
-            <div class="col-span-1 sm:col-span-2 sm:col-start-2 bg-[#1a1a1a] border border-white/5 rounded-xl p-4 sm:p-5">
+            <!-- grid 2 -->
+            <div class="col-start-1 col-span-4 row-start-2 row-span-1 bg-[#1a1a1a] border border-white/5 rounded-xl p-4 sm:p-5">
                 <h2 class="font-bold text-md text-white">Capaian Pembelajaran Mata Kuliah (CPMK)</h2> 
                 <hr class="border-white/10 mt-2 mb-4">
                 <ol class="lg:text-xs xl:text-sm text-sm sm:text-base space-y-2 px-2">

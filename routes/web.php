@@ -9,8 +9,8 @@ Route::get('/', function () {
     ]);
 }); 
 
-Route::get('/informasi-modul', function () {
-    return Inertia::render('InformasiModul', [
+Route::get('/informasi-modul/cpl-cpmk', function () {
+    return Inertia::render('CplCpmk', [
         'message' => 'Selamat datang!'
     ]);
 }); 
@@ -34,4 +34,8 @@ Route::get('/login', function () {
 
 Route::get('/register', function () {
     return Inertia::render('Auth/Register');
+}); 
+
+Route::get('/pembelajaran/materi/flipping-book', function () {
+    return Inertia::render('Flipping');
 }); 
