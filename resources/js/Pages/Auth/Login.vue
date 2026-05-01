@@ -26,7 +26,7 @@ import LoginForm from "@/Components/login-02/components/LoginForm.vue"
     </div>
     <div class="bg-muted relative hidden lg:block">
       <img
-        src="/asset/dashboard_overview.png"
+        src="/asset/Anatomi Tumbuhan.png"
         alt="Image"
         class="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
       >
