@@ -1,7 +1,7 @@
 <script setup>
     import { ref } from 'vue'
-    import Aside from './Components/Aside.vue'; 
-    import Header from './Components/Header.vue'; 
+    import Aside from './Components/sidebar/Aside.vue'; 
+    import Header from './Components/sidebar/Header.vue'; 
 
     const sidebarOpen = ref(false)
 </script>

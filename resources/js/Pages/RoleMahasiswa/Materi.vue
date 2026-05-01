@@ -5,7 +5,7 @@ import { Check, ArrowRight, StickyNote } from 'lucide-vue-next';
 import { router } from '@inertiajs/vue3';
 
 const OpenFlipping = () => {
-    router.visit("/pembelajaran/materi/flipping-book");
+    router.visit("/mahasiswa/pembelajaran/materi/flipping-book");
 }
 
 </script>
