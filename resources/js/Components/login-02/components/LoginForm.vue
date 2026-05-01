@@ -9,6 +9,8 @@ import {
   FieldSeparator,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
+import { reactive } from 'vue';
+import { router, usePage } from '@inertiajs/vue3';
 
 const props = defineProps({
   class: {
@@ -17,10 +19,21 @@ const props = defineProps({
     skipCheck: true,
   },
 });
+
+const post = reactive({
+    email : '',
+    password : ''
+})
+
+function store() {
+    router.post('/login', post)
+}
+
+const page = usePage();
 </script>
 
 <template>
-  <form :class="cn('flex flex-col gap-6', props.class)">
+  <form @submit.prevent="store" :class="cn('flex flex-col gap-6', props.class)">
     <FieldGroup>
       <div class="flex flex-col items-center gap-1 text-center">
         <h1 class="text-2xl font-bold">Login to your account</h1>
@@ -30,7 +43,7 @@ const props = defineProps({
       </div>
       <Field>
         <FieldLabel for="email"> Email </FieldLabel>
-        <Input id="email" type="email" placeholder="m@example.com" required />
+        <Input id="email" type="email" placeholder="m@example.com" required v-model="post.email"/>
       </Field>
       <Field>
         <div class="flex items-center">
@@ -42,7 +55,7 @@ const props = defineProps({
             Forgot your password?
           </a>
         </div>
-        <Input id="password" type="password" required />
+        <Input id="password" type="password" required v-model="post.password"/>
       </Field>
       <Field>
         <Button type="submit"> Login </Button>

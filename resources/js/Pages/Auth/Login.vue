@@ -5,6 +5,9 @@ export const description = "A two column login page with a cover image."
 <script setup lang="ts">
 import { GalleryVerticalEnd } from "lucide-vue-next"
 import LoginForm from "@/Components/login-02/components/LoginForm.vue"
+import { usePage } from '@inertiajs/vue3'
+
+const flash = usePage().props.flash
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import Layout from '../App.vue';
+import Layout from '../../App.vue';
 import { Button } from '@/components/ui/button';
 import { Check, ArrowRight, StickyNote } from 'lucide-vue-next';
 

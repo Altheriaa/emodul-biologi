@@ -1,5 +1,5 @@
 <script setup>
-import Layout from '../App.vue';
+import Layout from '../../App.vue';
 
 import {
   Accordion,
@@ -33,7 +33,7 @@ import { Check } from 'lucide-vue-next';
                             <AccordionContent>
                                 <ul class="list-decimal list-inside lg:text-xs xl:text-sm text-sm sm:text-base space-y-2 px-2">
                                     <li>
-                                    (SP3) Menginternalisasi nilai, norma, dan etika akademik
+                                        (SP3) Menginternalisasi nilai, norma, dan etika akademik
                                     </li>
                                     <li>
                                         (SP7) Bekerjasama dan memiliki kepekaan sosial serta kepedulian terhadap masyarakat dan lingkungan

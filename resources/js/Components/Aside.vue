@@ -26,7 +26,7 @@ const isUrl = (...urls) => {
 };
 
 const dropdowns = ref({
-    informasiModul: isUrl('/informasi-modul'),
+    informasiModul: isUrl('/mahasiswa/informasi-modul'),
     pembelajaran: isUrl('/pembelajaran'),
 });
 
@@ -67,7 +67,7 @@ const toggleDropdown = (key) => {
 
         <!-- Navigation -->
         <nav class="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto custom-scrollbar">
-            <Link href="/" :class="[isUrl('/') ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white hover:bg-white/5', 'flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors']">
+            <Link href="/dashboard" :class="[isUrl('/dashboard') ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white hover:bg-white/5', 'flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors']">
                 <LayoutDashboard class="w-4 h-4 shrink-0" />
                 Dashboard
             </Link>
@@ -76,7 +76,7 @@ const toggleDropdown = (key) => {
                 <button
                     @click="toggleDropdown('informasiModul')"
                     :class="[
-                        isUrl('/informasi-modul') ? 'text-white' : 'text-white/50 hover:text-white hover:bg-white/5',
+                        isUrl('/mahasiswa/informasi-modul') ? 'text-white' : 'text-white/50 hover:text-white hover:bg-white/5',
                         'w-full flex items-center justify-between px-3 py-2.5 rounded-md text-sm font-medium transition-colors group'
                     ]"
                 >
@@ -95,7 +95,7 @@ const toggleDropdown = (key) => {
                     <Link href="/informasi-modul/identitas-modul" :class="[isUrl('/informasi-modul/identitas-modul') ? 'text-white bg-white/5' : 'text-white/40 hover:text-white hover:bg-white/5', 'block px-3 py-2 rounded-md text-sm transition-colors']">
                         Identitas Modul
                     </Link>
-                    <Link href="/informasi-modul/cpl-cpmk" :class="[isUrl('/informasi-modul/cpl-cpmk') ? 'text-white bg-white/5' : 'text-white/40 hover:text-white hover:bg-white/5', 'block px-3 py-2 rounded-md text-sm transition-colors']">
+                    <Link href="/mahasiswa/informasi-modul/cpl-cpmk" :class="[isUrl('/mahasiswa/informasi-modul/cpl-cpmk') ? 'text-white bg-white/5' : 'text-white/40 hover:text-white hover:bg-white/5', 'block px-3 py-2 rounded-md text-sm transition-colors']">
                         CPL & CPMK
                     </Link>
                 </div>

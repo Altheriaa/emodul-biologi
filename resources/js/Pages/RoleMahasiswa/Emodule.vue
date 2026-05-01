@@ -1,5 +1,5 @@
 <script setup>
-import Layout from '../App.vue';
+import Layout from '../../App.vue';
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
@@ -15,22 +15,22 @@ const recentSales = [
     <Layout>
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6">
             <div class="bg-[#1a1a1a] border border-white/5 rounded-xl p-3 sm:p-4">
-                <p class="text-xs text-white/40 mb-1">Nama</p>
+                <p class="text-xs text-white/40 mb-1">Total Revenue</p>
                 <p class="text-lg sm:text-2xl font-bold text-white tracking-tight">$45,231.89</p>
                 <p class="text-xs text-emerald-400 mt-1">+20.1% from last month</p>
             </div>
             <div class="bg-[#1a1a1a] border border-white/5 rounded-xl p-3 sm:p-4">
-                <p class="text-xs text-white/40 mb-1">Prodi</p>
+                <p class="text-xs text-white/40 mb-1">Subscriptions</p>
                 <p class="text-lg sm:text-2xl font-bold text-white tracking-tight">+2350</p>
                 <p class="text-xs text-emerald-400 mt-1">+180.1% from last month</p>
             </div>
             <div class="bg-[#1a1a1a] border border-white/5 rounded-xl p-3 sm:p-4">
-                <p class="text-xs text-white/40 mb-1">Jenis Kelamin</p>
+                <p class="text-xs text-white/40 mb-1">Sales</p>
                 <p class="text-lg sm:text-2xl font-bold text-white tracking-tight">+12,234</p>
                 <p class="text-xs text-emerald-400 mt-1">+19% from last month</p>
             </div>
             <div class="bg-[#1a1a1a] border border-white/5 rounded-xl p-3 sm:p-4">
-                <p class="text-xs text-white/40 mb-1">Kelas</p>
+                <p class="text-xs text-white/40 mb-1">Active Now</p>
                 <p class="text-lg sm:text-2xl font-bold text-white tracking-tight">+573</p>
                 <p class="text-xs text-white/40 mt-1">+201 since last hour</p>
             </div>
