@@ -9,6 +9,7 @@ import {
     Settings,
     LogOut,
     ChevronDown,
+    NotepadText
 } from 'lucide-vue-next';
 
 const props = defineProps({
@@ -76,6 +77,14 @@ const navigation = computed(() => {
                 children: [
                     { label: 'Materi', href: '/mahasiswa/pembelajaran/materi' },
                     { label: 'LKM-Grafting', href: '#' },
+                ]
+            },
+            { 
+                label: 'Evaluasi', 
+                icon: NotepadText,
+                id: 'evaluasi',
+                children: [
+                    { label: 'Quiz', href: '/mahasiswa/evaluasi/quiz' },
                 ]
             },
             { label: 'Settings', href: '/mahasiswa/settings', icon: Settings },

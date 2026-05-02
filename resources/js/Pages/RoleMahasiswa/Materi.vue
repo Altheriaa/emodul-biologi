@@ -15,7 +15,7 @@ const OpenFlipping = () => {
         <div class="grid grid-cols-1 gap-3 sm:gap-4 mb-2 sm:mb-4">
             <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">
                 <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">Daftar Materi E-Modul Anatomi Tumbuhan</p>
-                <p class="text-xs sm:text-sm text-emerald-400 mt-1">Daftar materi yang akan dipelajari pada mata kuliah Anatomi Tumbuhan</p>
+                <p class="text-xs sm:text-sm text-green-600 mt-1">Daftar materi yang akan dipelajari pada mata kuliah Anatomi Tumbuhan</p>
             </div>
         </div>
 
@@ -58,7 +58,7 @@ const OpenFlipping = () => {
                         <StickyNote class="w-4 h-4" />
                         <span class="text-xs sm:text-sm text-white">45 Halaman</span>
                     </div>
-                    <Button variant="outline" @click="OpenFlipping" class="text-xs sm:text-sm justify-self-end border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10">
+                    <Button variant="outline" @click="OpenFlipping" class="text-xs sm:text-sm justify-self-end border-green-600 text-green-700 hover:bg-green-50">
                         <ArrowRight class="w-4 h-4 sm:w-2 sm:h-2" />
                         Mulai Belajar
                     </Button>

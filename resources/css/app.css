@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
 
 @import 'tailwindcss';
 
@@ -17,8 +17,19 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-green-50:  #edf7f1;
+    --color-green-100: #d4edde;
+    --color-green-200: #a8dbb9;
+    --color-green-300: #73c491;
+    --color-green-400: #3daa68;
+    --color-green-500: #1a8f4e;
+    --color-green-600: #1a6b3c;
+    --color-green-700: #155c32;
+    --color-green-800: #104d2a;
+    --color-green-900: #0b3d21;
+    --color-green-950: #072416;
 }
 
 @theme inline {

@@ -39,6 +39,12 @@ Route::middleware(['auth'])->group(function () {
             });
         });
 
+        Route::prefix('evaluasi')->group(function () {
+             Route::get('/quiz', function () {
+                return Inertia::render('RoleMahasiswa/Quiz');
+            });
+        });
+
        Route::get('/settings', [ProfileController::class, 'index']);
     });
 

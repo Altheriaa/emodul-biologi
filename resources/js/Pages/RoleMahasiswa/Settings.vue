@@ -28,7 +28,7 @@ const submit = () => {
         <div class="grid grid-cols-1 gap-3 sm:gap-4 mb-4 sm:mb-6">
             <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">
                 <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">Pengaturan Profil</p>
-                <p class="text-xs sm:text-sm text-emerald-400 mt-1">Kelola informasi data diri mahasiswa</p>
+                <p class="text-xs sm:text-sm text-green-600 mt-1">Kelola informasi data diri mahasiswa</p>
             </div>
         </div>
 
