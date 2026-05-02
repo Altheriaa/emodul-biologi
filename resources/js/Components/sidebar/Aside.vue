@@ -161,7 +161,7 @@ const navigation = computed(() => {
                             :class="['w-3.5 h-3.5 text-gray-400 transition-transform duration-200', dropdowns[item.id] ? 'rotate-180' : '']"
                         />
                     </button>
-                    <div v-show="dropdowns[item.id]" class="mt-0.5 ml-4 pl-3 border-l-2 border-gray-200 space-y-0.5">
+                    <div v-show="dropdowns[item.id]" class="mt-0.5 ml-4 pl-3 border-l-1 border-gray-200 space-y-0.5">
                         <Link 
                             v-for="child in item.children" 
                             :key="child.label"

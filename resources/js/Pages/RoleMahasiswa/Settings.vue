@@ -25,10 +25,10 @@ const submit = () => {
 <template>
     <Layout>
         <!-- Page Header -->
-        <div class="mb-6">
-            <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
-                <p class="text-xl font-bold text-gray-800 tracking-tight">Pengaturan Profil</p>
-                <p class="text-sm text-green-600 mt-0.5">Kelola informasi data diri mahasiswa</p>
+        <div class="grid grid-cols-1 gap-3 sm:gap-4 mb-4 sm:mb-6">
+            <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">
+                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">Pengaturan Profil</p>
+                <p class="text-xs sm:text-sm text-emerald-400 mt-1">Kelola informasi data diri mahasiswa</p>
             </div>
         </div>
 
@@ -48,11 +48,6 @@ const submit = () => {
                             Mahasiswa Aktif
                         </span>
                     </div>
-
-                    <!-- Upload placeholder -->
-                    <button type="button" class="w-full mt-1 px-4 py-2 rounded-lg border border-gray-200 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700 transition-colors">
-                        Ganti Foto
-                    </button>
 
                     <hr class="w-full border-gray-100">
 
@@ -78,7 +73,6 @@ const submit = () => {
             <div class="lg:col-span-2 space-y-5">
                 <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
                     <h2 class="text-sm font-semibold text-gray-800 mb-5 flex items-center gap-2">
-                        <span class="w-1.5 h-4 rounded-full bg-green-600 inline-block"></span>
                         Informasi Pribadi
                     </h2>
 
@@ -150,7 +144,7 @@ const submit = () => {
 
                         <hr class="border-gray-100 my-2">
 
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest">Ubah Password</p>
+                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mt-4">Ubah Password</p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             <div class="space-y-1.5">
                                 <label for="password" class="block text-xs font-medium text-gray-600">Password Baru</label>

@@ -1,13 +1,5 @@
 <script setup>
 import Layout from '../../App.vue';
-
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion'
-
 import { Check } from 'lucide-vue-next';
 </script>
 
@@ -19,65 +11,21 @@ import { Check } from 'lucide-vue-next';
                 <p class="text-xs sm:text-sm text-emerald-400 mt-1">Berisi petunjuk modul, deskripsi modul, tujuan modul</p>
             </div>
         </div>
-
-        <div class="grid grid-cols-4 sm:grid-cols-1 gap-4">
-            <!-- grid -->
-            <div class="col-start-1 col-span-4 row-start-1 row-span-1 bg-white border border-gray-200 rounded-xl p-4 sm:p-5">
-                <h2 class="font-bold text-md text-gray-800">Capaian Pembelajaran Lulusan (CPL)</h2> 
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+            <div class="md:col-span-3 md:row-span-3 bg-white border border-gray-200 rounded-xl p-4 sm:p-5">
+                <h2 class="font-bold text-md text-gray-800">Deskripsi Modul</h2> 
                 <hr class="border-gray-200 mt-3">
-                <div class="space-y-2">
-                    <!-- accord -->
-                    <Accordion type="single" collapsible>
-                        <AccordionItem value="item-1">
-                            <AccordionTrigger>A. Sikap</AccordionTrigger>
-                            <AccordionContent>
-                                <ul class="list-decimal list-inside lg:text-xs xl:text-sm text-sm sm:text-base space-y-2 px-2">
-                                    <li>
-                                        (SP3) Menginternalisasi nilai, norma, dan etika akademik
-                                    </li>
-                                    <li>
-                                        (SP7) Bekerjasama dan memiliki kepekaan sosial serta kepedulian terhadap masyarakat dan lingkungan
-                                    </li>
-                                    <li>
-                                        (SP10) Menunjukkan sikap bertanggung jawab atas pekerjaan dibidang keahliannya secara mandiri
-                                    </li>
-                                </ul>
-                            </AccordionContent>
-                        </AccordionItem>
-                        <AccordionItem value="item-2">
-                            <AccordionTrigger>B. Pengetahuan</AccordionTrigger>
-                            <AccordionContent>
-                                <ul class="list-decimal list-inside lg:text-xs xl:text-sm text-sm sm:text-base space-y-2 px-2">
-                                    <li>
-                                    (P2) Menguasai konsep-konsep dasar, hukum-hukum, teori-teori, dan perkembangan keilmuan biologi, serta pola pikir biologis yang diperlukan untuk melaksanakan pembelajaran di satuan pendidikan
-                                    </li>
-                                    <li>
-                                        (P3) Menguasai konsep-konsep pengelolaan sumber daya hayati dan lingkungan serta integrasinya dalam pembelajaran biologi
-                                    </li>
-                                    <li>
-                                        (P5) menguasai konsep pengembangan potensi peserta didik dan sistem pembelajaran biologi berbasis Student Center Learning (SCL)
-                                    </li>
-                                </ul>
-                            </AccordionContent>
-                        </AccordionItem>
-                        <AccordionItem value="item-3">
-                            <AccordionTrigger>C. Keterampilan Umum</AccordionTrigger>
-                            <AccordionContent>
-                                <ul class="list-decimal list-inside lg:text-xs xl:text-sm text-sm sm:text-base space-y-2 px-2">
-                                    <li>
-                                        Mampu mengambil keputusan secara tepat dalam konteks penyelesaian masalah dibidang keahliannya berdasarkan hasil analisis informasi dan data (KU4)
-                                    </li>
-                                </ul>
-                            </AccordionContent>
-                        </AccordionItem>
-                    </Accordion>
-                </div>
+                <p class="text-xs sm:text-sm text-gray-800 mt-2">
+                    Modul ini menyajikan materi ajar mata kuliah Anatomi Tumbuhan yang difokuskan pada pengenalan struktur, organisasi, fungsi, serta
+                    interaksi komponen penyusun tumbuhan mulai dari tingkat sel, jaringan, hingga organ. Materi yang disajikan mencakup komponen kimia 
+                    penyusun sel, struktur dan ultrstruktur sel tumbuhan, dinding sel, plasma membrane, mekanisme transpor melalui membrane, sintesis 
+                    protein dan organel, sistem endomembrane, retikulum endoplasma, kompleks golgi, vakuola, mitokondria, kloroplas, fotosintesis, peroksosom 
+                    dan glioksisom, sitoskeleton, pergerakan dan posisi organel, jaringan tumbuhan (meristem dan jaringan dewasa), struktur dan fungsi organ tumbuhan 
+                    (akar, batang, daun, bunga, buah dan biji).</p>
             </div>
-            
-            <!-- grid 2 -->
-            <div class="col-start-1 col-span-4 row-start-2 row-span-1 bg-white border border-gray-200 rounded-xl p-4 sm:p-5">
-                <h2 class="font-bold text-md text-gray-800">Capaian Pembelajaran Mata Kuliah (CPMK)</h2> 
-                <hr class="border-gray-200 mt-2 mb-4">
+            <div class="md:col-span-3 md:row-span-2 md:col-start-1 md:row-start-4 bg-white border border-gray-200 rounded-xl p-4 sm:p-5">
+                <h2 class="font-bold text-md text-gray-800">Tujuan Pembelajaran</h2> 
+                <hr class="border-gray-200 mt-3 mb-4">
                 <ol class="lg:text-xs xl:text-sm text-sm sm:text-base space-y-2 px-2">
                     <li class="flex items-start gap-2">
                         <Check class="w-4 h-4 text-green-500 shrink-0 mt-0.5" /> 
@@ -100,6 +48,73 @@ import { Check } from 'lucide-vue-next';
                         Mampu memahami dan menjelaskan tentang proses polinasi dan fertilisasi pada tumbuhan.
                     </li>
                 </ol>
+            </div>
+            <div class="md:col-span-2 md:row-span-5 md:col-start-4 md:row-start-1 bg-white border border-gray-200 rounded-xl p-5 flex flex-col">
+                <h2 class="font-bold text-base text-gray-800">Petunjuk Penggunaan</h2>
+                <hr class="border-gray-200 mt-3 mb-5">
+
+                <!-- Stepper -->
+                <div class="flex-1 space-y-0">
+
+                    <!-- Step 1 — active -->
+                    <div class="flex gap-3">
+                        <div class="flex flex-col items-center">
+                            <div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center shrink-0 mt-0.5">
+                                <div class="w-2 h-2 rounded-full bg-white"></div>
+                            </div>
+                            <div class="w-0.5 bg-gray-200 flex-1 my-1"></div>
+                        </div>
+                        <div class="pb-5">
+                            <p class="text-sm font-semibold text-gray-800">1. Pelajari Materi Konseptual</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Baca dan pahami materi yang tersedia pada setiap bab.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex gap-3">
+                        <div class="flex flex-col items-center">
+                            <div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center shrink-0 mt-0.5">
+                                <div class="w-2 h-2 rounded-full bg-white"></div>
+                            </div>
+                            <div class="w-0.5 bg-gray-200 flex-1 my-1"></div>
+                        </div>
+                        <div class="pb-5">
+                            <p class="text-sm font-semibold text-gray-800">2. Eksplorasi Virtual Lab</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Lakukan praktikum virtual untuk memperdalam pemahaman.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex gap-3">
+                        <div class="flex flex-col items-center">
+                            <div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center shrink-0 mt-0.5">
+                                <div class="w-2 h-2 rounded-full bg-white"></div>
+                            </div>
+                            <div class="w-0.5 bg-gray-200 flex-1 my-1"></div>
+                        </div>
+                        <div class="pb-5">
+                            <p class="text-sm font-semibold text-gray-800">3. Kerjakan Lembar Kerja (LKM)</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Selesaikan LKM-Grafting sebagai evaluasi pemahaman.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="flex gap-3">
+                        <div class="flex flex-col items-center">
+                            <div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center shrink-0 mt-0.5">
+                                <div class="w-2 h-2 rounded-full bg-white"></div>
+                            </div>
+                        </div>
+                        <div class="pb-2">
+                            <p class="text-sm font-semibold text-gray-800">4. Ikuti Evaluasi Akhir</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Kerjakan kuis interaktif di akhir setiap bab.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- CTA Button -->
+                <a href="/mahasiswa/pembelajaran/materi" class="mt-5 block w-full text-center px-4 py-3 rounded-xl bg-green-500 hover:bg-green-600 text-white font-semibold text-sm transition-colors shadow-sm">
+                    Mulai Modul →
+                </a>
             </div>
         </div>
     </Layout>
