@@ -1,13 +1,13 @@
 <script setup>
     import { ref } from 'vue'
-    import Aside from './Components/sidebar/Aside.vue'; 
-    import Header from './Components/sidebar/Header.vue'; 
+    import Aside from './components/sidebar/Aside.vue'; 
+    import Header from './components/sidebar/Header.vue'; 
 
     const sidebarOpen = ref(false)
 </script>
 
 <template>
-    <div class="flex h-screen bg-[#0f0f0f] text-white overflow-hidden font-sans dark">
+    <div class="flex h-screen bg-gray-100 text-gray-800 overflow-hidden font-sans">
         <Aside :show="sidebarOpen" @close="sidebarOpen = false" />
         <!-- Main Content -->
         <div class="flex-1 flex flex-col min-w-0 overflow-hidden">

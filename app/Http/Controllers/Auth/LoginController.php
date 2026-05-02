@@ -11,10 +11,6 @@ class LoginController extends Controller
 {
     public function index()
     {
-        if (Auth::check()) {
-            return redirect()->route('dashboard.admin');
-        }
-
         return Inertia::render('Auth/Login');
     }
 

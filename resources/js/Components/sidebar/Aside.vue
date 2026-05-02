@@ -8,6 +8,7 @@ import {
     Users,
     Settings,
     LogOut,
+    ChevronDown,
 } from 'lucide-vue-next';
 
 const props = defineProps({
@@ -42,7 +43,8 @@ const navigation = computed(() => {
     if (role === 'admin') {
         return [
             { label: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
-            { label: 'Kelola User', href: '/admin/users', icon: Users },
+            { label: 'Kelola Mahasiswa', href: '/admin/mahasiswa', icon: Users },
+            { label: 'Kelola Dosen', href: '/admin/dosen', icon: Users },
             { label: 'Pengaturan', href: '/admin/settings', icon: Settings },
         ];
     }
@@ -76,6 +78,7 @@ const navigation = computed(() => {
                     { label: 'LKM-Grafting', href: '#' },
                 ]
             },
+            { label: 'Settings', href: '/mahasiswa/settings', icon: Settings },
         ];
     }
 
@@ -87,24 +90,32 @@ const navigation = computed(() => {
     <!-- Mobile Overlay -->
     <div
         v-if="show"
-        class="fixed inset-0 bg-black/60 z-20 lg:hidden"
+        class="fixed inset-0 bg-black/40 z-20 lg:hidden"
         @click="emit('close')"
     />
 
     <!-- Sidebar -->
     <aside
         :class="[
-            'fixed inset-y-0 left-0 z-30 w-64 bg-[#171717] flex flex-col shrink-0 border-r border-white/5 transition-transform duration-300 ease-in-out',
+            'fixed inset-y-0 left-0 z-30 w-64 bg-white flex flex-col shrink-0 border-r border-gray-200 transition-transform duration-300 ease-in-out shadow-sm',
             'lg:relative lg:translate-x-0 lg:w-56 lg:z-auto',
             show ? 'translate-x-0' : '-translate-x-full'
         ]"
     >
         <!-- Brand -->
-        <div class="flex items-center justify-between px-5 py-4 border-b border-white/5">
-            <span class="font-semibold text-sm tracking-wide text-white/90">E-Modul Biologi</span>
+        <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+            <div class="flex items-center gap-2.5">
+                <!-- Logo icon -->
+                <div class="w-7 h-7 rounded-lg bg-green-700 flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <span class="font-semibold text-sm tracking-wide text-gray-800">E-Modul Biologi</span>
+            </div>
             <!-- Close button (mobile only) -->
             <button
-                class="lg:hidden p-1 rounded text-white/40 hover:text-white hover:bg-white/10 transition-colors"
+                class="lg:hidden p-1 rounded text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
                 @click="emit('close')"
             >
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -114,15 +125,17 @@ const navigation = computed(() => {
         </div>
 
         <!-- Navigation -->
-        <nav class="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto custom-scrollbar">
+        <nav class="flex-1 px-2 py-3 space-y-0.5 overflow-y-auto custom-scrollbar">
             <template v-for="item in navigation" :key="item.label">
                 <!-- Simple Link -->
                 <Link 
                     v-if="!item.children"
                     :href="item.href" 
                     :class="[
-                        isUrl(item.href) ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white hover:bg-white/5', 
-                        'flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors'
+                        isUrl(item.href)
+                            ? 'bg-green-700 text-white shadow-sm'
+                            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100', 
+                        'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all'
                     ]"
                 >
                     <component :is="item.icon" class="w-4 h-4 shrink-0" />
@@ -134,28 +147,29 @@ const navigation = computed(() => {
                     <button
                         @click="toggleDropdown(item.id)"
                         :class="[
-                            isUrl(item.href, ...(item.children?.map(c => c.href) || [])) ? 'text-white' : 'text-white/50 hover:text-white hover:bg-white/5',
-                            'w-full flex items-center justify-between px-3 py-2.5 rounded-md text-sm font-medium transition-colors group'
+                            isUrl(item.href, ...(item.children?.map(c => c.href) || []))
+                                ? 'text-green-700 bg-green-50'
+                                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100',
+                            'w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-all group'
                         ]"
                     >
                         <div class="flex items-center gap-3">
                             <component :is="item.icon" class="w-4 h-4 shrink-0" />
                             {{ item.label }}
                         </div>
-                        <svg
-                            :class="['w-3.5 h-3.5 text-white/20 group-hover:text-white/40 transition-transform duration-200', dropdowns[item.id] ? 'rotate-180' : '']"
-                            fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                        >
-                            <path d="M19 9l-7 7-7-7"/>
-                        </svg>
+                        <ChevronDown
+                            :class="['w-3.5 h-3.5 text-gray-400 transition-transform duration-200', dropdowns[item.id] ? 'rotate-180' : '']"
+                        />
                     </button>
-                    <div v-show="dropdowns[item.id]" class="mt-1 ml-4 pl-3 border-l border-white/5 space-y-0.5">
+                    <div v-show="dropdowns[item.id]" class="mt-0.5 ml-4 pl-3 border-l-2 border-gray-200 space-y-0.5">
                         <Link 
                             v-for="child in item.children" 
                             :key="child.label"
                             :href="child.href" 
                             :class="[
-                                isUrl(child.href) ? 'text-white bg-white/5' : 'text-white/40 hover:text-white hover:bg-white/5', 
+                                isUrl(child.href)
+                                    ? 'text-green-700 bg-green-50 font-medium'
+                                    : 'text-gray-500 hover:text-gray-800 hover:bg-gray-50', 
                                 'block px-3 py-2 rounded-md text-sm transition-colors'
                             ]"
                         >
@@ -167,16 +181,16 @@ const navigation = computed(() => {
         </nav>
 
         <!-- User Profile -->
-        <div class="px-3 py-3 border-t border-white/5">
-            <Link href="/logout" method="get" as="button" class="w-full flex items-center gap-3 px-2 py-2 rounded-md hover:bg-white/5 cursor-pointer transition-colors group">
-                <div class="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-xs font-semibold shrink-0">
+        <div class="px-2 py-3 border-t border-gray-100">
+            <Link href="/logout" method="get" as="button" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors group">
+                <div class="w-7 h-7 rounded-full bg-gradient-to-br from-green-600 to-emerald-700 flex items-center justify-center text-xs font-semibold text-white shrink-0">
                     {{ user?.name?.charAt(0) || 'U' }}
                 </div>
                 <div class="flex-1 min-w-0 text-left">
-                    <p class="text-xs font-medium text-white/90 truncate">{{ user?.name }}</p>
-                    <p class="text-xs text-white/40 truncate">{{ user?.email }}</p>
+                    <p class="text-xs font-medium text-gray-800 truncate">{{ user?.name }}</p>
+                    <p class="text-xs text-gray-400 truncate">{{ user?.email }}</p>
                 </div>
-                <LogOut class="w-4 h-4 text-white group-hover:text-white transition-colors shrink-0" />
+                <LogOut class="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors shrink-0" />
             </Link>
         </div>
 
@@ -191,10 +205,10 @@ const navigation = computed(() => {
     background: transparent;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.08);
     border-radius: 10px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.15);
 }
 </style>

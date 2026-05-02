@@ -22,14 +22,14 @@ const toggleFullScreen = () => {
 <template>
     <Layout>
         <div class="grid grid-cols-1 gap-3 sm:gap-4 mb-4 sm:mb-6">
-            <div class="bg-[#1a1a1a] border border-white/5 rounded-xl p-3 sm:p-4">
-                <p class="text-lg sm:text-2xl font-bold text-white tracking-tight">Flipping Anatomi Tumbuhan</p>
+            <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">
+                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">Flipping Anatomi Tumbuhan</p>
             </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 h-[80vh]">
             <!-- Left Panel: Flipbook -->
-            <div class="lg:col-span-2 md:col-span-1 bg-[#1a1a1a] border border-white/5 rounded-xl p-3 sm:p-4 h-[50vh] lg:h-full">
+            <div class="lg:col-span-2 md:col-span-1 bg-white border border-gray-200 rounded-xl p-3 sm:p-4 h-[50vh] lg:h-full">
                 <iframe 
                     ref="iframeRef"
                     src="https://heyzine.com/flip-book/2afbaafeaa162f52" 
@@ -40,29 +40,29 @@ const toggleFullScreen = () => {
             </div>
 
             <!-- Right Panel: Info -->
-            <div class="bg-[#1a1a1a] border border-white/5 rounded-xl p-5 sm:p-6 flex flex-col h-full overflow-y-auto">
+            <div class="bg-white border border-gray-200 rounded-xl p-5 sm:p-6 flex flex-col h-full overflow-y-auto shadow-sm">
 
-                <h2 class="text-white font-bold text-xl sm:text-2xl leading-tight mb-3 tracking-tight">
-                    Anatomi Tumbuhan
+                <h2 class="text-gray-800 font-bold text-xl sm:text-2xl leading-tight mb-3 tracking-tight">
+                    Jaringan Tumbuhan
                 </h2>
-                <div class="w-10 h-1 bg-emerald-500 rounded mb-6"></div>
+                <div class="w-10 h-1 bg-green-600 rounded mb-6"></div>
 
                 <div class="space-y-3 mb-6">
-                    <div class="flex items-center gap-3 text-white/70 text-sm">
-                        <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
-                            <StickyNote class="w-4 h-4 text-emerald-400" />
+                    <div class="flex items-center gap-3 text-gray-600 text-sm">
+                        <div class="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center">
+                            <StickyNote class="w-4 h-4 text-green-600" />
                         </div>
                         <div class="flex flex-col">
-                            <span class="text-[10px] text-white/30 uppercase font-bold tracking-wider">Edisi</span>
+                            <span class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Edisi</span>
                             <span>Volume 1, Nomor 1</span>
                         </div>
                     </div>
-                    <div class="flex items-center gap-3 text-white/70 text-sm">
-                        <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
-                            <Check class="w-4 h-4 text-emerald-400" />
+                    <div class="flex items-center gap-3 text-gray-600 text-sm">
+                        <div class="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center">
+                            <Check class="w-4 h-4 text-green-600" />
                         </div>
                         <div class="flex flex-col">
-                            <span class="text-[10px] text-white/30 uppercase font-bold tracking-wider">Tanggal</span>
+                            <span class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Tanggal</span>
                             <span>Januari 2026</span>
                         </div>
                     </div>
@@ -77,7 +77,7 @@ const toggleFullScreen = () => {
                 <Button 
                     variant="outline" 
                     @click="toggleFullScreen"
-                    class="w-full border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10 gap-2 h-11 rounded-xl"
+                    class="w-full border-green-600 text-green-700 hover:bg-green-50 gap-2 h-11 rounded-xl"
                 >
                     <ArrowRight class="w-4 h-4" />
                     Baca Layar Penuh
