@@ -1,106 +1,152 @@
 <script setup>
 import Layout from '../../../App.vue';
-
+import { router } from '@inertiajs/vue3';
+import { ref } from 'vue';
+import { 
+  Search, 
+  Plus, 
+  MoreHorizontal, 
+  Filter, 
+  Download,
+  CheckCircle2,
+  Clock
+} from 'lucide-vue-next';
+import { 
+  Table, 
+  TableBody, 
+  TableCell, 
+  TableHead, 
+  TableHeader, 
+  TableRow 
+} from '@/components/ui/table';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion'
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
-import { Check } from 'lucide-vue-next';
+// Data Dummy untuk Mockup Layout
+const dataMahasiswa = [
+  { id: 1, nim: '2100101', nama: 'Budi Santoso', prodi: 'Teknik Informatika', kelompok: 'Desa A', status: 'Selesai' },
+  { id: 2, nim: '2100102', nama: 'Siti Aminah', prodi: 'Sistem Informasi', kelompok: 'Desa B', status: 'Pending' },
+  { id: 3, nim: '2100103', nama: 'Andi Wijaya', prodi: 'Teknik Sipil', kelompok: 'Desa A', status: 'Selesai' },
+  { id: 4, nim: '2100104', nama: 'Dewi Lestari', prodi: 'Akuntansi', kelompok: 'Desa C', status: 'Pending' },
+  { id: 5, nim: '2100105', nama: 'Dewi Lestari', prodi: 'Akuntansi', kelompok: 'Desa C', status: 'Pending' },
+  { id: 6, nim: '2100106', nama: 'Dewi Lestari', prodi: 'Akuntansi', kelompok: 'Desa C', status: 'Pending' },
+  { id: 7, nim: '2100107', nama: 'Dewi Lestari', prodi: 'Akuntansi', kelompok: 'Desa C', status: 'Pending' },
+  { id: 8, nim: '2100108', nama: 'Dewi Lestari', prodi: 'Akuntansi', kelompok: 'Desa C', status: 'Pending' },
+];
+
+const searchQuery = ref('');
+
 </script>
 
 <template>
     <Layout>
-        <div class="grid grid-cols-1 gap-3 sm:gap-4 mb-4 sm:mb-6">
-            <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">
-                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">Kelola Dosen</p>
-                <p class="text-xs sm:text-sm text-emerald-400 mt-1">Kelola data dosen yang akan mengajar pada mata kuliah Anatomi Tumbuhan</p>
+        <!-- Header Page -->
+        <div class="grid grid-cols-1 gap-4 mb-6">
+            <div class="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm">
+                <p class="text-xl sm:text-2xl font-bold text-gray-800 tracking-tight">Kelola Dosen</p>
+                <p class="text-xs sm:text-sm text-green-600 mt-1">Halaman untuk mengelola data dosen</p>
             </div>
         </div>
 
-        <div class="grid grid-cols-4 sm:grid-cols-1 gap-4">
-            <!-- grid -->
-            <div class="col-start-1 col-span-4 row-start-1 row-span-1 bg-white border border-gray-200 rounded-xl p-4 sm:p-5">
-                <h2 class="font-bold text-md text-gray-800">Capaian Pembelajaran Lulusan (CPL)</h2> 
-                <hr class="border-gray-200 mt-3">
-                <div class="space-y-2">
-                    <!-- accord -->
-                    <Accordion type="single" collapsible>
-                        <AccordionItem value="item-1">
-                            <AccordionTrigger>A. Sikap</AccordionTrigger>
-                            <AccordionContent>
-                                <ul class="list-decimal list-inside lg:text-xs xl:text-sm text-sm sm:text-base space-y-2 px-2">
-                                    <li>
-                                        (SP3) Menginternalisasi nilai, norma, dan etika akademik
-                                    </li>
-                                    <li>
-                                        (SP7) Bekerjasama dan memiliki kepekaan sosial serta kepedulian terhadap masyarakat dan lingkungan
-                                    </li>
-                                    <li>
-                                        (SP10) Menunjukkan sikap bertanggung jawab atas pekerjaan dibidang keahliannya secara mandiri
-                                    </li>
-                                </ul>
-                            </AccordionContent>
-                        </AccordionItem>
-                        <AccordionItem value="item-2">
-                            <AccordionTrigger>B. Pengetahuan</AccordionTrigger>
-                            <AccordionContent>
-                                <ul class="list-decimal list-inside lg:text-xs xl:text-sm text-sm sm:text-base space-y-2 px-2">
-                                    <li>
-                                    (P2) Menguasai konsep-konsep dasar, hukum-hukum, teori-teori, dan perkembangan keilmuan biologi, serta pola pikir biologis yang diperlukan untuk melaksanakan pembelajaran di satuan pendidikan
-                                    </li>
-                                    <li>
-                                        (P3) Menguasai konsep-konsep pengelolaan sumber daya hayati dan lingkungan serta integrasinya dalam pembelajaran biologi
-                                    </li>
-                                    <li>
-                                        (P5) menguasai konsep pengembangan potensi peserta didik dan sistem pembelajaran biologi berbasis Student Center Learning (SCL)
-                                    </li>
-                                </ul>
-                            </AccordionContent>
-                        </AccordionItem>
-                        <AccordionItem value="item-3">
-                            <AccordionTrigger>C. Keterampilan Umum</AccordionTrigger>
-                            <AccordionContent>
-                                <ul class="list-decimal list-inside lg:text-xs xl:text-sm text-sm sm:text-base space-y-2 px-2">
-                                    <li>
-                                        Mampu mengambil keputusan secara tepat dalam konteks penyelesaian masalah dibidang keahliannya berdasarkan hasil analisis informasi dan data (KU4)
-                                    </li>
-                                </ul>
-                            </AccordionContent>
-                        </AccordionItem>
-                    </Accordion>
-                </div>
-            </div>
-            
-            <!-- grid 2 -->
-            <div class="col-start-1 col-span-4 row-start-2 row-span-1 bg-white border border-gray-200 rounded-xl p-4 sm:p-5">
-                <h2 class="font-bold text-md text-gray-800">Capaian Pembelajaran Mata Kuliah (CPMK)</h2> 
-                <hr class="border-gray-200 mt-2 mb-4">
-                <ol class="lg:text-xs xl:text-sm text-sm sm:text-base space-y-2 px-2">
-                    <li class="flex items-start gap-2">
-                        <Check class="w-4 h-4 text-green-500 shrink-0 mt-0.5" /> 
-                        Mampu menjelaskan dan memahami tentang struktur sel tumbuhan,
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <Check class="w-4 h-4 text-green-500 shrink-0 mt-0.5" /> 
-                        Mampu menjelaskan dan memahami tentang proses pertumbuhan dan perkembangan tumbuhan,
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <Check class="w-4 h-4 text-green-500 shrink-0 mt-0.5" /> 
-                        Mampu menjelaskan dan memahami tentang konsep jaringan dan sistem jaringan pada tumbuhan,
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <Check class="w-4 h-4 text-green-500 shrink-0 mt-0.5" /> 
-                        Mampu menjelaskan dan memahami tentang Struktur organ reproduksi : Bunga, Buah dan Biji,
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <Check class="w-4 h-4 text-green-500 shrink-0 mt-0.5" /> 
-                        Mampu memahami dan menjelaskan tentang proses polinasi dan fertilisasi pada tumbuhan.
-                    </li>
-                </ol>
-            </div>
+        <!-- Content Area -->
+        <div class="w-full">
+            <Card class="border-gray-200 shadow-sm overflow-hidden">
+                <CardHeader class="sm:px-6">
+                    <div class="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
+                        <div class="relative w-full max-w-sm">
+                            <Search class="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                            <Input
+                                v-model="searchQuery"
+                                type="search"
+                                placeholder="Cari NIP atau Nama..."
+                                class="pl-8 h-10"
+                            />
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <Button variant="ghost" size="sm" class="flex-1 md:flex-none h-10 border md:border-none">
+                                <Filter class="mr-2 h-4 w-4" /> Filter
+                            </Button>
+                            <Button variant="outline" @click="OpenFlipping" class="flex-1 md:flex-none h-10 border-green-600 text-green-700 hover:bg-green-50">
+                                <Plus class="mr-2 h-4 w-4" />
+                                <span class="hidden sm:inline">Tambah Dosen</span>
+                                <span class="sm:hidden">Tambah</span>
+                            </Button>
+                        </div>
+                    </div>
+                </CardHeader>
+                
+                <CardContent class="p-0 sm:p-6 pt-0 sm:pt-0">
+                    <div class="rounded-none sm:rounded-md border-y sm:border overflow-x-auto">
+                        <Table>
+                            <TableHeader>
+                                <TableRow class="bg-gray-50/50">
+                                    <TableHead class="w-[120px] pl-4 sm:pl-6">NUPTK</TableHead>
+                                    <TableHead class="px-4">Nama</TableHead>
+                                    <TableHead class="px-4">Jabatan</TableHead>
+                                    <TableHead class="px-4">Email</TableHead>
+                                    <TableHead class="px-4">Password</TableHead>
+                                    <TableHead class="text-right pr-4 sm:pr-6">Aksi</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                <TableRow v-for="item in dataMahasiswa" :key="item.id" class="hover:bg-gray-50/50 transition-colors">
+                                    <TableCell class="font-medium pl-4 sm:pl-6 py-4">{{ item.nim }}</TableCell>
+                                    <TableCell class="px-4 py-4">{{ item.nama }}</TableCell>
+                                    <TableCell class="px-4 py-4">{{ item.prodi }}</TableCell>
+                                    <TableCell class="px-4 py-4">{{ item.kelompok }}</TableCell>
+                                    <TableCell class="px-4 py-4">
+                                        <Badge 
+                                            :variant="item.status === 'Selesai' ? 'default' : 'secondary'"
+                                            class="flex w-fit items-center gap-1"
+                                        >
+                                            <CheckCircle2 v-if="item.status === 'Selesai'" class="h-3 w-3" />
+                                            <Clock v-else class="h-3 w-3" />
+                                            {{ item.status }}
+                                        </Badge>
+                                    </TableCell>
+                                    <TableCell class="text-right pr-4 sm:pr-6 py-4">
+                                        <DropdownMenu>
+                                            <DropdownMenuTrigger as-child>
+                                                <Button variant="ghost" class="h-8 w-8 p-0 hover:bg-gray-200">
+                                                    <MoreHorizontal class="h-4 w-4" />
+                                                </Button>
+                                            </DropdownMenuTrigger>
+                                            <DropdownMenuContent align="end">
+                                                <DropdownMenuLabel>Opsi</DropdownMenuLabel>
+                                                <DropdownMenuItem>Lihat Detail</DropdownMenuItem>
+                                                <DropdownMenuItem>Edit Data</DropdownMenuItem>
+                                                <DropdownMenuSeparator />
+                                                <DropdownMenuItem class="text-red-600">Hapus</DropdownMenuItem>
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
+                                    </TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </div>
+                    
+                    <!-- Pagination Area -->
+                    <div class="flex flex-col sm:flex-row items-center justify-between px-4 py-5 sm:px-0 sm:py-4 gap-4">
+                        <p class="text-sm text-muted-foreground order-2 sm:order-1">
+                            Menampilkan 4 dari 120 data mahasiswa.
+                        </p>
+                        <div class="flex items-center gap-2 w-full sm:w-auto order-1 sm:order-2">
+                            <Button variant="outline" size="sm" disabled class="flex-1 sm:flex-none">Sebelumnya</Button>
+                            <Button variant="outline" size="sm" class="flex-1 sm:flex-none">Berikutnya</Button>
+                        </div>
+                    </div>
+                </CardContent>
+            </Card>
         </div>
     </Layout>
 </template>
