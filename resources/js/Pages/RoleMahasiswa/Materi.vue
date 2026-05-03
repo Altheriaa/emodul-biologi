@@ -56,7 +56,7 @@ const OpenFlipping = () => {
                 <div class="grid grid-cols-2 sm:grid-cols-2 gap-4">
                     <div class="flex items-center gap-2">
                         <StickyNote class="w-4 h-4" />
-                        <span class="text-xs sm:text-sm text-white">45 Halaman</span>
+                        <span class="text-xs sm:text-sm text-gray-700">45 Halaman</span>
                     </div>
                     <Button variant="outline" @click="OpenFlipping" class="text-xs sm:text-sm justify-self-end border-green-600 text-green-700 hover:bg-green-50">
                         <ArrowRight class="w-4 h-4 sm:w-2 sm:h-2" />

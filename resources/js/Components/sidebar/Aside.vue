@@ -115,12 +115,10 @@ const navigation = computed(() => {
         <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100">
             <div class="flex items-center gap-2.5">
                 <!-- Logo icon -->
-                <div class="w-7 h-7 rounded-lg bg-green-700 flex items-center justify-center shrink-0">
-                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                    </svg>
+                <div class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0">
+                    <img src="/asset/Logo Pals.png" alt="">
                 </div>
-                <span class="font-semibold text-sm tracking-wide text-gray-800">E-Modul Biologi</span>
+                <span class="font-semibold text-sm tracking-wide text-gray-800">E-Plant Anatomy Learning System</span>
             </div>
             <!-- Close button (mobile only) -->
             <button

@@ -4,6 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Check, ArrowRight, StickyNote, Clock } from 'lucide-vue-next';
 import { router } from '@inertiajs/vue3';
 
+function startQuiz() {
+    router.visit('/mahasiswa/evaluasi/quiz/start');
+}
 </script>
 
 <template>
@@ -105,7 +108,7 @@ import { router } from '@inertiajs/vue3';
 
             <hr class="border-gray-200 mb-4">
 
-            <button @click="mulaiQuiz" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors">Mulai Quiz</button>
+            <button @click="startQuiz" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors">Mulai Quiz</button>
         </div>
     </Layout>
 </template>

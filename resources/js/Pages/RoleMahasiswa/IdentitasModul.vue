@@ -7,7 +7,7 @@ import { Check } from 'lucide-vue-next';
     <Layout>
         <div class="grid grid-cols-1 gap-3 sm:gap-4 mb-4 sm:mb-6">
             <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">
-                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">Identitas E-Modul Anatomi Tumbuhan</p>
+                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">E-Plant Anatomy Learning System (E-PALS)</p>
                 <p class="text-xs sm:text-sm text-green-600 mt-1">Berisi petunjuk modul, deskripsi modul, tujuan modul</p>
             </div>
         </div>
