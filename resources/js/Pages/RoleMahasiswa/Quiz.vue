@@ -102,6 +102,10 @@ import { router } from '@inertiajs/vue3';
                     </div>
                 </div>
             </div>
+
+            <hr class="border-gray-200 mb-4">
+
+            <button @click="mulaiQuiz" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors">Mulai Quiz</button>
         </div>
     </Layout>
 </template>
