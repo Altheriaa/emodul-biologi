@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dosen;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,7 +15,12 @@ class DosenController extends Controller
      */
     public function index()
     {
-        return Inertia::render('RoleAdmin/KelolaDosen/Index');
+
+        $dosens = User::with('dosen')->where('role', 'dosen')->latest()->paginate(10);
+
+        return Inertia::render('RoleAdmin/KelolaDosen/Index', [
+            'dosens' => $dosens,
+        ]);
     }
 
     /**
@@ -21,7 +28,7 @@ class DosenController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('RoleAdmin/KelolaDosen/Create');
     }
 
     /**
@@ -29,7 +36,29 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'string|required',
+            'email' => 'email|required|unique:users,email',
+            'password' => 'min:8|required|confirmed',
+            'nuptk' => 'integer|required|unique:dosen,nuptk',
+            'jabatan' => 'string|required|max:50',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => 'dosen',
+        ]);
+
+        Dosen::create([
+            'user_id' => $user->id,
+            'nuptk' => $request->nuptk,
+            'jabatan' => $request->jabatan
+        ]); 
+
+        return redirect('/admin/dosen')->with('success', 'Data Dosen berhasil ditambahkan!');
+
     }
 
     /**
@@ -43,9 +72,9 @@ class DosenController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit()
     {
-        //
+        return Inertia::render('RoleAdmin/KelolaDosen/Edit');
     }
 
     /**

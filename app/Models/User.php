@@ -30,6 +30,10 @@ class User extends Authenticatable
         ];
     }
 
+    protected $fillable = [
+        'role'
+    ];
+
     public function isAdmin()
     {
         return $this->role === 'admin';
