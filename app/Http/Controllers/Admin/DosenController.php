@@ -13,13 +13,26 @@ class DosenController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        $dosens = User::with('dosen')->where('role', 'dosen')->latest()->paginate(10);
+        $search = $request->input('search');
+        $dosens = User::with('dosen')->where('role', 'dosen')
+                    ->when($search, function ($query, $search) {
+                        $query->where(function ($q) use ($search) {
+                            $q->where('name', 'like', "%{$search}%")
+                            ->orWhereHas('dosen', function ($dosen) use ($search) {
+                                $dosen->where('nuptk', 'like', "%{$search}%");
+                            });
+                        });
+                    })
+                    ->orderBy('created_at', 'desc')
+                    ->simplePaginate(10)
+                    ->withQueryString();
 
         return Inertia::render('RoleAdmin/KelolaDosen/Index', [
             'dosens' => $dosens,
+            'title' => 'Dosen',
+            'filters' => ['search' => $search],
         ]);
     }
 
@@ -54,8 +67,8 @@ class DosenController extends Controller
         Dosen::create([
             'user_id' => $user->id,
             'nuptk' => $request->nuptk,
-            'jabatan' => $request->jabatan
-        ]); 
+            'jabatan' => $request->jabatan,
+        ]);
 
         return redirect('/admin/dosen')->with('success', 'Data Dosen berhasil ditambahkan!');
 
@@ -72,9 +85,13 @@ class DosenController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit()
+    public function edit(string $id)
     {
-        return Inertia::render('RoleAdmin/KelolaDosen/Edit');
+        $dosen = Dosen::with('user')->findOrFail($id);
+
+        return Inertia::render('RoleAdmin/KelolaDosen/Edit', [
+            'dosen' => $dosen,
+        ]);
     }
 
     /**
@@ -82,7 +99,33 @@ class DosenController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $dosen = Dosen::with('user')->findOrFail($id);
+
+        $request->validate([
+            'name' => 'string|required',
+            'email' => 'email|required|unique:users,email,'.$dosen->user_id,
+            'password' => 'nullable|min:8|confirmed',
+            'nuptk' => 'integer|required|unique:dosen,nuptk,'.$id,
+            'jabatan' => 'string|required|max:50',
+        ]);
+
+        $dosen->user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        if ($request->filled('password')) {
+            $dosen->user->update([
+                'password' => bcrypt($request->password),
+            ]);
+        }
+
+        $dosen->update([
+            'nuptk' => $request->nuptk,
+            'jabatan' => $request->jabatan,
+        ]);
+
+        return redirect('/admin/dosen')->with('success', 'Data Dosen berhasil diperbarui!');
     }
 
     /**
@@ -90,6 +133,10 @@ class DosenController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $dosen = Dosen::with('user')->findOrFail($id);
+
+        $dosen->user->delete($dosen->user_id);
+
+        return redirect('/admin/dosen')->with('success', 'Data Dosen berhasil dihapus!');
     }
 }

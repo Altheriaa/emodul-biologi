@@ -1,14 +1,66 @@
 <script setup>
 import Layout from '../../App.vue';
+import { Toast } from '@/lib/toast';
+import { ref, onMounted, watch } from 'vue';
+import { usePage } from '@inertiajs/vue3';
 
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+// sweet alert toast
+const page = usePage();
 
-const recentSales = [
-    { name: 'Olivia Martin',   email: 'olivia.martin@email.com',   amount: '+$1,999.00', color: 'linear-gradient(135deg,#6366f1,#8b5cf6)' },
-    { name: 'Jackson Lee',     email: 'jackson.lee@email.com',      amount: '+$39.00',    color: 'linear-gradient(135deg,#f59e0b,#ef4444)' },
-    { name: 'Isabella Nguyen', email: 'isabella.nguyen@email.com',  amount: '+$299.00',   color: 'linear-gradient(135deg,#10b981,#3b82f6)' },
-    { name: 'William Kim',     email: 'will.kim@email.com',         amount: '+$99.00',    color: 'linear-gradient(135deg,#ec4899,#f43f5e)' },
-]
+const showFlashMessage = () => {
+    const flash = page.props.flash;
+    const errors = page.props.errors;
+
+    if (flash.success) {
+        Toast.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: flash.success,
+            showConfirmButton: false,
+            customClass: {
+                popup: 'glass-popup rounded-3xl shadow-blur p-6',
+                title: 'font-semibold',
+                icon: 'icon-custom bg-transparent'
+            },
+            timer: 2000
+        });
+    } else if (flash.warning) {
+        Toast.fire({
+            icon: 'warning',
+            text: flash.warning,
+            showConfirmButton: false,
+            customClass: {
+                popup: 'glass-popup rounded-3xl shadow-blur p-6',
+                title: 'font-semibold',
+                icon: 'icon-custom bg-transparent'
+            },
+            timer: 2000
+        });
+    }
+
+    if (Object.keys(errors).length > 0) {
+        const errorMessages = Object.values(errors).join('<br>');
+        Toast.fire({
+            icon: 'error',
+            title: 'Oops...',
+            html: errorMessages,
+            customClass: {
+                popup: 'glass-popup rounded-3xl shadow-blur p-6',
+                title: 'font-bold',
+                confirmButton: 'button-confirm px-6 py-2 rounded-xl text-white',
+            }
+        });
+    }
+};
+
+onMounted(() => {
+    showFlashMessage();
+});
+
+watch(() => page.props.flash, () => {
+    showFlashMessage();
+}, { deep: true });
+
 </script>
 
 <template>

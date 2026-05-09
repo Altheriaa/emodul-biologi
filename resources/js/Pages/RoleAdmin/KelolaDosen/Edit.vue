@@ -1,25 +1,27 @@
 <script setup>
 import Layout from '../../../App.vue';
-import { ref } from 'vue';
+import { useForm } from '@inertiajs/vue3';
 
-const form = ref({
-    name: 'Budi Santoso',
-    email: 'budi@example.com',
-    nim: '22810001',
-    angkatan: '2022',
-    prodi: 'Pendidikan Biologi',
-    jenis_kelamin: 'Laki-laki',
-    password: '',
+const props = defineProps({
+    dosen: Object,
+    errors: Object
+})
+
+const form = useForm({
+    name: props.dosen.user.name,
+    email: props.dosen.user.email,
+    password: '', 
     password_confirmation: '',
+    nuptk: props.dosen.nuptk,
+    jabatan: props.dosen.jabatan,
 });
 
-const saved = ref(false);
-
 const submit = () => {
-    // placeholder — backend nanti
-    saved.value = true;
-    setTimeout(() => { saved.value = false; }, 3000);
+    form.put(`/admin/dosen/${props.dosen.id}`, {
+        preserveScroll: true,
+    });
 };
+
 </script>
 
 <template>
@@ -67,26 +69,26 @@ const submit = () => {
                                 />
                             </div>
 
-                            <!-- NIM -->
+                            <!-- NUPTK -->
                             <div class="space-y-1.5">
-                                <label for="nim" class="block text-xs font-medium text-gray-600">NUPTK</label>
+                                <label for="nuptk" class="block text-xs font-medium text-gray-600">NUPTK</label>
                                 <input
-                                    id="nim"
-                                    v-model="form.nim"
+                                    id="nuptk"
+                                    v-model="form.nuptk"
                                     type="text"
-                                    placeholder="Nomor Induk Mahasiswa"
+                                    placeholder="Nomor Unik Pendidik dan Tenaga Kependidikan"
                                     class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
                                 />
                             </div>
 
-                            <!-- Angkatan -->
+                            <!-- Jabatan -->
                             <div class="space-y-1.5">
-                                <label for="angkatan" class="block text-xs font-medium text-gray-600">Jabatan</label>
+                                <label for="jabatan" class="block text-xs font-medium text-gray-600">Jabatan</label>
                                 <input
-                                    id="angkatan"
-                                    v-model="form.angkatan"
+                                    id="jabatan"
+                                    v-model="form.jabatan"
                                     type="text"
-                                    placeholder="Contoh: 2022"
+                                    placeholder="Contoh: Dosen Biologi"
                                     class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
                                 />
                             </div>
@@ -120,11 +122,10 @@ const submit = () => {
                         <!-- Actions -->
                         <div class="flex items-center justify-between pt-2">
                             <Transition enter-active-class="transition duration-300" enter-from-class="opacity-0 translate-y-1" leave-active-class="transition duration-200" leave-to-class="opacity-0">
-                                <span v-if="saved" class="flex items-center gap-1.5 text-xs text-green-600">
+                                <span v-if="form.wasSuccessful" class="flex items-center gap-1.5 text-xs text-green-600">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
                                     Perubahan berhasil disimpan
                                 </span>
-                                <span v-else></span>
                             </Transition>
                             <button
                                 type="submit"

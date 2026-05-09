@@ -1,23 +1,19 @@
 <script setup>
 import Layout from '../../../App.vue';
-import { reactive } from 'vue';
-import { router } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
 
-const form = reactive({
+const form = useForm({
     name : '',
     email : '',
     password : '',
     password_confirmation : '',
     nuptk : '',
     jabatan : '',
-    
-})
+});
 
 function store() {
-    router.post('/admin/dosen', form)
+    form.post('/admin/dosen');
 }
-
-
 </script>
 
 <template>
@@ -118,11 +114,10 @@ function store() {
                         <!-- Actions -->
                         <div class="flex items-center justify-between pt-2">
                             <Transition enter-active-class="transition duration-300" enter-from-class="opacity-0 translate-y-1" leave-active-class="transition duration-200" leave-to-class="opacity-0">
-                                <span v-if="saved" class="flex items-center gap-1.5 text-xs text-green-600">
+                                <span v-if="form.wasSuccessful" class="flex items-center gap-1.5 text-xs text-green-600">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
                                     Perubahan berhasil disimpan
                                 </span>
-                                <span v-else></span>
                             </Transition>
                             <button
                                 type="submit"
