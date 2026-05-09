@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\Admin\DosenController;
+use App\Http\Controllers\Admin\MahasiswaController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
@@ -57,7 +59,10 @@ Route::middleware(['auth'])->group(function () {
     // ADMIN
     Route::middleware('role:admin')->prefix('admin')->group(function () {
         Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard.admin');
+        Route::resource('/mahasiswa', MahasiswaController::class);
         Route::resource('/dosen', DosenController::class);
+        Route::get('/settings', [AdminProfileController::class, 'index']);
+        Route::put('/settings', [AdminProfileController::class, 'update']);
     });
 
 });

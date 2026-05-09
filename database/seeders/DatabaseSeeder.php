@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
          User::factory()
-            ->hasDosen()
+            ->hasMahasiswa()
             ->count(50)
             ->create([
-                'role' => 'dosen'
+                'role' => 'mahasiswa'
         ]);
     }
 }

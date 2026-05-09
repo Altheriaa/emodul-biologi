@@ -46,7 +46,7 @@ const navigation = computed(() => {
             { label: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
             { label: 'Kelola Mahasiswa', href: '/admin/mahasiswa', icon: Users },
             { label: 'Kelola Dosen', href: '/admin/dosen', icon: Users },
-            { label: 'Pengaturan', href: '/admin/settings', icon: Settings },
+            { label: 'Settings', href: '/admin/settings', icon: Settings },
         ];
     }
 

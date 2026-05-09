@@ -55,6 +55,9 @@ const submit = () => {
                                     placeholder="Nama lengkap"
                                     class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
                                 />
+                                <small v-if="form.errors.name" class="text-red-500 text-xs mt-1 d-block">
+                                    {{ form.errors.name }}
+                                </small>
                             </div>
 
                             <!-- Email -->
@@ -67,6 +70,9 @@ const submit = () => {
                                     placeholder="email@example.com"
                                     class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
                                 />
+                                <small v-if="form.errors.email" class="text-red-500 text-xs mt-1 d-block">
+                                    {{ form.errors.email }}
+                                </small>
                             </div>
 
                             <!-- NUPTK -->
@@ -79,6 +85,9 @@ const submit = () => {
                                     placeholder="Nomor Unik Pendidik dan Tenaga Kependidikan"
                                     class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
                                 />
+                                <small v-if="form.errors.nuptk" class="text-red-500 text-xs d-block">
+                                    {{ form.errors.nuptk }}
+                                </small>
                             </div>
 
                             <!-- Jabatan -->
@@ -91,6 +100,9 @@ const submit = () => {
                                     placeholder="Contoh: Dosen Biologi"
                                     class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
                                 />
+                                <small v-if="form.errors.jabatan" class="text-red-500 text-xs mt-1 d-block">
+                                    {{ form.errors.jabatan }}
+                                </small>
                             </div>
                         </div>
 
@@ -105,6 +117,9 @@ const submit = () => {
                                     placeholder="••••••••"
                                     class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
                                 />
+                                <small v-if="form.errors.password" class="text-red-500 text-xs mt-1 d-block">
+                                    {{ form.errors.password }}
+                                </small>
                                 <p class="text-[11px] text-gray-400">Minimal 8 karakter</p>
                             </div>
                             <div class="space-y-1.5">
@@ -116,6 +131,9 @@ const submit = () => {
                                     placeholder="••••••••"
                                     class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
                                 />
+                                <small v-if="form.errors.password_confirmation" class="text-red-500 text-xs mt-1 d-block">
+                                    {{ form.errors.password_confirmation }}
+                                </small>
                             </div>
                         </div>
 

@@ -2,18 +2,26 @@
 import Layout from '../../../App.vue';
 import { useForm } from '@inertiajs/vue3';
 
+const props = defineProps({
+    mahasiswa: Object,
+    errors: Object
+})
+
 const form = useForm({
-    name : '',
-    email : '',
-    password : '',
-    password_confirmation : '',
-    nuptk : '',
-    jabatan : '',
+    name: props.mahasiswa.user.name,
+    email: props.mahasiswa.user.email,
+    password: '', 
+    password_confirmation: '',
+    nim: props.mahasiswa.nim,
+    angkatan: props.mahasiswa.angkatan,
 });
 
-function store() {
-    form.post('/admin/dosen');
-}
+const submit = () => {
+    form.put(`/admin/mahasiswa/${props.mahasiswa.id}`, {
+        preserveScroll: true,
+    });
+};
+
 </script>
 
 <template>
@@ -21,8 +29,8 @@ function store() {
         <!-- Page Header -->
         <div class="grid grid-cols-1 gap-4 mb-6">
             <div class="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm">
-                <p class="text-xl sm:text-2xl font-bold text-gray-800 tracking-tight">Tambah Data</p>
-                <p class="text-xs sm:text-sm text-green-600 mt-1">Halaman untuk mengelola data dosen</p>
+                <p class="text-xl sm:text-2xl font-bold text-gray-800 tracking-tight">Kelola Mahasiswa</p>
+                <p class="text-xs sm:text-sm text-green-600 mt-1">Halaman untuk mengelola data Mahasiswa</p>
             </div>
         </div>
 
@@ -31,10 +39,10 @@ function store() {
             <div class="lg:col-span-3 space-y-5">
                 <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
                     <h2 class="text-sm font-semibold text-gray-800 mb-5 flex items-center gap-2">
-                        Informasi Dosen
+                        Informasi Mahasiswa
                     </h2>
 
-                    <form @submit.prevent="store" class="space-y-5">
+                    <form @submit.prevent="submit" class="space-y-5">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
                             <!-- Nama -->
@@ -67,33 +75,33 @@ function store() {
                                 </small>
                             </div>
 
-                            <!-- NIM -->
+                            <!-- NUPTK -->
                             <div class="space-y-1.5">
-                                <label for="nim" class="block text-xs font-medium text-gray-600">NUPTK</label>
+                                <label for="nim" class="block text-xs font-medium text-gray-600">NIM</label>
                                 <input
-                                    id="nuptk"
-                                    v-model="form.nuptk"
+                                    id="nim"
+                                    v-model="form.nim"
                                     type="text"
-                                    placeholder="Nomor Unik Pendidik dan Tenaga Pendidik Kependidikan"
+                                    placeholder="Nomor Induk Mahasiswa"
                                     class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
                                 />
-                                <small v-if="form.errors.nuptk" class="text-red-500 text-xs mt-1 d-block">
-                                    {{ form.errors.nuptk }}
+                                <small v-if="form.errors.nim" class="text-red-500 text-xs mt-1 d-block">
+                                    {{ form.errors.nim }}
                                 </small>
                             </div>
 
                             <!-- Jabatan -->
                             <div class="space-y-1.5">
-                                <label for="jabatan" class="block text-xs font-medium text-gray-600">Jabatan</label>
+                                <label for="angkatan" class="block text-xs font-medium text-gray-600">Angkatan</label>
                                 <input
-                                    id="jabatan"
-                                    v-model="form.jabatan"
+                                    id="angkatan"
+                                    v-model="form.angkatan"
                                     type="text"
-                                    placeholder="Contoh: Dosen Biologi"
+                                    placeholder="Contoh: 2020"
                                     class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
                                 />
-                                <small v-if="form.errors.jabatan" class="text-red-500 text-xs mt-1 d-block">
-                                    {{ form.errors.jabatan }}
+                                <small v-if="form.errors.angkatan" class="text-red-500 text-xs mt-1 d-block">
+                                    {{ form.errors.angkatan }}
                                 </small>
                             </div>
                         </div>
