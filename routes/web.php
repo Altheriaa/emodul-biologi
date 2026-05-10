@@ -5,20 +5,29 @@ use App\Http\Controllers\Admin\DosenController;
 use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Admin\MateriController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
 use App\Http\Controllers\Mahasiswa\MateriController as MahasiswaMateriController;
 use App\Http\Controllers\Mahasiswa\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-
-Route::middleware('guest')->group(function() {
+Route::middleware('guest')->group(function () {
     Route::get('/', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
     Route::post('/register', [RegisterController::class, 'store']);
+
+    // forgot password
+    Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->name('password.request');
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'send'])->name('password.email');
+
+    // reset password
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'index'])->name('password.reset');
+    Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 });
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
@@ -29,7 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('role:mahasiswa')->prefix('mahasiswa')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.mahasiswa');
 
-        route::prefix('informasi-modul')->group(function () {
+        Route::prefix('informasi-modul')->group(function () {
             Route::get('/identitas-modul', function () {
                 return Inertia::render('RoleMahasiswa/InformasiModul/IdentitasModul');
             });
@@ -52,15 +61,15 @@ Route::middleware(['auth'])->group(function () {
             });
         });
 
-       Route::get('/settings', [ProfileController::class, 'index']);
-       Route::put('/settings', [ProfileController::class, 'update']);
+        Route::get('/settings', [ProfileController::class, 'index']);
+        Route::put('/settings', [ProfileController::class, 'update']);
     });
 
     // Admin
     Route::middleware('role:admin')->prefix('admin')->group(function () {
         Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard.admin');
-        
-        route::prefix('informasi-modul')->group(function () {
+
+        Route::prefix('informasi-modul')->group(function () {
             Route::get('/identitas-modul', function () {
                 return Inertia::render('RoleAdmin/InformasiModul/IdentitasModul');
             });
@@ -86,8 +95,3 @@ Route::middleware(['auth'])->group(function () {
     });
 
 });
-
-
-
-
-

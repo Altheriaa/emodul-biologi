@@ -48,12 +48,12 @@ const page = usePage();
       <Field>
         <div class="flex items-center">
           <FieldLabel for="password"> Password </FieldLabel>
-          <a
-            href="#"
+          <Link 
+            href="/forgot-password"
             class="ml-auto text-sm underline-offset-4 hover:underline"
           >
             Forgot your password?
-          </a>
+          </Link>
         </div>
         <Input id="password" type="password" required v-model="post.password"/>
       </Field>
