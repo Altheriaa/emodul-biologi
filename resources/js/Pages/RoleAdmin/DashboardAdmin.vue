@@ -4,6 +4,11 @@ import { Toast } from '@/lib/toast';
 import { ref, onMounted, watch } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 
+const props = defineProps({
+    count_dosen: Number,
+    count_mahasiswa: Number,
+});
+
 // sweet alert toast
 const page = usePage();
 
@@ -67,13 +72,13 @@ watch(() => page.props.flash, () => {
     <Layout>
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6">
             <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">
-                <p class="text-xs text-gray-400 mb-1">Admin</p>
-                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">$45,231.89</p>
+                <p class="text-xs text-gray-400 mb-1">Jumlah Mahasiswa</p>
+                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">{{ count_mahasiswa }}</p>
                 <p class="text-xs text-emerald-400 mt-1">+20.1% from last month</p>
             </div>
             <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">
-                <p class="text-xs text-gray-400 mb-1">Prodi</p>
-                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">+2350</p>
+                <p class="text-xs text-gray-400 mb-1">Jumlah Dosen</p>
+                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">{{ count_dosen }}</p>
                 <p class="text-xs text-emerald-400 mt-1">+180.1% from last month</p>
             </div>
             <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">

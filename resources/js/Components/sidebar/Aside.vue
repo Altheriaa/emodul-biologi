@@ -29,9 +29,11 @@ const isUrl = (...urls) => {
     return urls.filter(url => url && currentUrl.startsWith(url)).length > 0;
 };
 
+// Dropdown biar ga nutup pas ditekan
 const dropdowns = ref({
-    informasiModul: isUrl('/mahasiswa/informasi-modul'),
-    pembelajaran: isUrl('/mahasiswa/pembelajaran'),
+    informasiModul: isUrl('/mahasiswa/informasi-modul', '/admin/informasi-modul'),
+    pembelajaran: isUrl('/mahasiswa/pembelajaran', '/admin/pembelajaran'),
+    evaluasi: isUrl('/mahasiswa/evaluasi'),
 });
 
 const toggleDropdown = (key) => {
@@ -44,6 +46,24 @@ const navigation = computed(() => {
     if (role === 'admin') {
         return [
             { label: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
+            { 
+                label: 'Informasi Modul', 
+                icon: Info,
+                id: 'informasiModul',
+                children: [
+                    { label: 'Identitas Modul', href: '/admin/informasi-modul/identitas-modul' },
+                    { label: 'CPL & CPMK', href: '/admin/informasi-modul/cpl-cpmk' },
+                ]
+            },
+            { 
+                label: 'Pembelajaran', 
+                icon: BookOpen,
+                id: 'pembelajaran',
+                children: [
+                    { label: 'Materi', href: '/admin/pembelajaran/materi' },
+                    { label: 'LKM-Grafting', href: '#' },
+                ]
+            },
             { label: 'Kelola Mahasiswa', href: '/admin/mahasiswa', icon: Users },
             { label: 'Kelola Dosen', href: '/admin/dosen', icon: Users },
             { label: 'Settings', href: '/admin/settings', icon: Settings },

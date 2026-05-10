@@ -1,25 +1,86 @@
 <script setup>
 import Layout from '../../App.vue';
-import { ref } from 'vue';
+import { usePage, useForm } from '@inertiajs/vue3';
+import { Toast } from '@/lib/toast';
+import { ref, onMounted, watch } from 'vue';
 
-const form = ref({
-    name: 'Budi Santoso',
-    email: 'budi@example.com',
-    nim: '22810001',
-    angkatan: '2022',
-    prodi: 'Pendidikan Biologi',
-    jenis_kelamin: 'Laki-laki',
+const props = defineProps({
+    user: Object,
+    errors: Object
+})
+
+const form = useForm({
+    name: props.user.name,
+    email: props.user.email,
+    nim: props.user.mahasiswa.nim,
+    angkatan: props.user.mahasiswa.angkatan,
+    prodi: props.user.mahasiswa.prodi,
     password: '',
     password_confirmation: '',
 });
 
-const saved = ref(false);
-
 const submit = () => {
-    // placeholder — backend nanti
-    saved.value = true;
-    setTimeout(() => { saved.value = false; }, 3000);
+    form.put(`/mahasiswa/settings`, {
+        preserveScroll: true,
+    });
 };
+
+// sweet alert toast
+const page = usePage();
+
+const showFlashMessage = () => {
+    const flash = page.props.flash;
+    const errors = page.props.errors;
+
+    if (flash.success) {
+        Toast.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: flash.success,
+            showConfirmButton: false,
+            customClass: {
+                popup: 'glass-popup rounded-3xl shadow-blur p-6',
+                title: 'font-semibold',
+                icon: 'icon-custom bg-transparent'
+            },
+            timer: 2000
+        });
+    } else if (flash.warning) {
+        Toast.fire({
+            icon: 'warning',
+            text: flash.warning,
+            showConfirmButton: false,
+            customClass: {
+                popup: 'glass-popup rounded-3xl shadow-blur p-6',
+                title: 'font-semibold',
+                icon: 'icon-custom bg-transparent'
+            },
+            timer: 2000
+        });
+    }
+
+    if (Object.keys(errors).length > 0) {
+        const errorMessages = Object.values(errors).join('<br>');
+        Toast.fire({
+            icon: 'error',
+            title: 'Oops...',
+            html: errorMessages,
+            customClass: {
+                popup: 'glass-popup rounded-3xl shadow-blur p-6',
+                title: 'font-bold',
+                confirmButton: 'button-confirm px-6 py-2 rounded-xl text-white',
+            }
+        });
+    }
+};
+
+onMounted(() => {
+    showFlashMessage();
+});
+
+watch(() => page.props.flash, () => {
+    showFlashMessage();
+}, { deep: true });
 </script>
 
 <template>
@@ -61,10 +122,6 @@ const submit = () => {
                             <span class="text-xs text-gray-400">Angkatan</span>
                             <span class="text-xs text-gray-700">{{ form.angkatan }}</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-400">Jenis Kelamin</span>
-                            <span class="text-xs text-gray-700">{{ form.jenis_kelamin }}</span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -89,6 +146,9 @@ const submit = () => {
                                     placeholder="Nama lengkap"
                                     class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
                                 />
+                                <small v-if="form.errors.name" class="text-red-500 text-xs mt-1 d-block">
+                                    {{ form.errors.name }}
+                                </small>
                             </div>
 
                             <!-- Email -->
@@ -101,6 +161,9 @@ const submit = () => {
                                     placeholder="email@example.com"
                                     class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
                                 />
+                                <small v-if="form.errors.email" class="text-red-500 text-xs mt-1 d-block">
+                                    {{ form.errors.email }}
+                                </small>
                             </div>
 
                             <!-- NIM -->
@@ -113,6 +176,9 @@ const submit = () => {
                                     placeholder="Nomor Induk Mahasiswa"
                                     class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
                                 />
+                                <small v-if="form.errors.nim" class="text-red-500 text-xs mt-1 d-block">
+                                    {{ form.errors.nim }}
+                                </small>
                             </div>
 
                             <!-- Angkatan -->
@@ -125,21 +191,10 @@ const submit = () => {
                                     placeholder="Contoh: 2022"
                                     class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
                                 />
+                                <small v-if="form.errors.angkatan" class="text-red-500 text-xs mt-1 d-block">
+                                    {{ form.errors.angkatan }}
+                                </small>
                             </div>
-
-                            <!-- Jenis Kelamin -->
-                            <div class="space-y-1.5">
-                                <label for="jenis_kelamin" class="block text-xs font-medium text-gray-600">Jenis Kelamin</label>
-                                <select
-                                    id="jenis_kelamin"
-                                    v-model="form.jenis_kelamin"
-                                    class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
-                                >
-                                    <option value="Laki-laki">Laki-laki</option>
-                                    <option value="Perempuan">Perempuan</option>
-                                </select>
-                            </div>
-
                         </div>
 
                         <hr class="border-gray-100 my-2">
@@ -155,6 +210,9 @@ const submit = () => {
                                     placeholder="••••••••"
                                     class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
                                 />
+                                <small v-if="form.errors.password" class="text-red-500 text-xs mt-1 d-block">
+                                    {{ form.errors.password }}
+                                </small>
                                 <p class="text-[11px] text-gray-400">Minimal 8 karakter</p>
                             </div>
                             <div class="space-y-1.5">
@@ -166,6 +224,9 @@ const submit = () => {
                                     placeholder="••••••••"
                                     class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
                                 />
+                                <small v-if="form.errors.password_confirmation" class="text-red-500 text-xs mt-1 d-block">
+                                    {{ form.errors.password_confirmation }}
+                                </small>
                             </div>
                         </div>
 

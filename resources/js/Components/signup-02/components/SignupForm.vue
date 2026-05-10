@@ -78,7 +78,7 @@ function store() {
       <FieldSeparator></FieldSeparator>
       <Field>
         <FieldDescription class="px-6 text-center">
-          Sudah Punya Akun? <Link href="/login">Login</Link>
+          Sudah Punya Akun? <Link href="/">Login</Link>
         </FieldDescription>
       </Field>
     </FieldGroup>
