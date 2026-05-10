@@ -1,8 +1,12 @@
 <script setup>
 import { ref } from 'vue';
-import Layout from '../../App.vue';
+import Layout from '../../../App.vue';
 import { Button } from '@/components/ui/button';
 import { Check, ArrowRight, StickyNote } from 'lucide-vue-next';
+
+const props = defineProps({
+    materi: Object,
+})
 
 const iframeRef = ref(null);
 
@@ -32,7 +36,7 @@ const toggleFullScreen = () => {
             <div class="lg:col-span-2 md:col-span-1 bg-white border border-gray-200 rounded-xl p-3 sm:p-4 h-[50vh] lg:h-full">
                 <iframe 
                     ref="iframeRef"
-                    src="https://heyzine.com/flip-book/2afbaafeaa162f52" 
+                    :src="materi.link_flipping"
                     class="w-full h-full rounded-lg border-0 shadow-2xl"
                     allowfullscreen
                     allow="clipboard-write"
@@ -43,35 +47,24 @@ const toggleFullScreen = () => {
             <div class="bg-white border border-gray-200 rounded-xl p-5 sm:p-6 flex flex-col h-full overflow-y-auto shadow-sm">
 
                 <h2 class="text-gray-800 font-bold text-xl sm:text-2xl leading-tight mb-3 tracking-tight">
-                    Jaringan Tumbuhan
+                    {{ materi.judul }}
                 </h2>
                 <div class="w-10 h-1 bg-green-600 rounded mb-6"></div>
 
                 <div class="space-y-3 mb-6">
                     <div class="flex items-center gap-3 text-gray-600 text-sm">
                         <div class="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center">
-                            <StickyNote class="w-4 h-4 text-green-600" />
-                        </div>
-                        <div class="flex flex-col">
-                            <span class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Edisi</span>
-                            <span>Volume 1, Nomor 1</span>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3 text-gray-600 text-sm">
-                        <div class="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center">
                             <Check class="w-4 h-4 text-green-600" />
                         </div>
                         <div class="flex flex-col">
                             <span class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Tanggal</span>
-                            <span>Januari 2026</span>
+                            <span>{{ materi.tanggal_rilis }}</span>
                         </div>
                     </div>
                 </div>
 
                 <p class="text-gray-400 text-sm leading-relaxed text-justify mb-8 flex-1">
-                    Modul ini dirancang untuk memberikan pemahaman komprehensif mengenai struktur internal tumbuhan, 
-                    prinsip-prinsip dasar proses fisiologis, serta aplikasinya dalam berbagai aspek botani. 
-                    Materi disajikan secara interaktif dengan ilustrasi, diagram, dan contoh-contoh nyata.
+                    {{ materi.deskripsi }}
                 </p>
 
                 <Button 

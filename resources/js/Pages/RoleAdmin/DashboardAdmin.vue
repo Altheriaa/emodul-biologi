@@ -7,6 +7,7 @@ import { usePage } from '@inertiajs/vue3';
 const props = defineProps({
     count_dosen: Number,
     count_mahasiswa: Number,
+    count_materi: Number,
 });
 
 // sweet alert toast
@@ -82,12 +83,12 @@ watch(() => page.props.flash, () => {
                 <p class="text-xs text-emerald-400 mt-1">+180.1% from last month</p>
             </div>
             <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">
-                <p class="text-xs text-gray-400 mb-1">Jenis Kelamin</p>
-                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">+12,234</p>
+                <p class="text-xs text-gray-400 mb-1">Jumlah Materi</p>
+                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">{{ count_materi }}</p>
                 <p class="text-xs text-emerald-400 mt-1">+19% from last month</p>
             </div>
             <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">
-                <p class="text-xs text-gray-400 mb-1">Kelas</p>
+                <p class="text-xs text-gray-400 mb-1">Jumlah Soal</p>
                 <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">+573</p>
                 <p class="text-xs text-gray-400 mt-1">+201 since last hour</p>
             </div>

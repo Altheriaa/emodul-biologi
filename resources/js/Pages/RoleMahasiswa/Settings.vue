@@ -14,7 +14,6 @@ const form = useForm({
     email: props.user.email,
     nim: props.user.mahasiswa.nim,
     angkatan: props.user.mahasiswa.angkatan,
-    prodi: props.user.mahasiswa.prodi,
     password: '',
     password_confirmation: '',
 });
@@ -114,10 +113,6 @@ watch(() => page.props.flash, () => {
 
                     <!-- Info ringkas -->
                     <div class="w-full space-y-3">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-400">Prodi</span>
-                            <span class="text-xs text-gray-700">{{ form.prodi }}</span>
-                        </div>
                         <div class="flex justify-between items-center">
                             <span class="text-xs text-gray-400">Angkatan</span>
                             <span class="text-xs text-gray-700">{{ form.angkatan }}</span>

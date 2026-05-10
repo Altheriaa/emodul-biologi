@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
+use App\Http\Controllers\Mahasiswa\MateriController as MahasiswaMateriController;
 use App\Http\Controllers\Mahasiswa\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,26 +25,22 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middl
 
 Route::middleware(['auth'])->group(function () {
 
-    // MAHASISWA
+    // Mahasiswa
     Route::middleware('role:mahasiswa')->prefix('mahasiswa')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.mahasiswa');
 
         route::prefix('informasi-modul')->group(function () {
             Route::get('/identitas-modul', function () {
-                return Inertia::render('RoleMahasiswa/IdentitasModul');
+                return Inertia::render('RoleMahasiswa/InformasiModul/IdentitasModul');
             });
             Route::get('/cpl-cpmk', function () {
-                return Inertia::render('RoleMahasiswa/CplCpmk');
+                return Inertia::render('RoleMahasiswa/InformasiModul/CplCpmk');
             });
         });
 
         Route::prefix('pembelajaran')->group(function () {
-             Route::get('/materi', function () {
-                return Inertia::render('RoleMahasiswa/Materi');
-            });
-            Route::get('/materi/flipping-book', function () {
-                return Inertia::render('RoleMahasiswa/Flipping');
-            });
+            Route::get('/materi', [MahasiswaMateriController::class, 'index']);
+            Route::get('/materi/{materi}', [MahasiswaMateriController::class, 'show']);
         });
 
         Route::prefix('evaluasi')->group(function () {
@@ -59,7 +56,7 @@ Route::middleware(['auth'])->group(function () {
        Route::put('/settings', [ProfileController::class, 'update']);
     });
 
-    // ADMIN
+    // Admin
     Route::middleware('role:admin')->prefix('admin')->group(function () {
         Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard.admin');
         

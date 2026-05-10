@@ -1,5 +1,5 @@
 <script setup>
-import Layout from '../../App.vue';
+import Layout from '../../../App.vue';
 
 import {
   Accordion,
