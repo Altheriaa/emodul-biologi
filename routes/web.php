@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Dosen\DashboardDosenController;
+use App\Http\Controllers\Dosen\MateriController as DosenMateriController;
 use App\Http\Controllers\Dosen\ProfileController as DosenProfileController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
 use App\Http\Controllers\Mahasiswa\MateriController as MahasiswaMateriController;
@@ -70,19 +71,24 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('role:dosen')->prefix('dosen')->group(function () {
         Route::get('/dashboard', [DashboardDosenController::class, 'index'])->name('dashboard.dosen');
 
-        // Route::prefix('informasi-modul')->group(function () {
-        //     Route::get('/identitas-modul', function () {
-        //         return Inertia::render('RoleMahasiswa/InformasiModul/IdentitasModul');
-        //     });
-        //     Route::get('/cpl-cpmk', function () {
-        //         return Inertia::render('RoleMahasiswa/InformasiModul/CplCpmk');
-        //     });
-        // });
+        Route::prefix('informasi-modul')->group(function () {
+            Route::get('/identitas-modul', function () {
+                return Inertia::render('RoleDosen/InformasiModul/IdentitasModul');
+            });
+            Route::get('/cpl-cpmk', function () {
+                return Inertia::render('RoleDosen/InformasiModul/CplCpmk');
+            });
+        });
 
-        // Route::prefix('pembelajaran')->group(function () {
-        //     Route::get('/materi', [MahasiswaMateriController::class, 'index']);
-        //     Route::get('/materi/{materi}', [MahasiswaMateriController::class, 'show']);
-        // });
+        Route::prefix('pembelajaran')->group(function () {
+            Route::get('/materi', [DosenMateriController::class, 'index']);
+            Route::get('/materi/create', [DosenMateriController::class, 'create']);
+            Route::post('/materi', [DosenMateriController::class, 'store']);
+            Route::delete('/materi/{materi}', [DosenMateriController::class, 'destroy']);
+            Route::get('/materi/{materi}', [DosenMateriController::class, 'show']);
+            Route::get('/materi/{materi}/edit', [DosenMateriController::class, 'edit']);
+            Route::put('/materi/{materi}', [DosenMateriController::class, 'update']);
+        });
 
         // Route::prefix('evaluasi')->group(function () {
         //     Route::get('/quiz', function () {

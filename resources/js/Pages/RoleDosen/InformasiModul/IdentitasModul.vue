@@ -111,6 +111,10 @@ import { Check } from 'lucide-vue-next';
                         </div>
                     </div>
                 </div>
+                <!-- CTA Button -->
+                <a href="/mahasiswa/pembelajaran/materi" class="mt-5 block w-full text-center px-4 py-3 rounded-xl bg-green-500 hover:bg-green-600 text-white font-semibold text-sm transition-colors shadow-sm">
+                    Mulai Modul →
+                </a>
             </div>
         </div>
     </Layout>
