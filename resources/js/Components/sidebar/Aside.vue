@@ -73,8 +73,34 @@ const navigation = computed(() => {
     if (role === 'dosen') {
         return [
             { label: 'Dashboard', href: '/dosen/dashboard', icon: LayoutDashboard },
-            { label: 'Kelola Materi', href: '/dosen/materi', icon: BookOpen },
-            { label: 'Monitoring Mahasiswa', href: '/dosen/monitoring', icon: Users },
+            { 
+                label: 'Informasi Modul', 
+                icon: Info,
+                id: 'informasiModul',
+                children: [
+                    { label: 'Identitas Modul', href: '/dosen/informasi-modul/identitas-modul' },
+                    { label: 'CPL & CPMK', href: '/dosen/informasi-modul/cpl-cpmk' },
+                ]
+            },
+            { 
+                label: 'Pembelajaran', 
+                icon: BookOpen,
+                id: 'pembelajaran',
+                children: [
+                    { label: 'Materi', href: '/dosen/pembelajaran/materi' },
+                    { label: 'LKM-Grafting', href: '#' },
+                ]
+            },
+            { 
+                label: 'Evaluasi', 
+                icon: NotepadText,
+                id: 'evaluasi',
+                children: [
+                    { label: 'Quiz', href: '/dosen/evaluasi/quiz' },
+                ]
+            },
+            { label: 'Settings', href: '/dosen/settings', icon: Settings },
+
         ];
     }
 

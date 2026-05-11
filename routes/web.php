@@ -9,6 +9,8 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Dosen\DashboardDosenController;
+use App\Http\Controllers\Dosen\ProfileController as DosenProfileController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
 use App\Http\Controllers\Mahasiswa\MateriController as MahasiswaMateriController;
 use App\Http\Controllers\Mahasiswa\ProfileController;
@@ -63,6 +65,36 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/settings', [ProfileController::class, 'index']);
         Route::put('/settings', [ProfileController::class, 'update']);
+    });
+
+    Route::middleware('role:dosen')->prefix('dosen')->group(function () {
+        Route::get('/dashboard', [DashboardDosenController::class, 'index'])->name('dashboard.dosen');
+
+        // Route::prefix('informasi-modul')->group(function () {
+        //     Route::get('/identitas-modul', function () {
+        //         return Inertia::render('RoleMahasiswa/InformasiModul/IdentitasModul');
+        //     });
+        //     Route::get('/cpl-cpmk', function () {
+        //         return Inertia::render('RoleMahasiswa/InformasiModul/CplCpmk');
+        //     });
+        // });
+
+        // Route::prefix('pembelajaran')->group(function () {
+        //     Route::get('/materi', [MahasiswaMateriController::class, 'index']);
+        //     Route::get('/materi/{materi}', [MahasiswaMateriController::class, 'show']);
+        // });
+
+        // Route::prefix('evaluasi')->group(function () {
+        //     Route::get('/quiz', function () {
+        //         return Inertia::render('RoleMahasiswa/Quiz');
+        //     });
+        //     Route::get('/quiz/start', function () {
+        //         return Inertia::render('RoleMahasiswa/QuizStart');
+        //     });
+        // });
+
+        Route::get('/settings', [DosenProfileController::class, 'index']);
+        Route::put('/settings', [DosenProfileController::class, 'update']);
     });
 
     // Admin
