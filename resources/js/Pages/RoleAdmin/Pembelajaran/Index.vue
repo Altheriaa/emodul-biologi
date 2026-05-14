@@ -23,11 +23,12 @@ const OpenEdit = (id) => {
     router.visit(`/admin/pembelajaran/materi/${id}/edit`);
 }; 
 
+
 // confirm delete
-const confirmDelete = (id) => {
+const confirmDelete = (item) => {
     Swal.fire({
         title: 'Hapus Materi?',
-        text: `Materi "${id.judul}" akan dihapus permanen!`,
+        text: `Materi "${item.judul}" akan dihapus permanen!`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Ya, Hapus!',
@@ -43,7 +44,7 @@ const confirmDelete = (id) => {
         }
     }).then((result) => {
         if (result.isConfirmed) {
-            router.delete(`/admin/pembelajaran/materi/${id}`);
+            router.delete(`/admin/pembelajaran/materi/${item.id}`);
         }
     });
 };
@@ -136,7 +137,7 @@ watch(() => page.props.flash, () => {
                         <Button variant="outline" @click="OpenEdit(item.id)" class="h-8 w-8 p-0 sm:h-9 sm:w-9 border-yellow-600 text-yellow-700 hover:bg-yellow-50">
                             <Pencil class="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                         </Button>
-                        <Button variant="outline" @click="confirmDelete(item.id)" class="h-8 w-8 p-0 sm:h-9 sm:w-9 border-red-600 text-red-700 hover:bg-red-50">
+                        <Button variant="outline" @click="confirmDelete(item)" class="h-8 w-8 p-0 sm:h-9 sm:w-9 border-red-600 text-red-700 hover:bg-red-50">
                             <Trash class="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                         </Button>
                         <Button variant="outline" @click="Show(item.id)" class="h-8 px-2 sm:h-9 sm:px-4 border-green-600 text-green-700 hover:bg-green-50 text-[10px] sm:text-sm font-medium">

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DosenController;
 use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Admin\MateriController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
+use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -124,6 +125,15 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/materi/{materi}', [MateriController::class, 'show']);
             Route::get('/materi/{materi}/edit', [MateriController::class, 'edit']);
             Route::put('/materi/{materi}', [MateriController::class, 'update']);
+        });
+
+        Route::prefix('evaluasi')->group(function () {
+            Route::get('/bank-soal', [QuizController::class, 'index']);
+            Route::get('/bank-soal/create', [QuizController::class, 'create']);
+            Route::post('/bank-soal', [QuizController::class, 'store']);
+            Route::get('/bank-soal/{quiz}/edit', [QuizController::class, 'edit']);
+            Route::put('/bank-soal/{quiz}', [QuizController::class, 'update']);
+            Route::delete('/bank-soal/{quiz}', [QuizController::class, 'destroy']);
         });
 
         Route::resource('/mahasiswa', MahasiswaController::class);

@@ -33,7 +33,7 @@ const isUrl = (...urls) => {
 const dropdowns = ref({
     informasiModul: isUrl('/mahasiswa/informasi-modul', '/admin/informasi-modul', '/dosen/informasi-modul'),
     pembelajaran: isUrl('/mahasiswa/pembelajaran', '/admin/pembelajaran', '/dosen/pembelajaran/'),
-    evaluasi: isUrl('/mahasiswa/evaluasi'),
+    evaluasi: isUrl('/mahasiswa/evaluasi', '/admin/evaluasi', '/dosen/evaluasi'),
 });
 
 const toggleDropdown = (key) => {
@@ -62,6 +62,16 @@ const navigation = computed(() => {
                 children: [
                     { label: 'Materi', href: '/admin/pembelajaran/materi' },
                     { label: 'LKM-Grafting', href: '#' },
+                ]
+            },
+            { 
+                label: 'Evaluasi', 
+                icon: NotepadText,
+                id: 'evaluasi',
+                children: [
+                    { label: 'Quiz', href: '/admin/evaluasi/quiz' },
+                    { label: 'Bank Soal', href: '/admin/evaluasi/bank-soal' },
+                    { label: 'Hasil Quiz', href: '/admin/evaluasi/hasil-quiz' },
                 ]
             },
             { label: 'Kelola Mahasiswa', href: '/admin/mahasiswa', icon: Users },

@@ -58,4 +58,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(Mahasiswa::class);
     }
+
+    public function quizzes(){
+        return $this->hasMany(Quiz::class, 'created_by');
+    }
 }

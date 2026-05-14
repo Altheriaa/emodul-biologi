@@ -100,14 +100,14 @@ const openEdit = (id) => {
 };  
 
 // confirm delete
-const confirmDelete = (id) => {
+const confirmDelete = (item) => {
     Swal.fire({
         title: 'Hapus Data?',
-        text: `Data "${id.name}" akan dihapus permanen!`,
+        text: `Data "${item.name}" akan dihapus permanen!`,
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: '<i class="material-symbols-rounded text-sm me-1">delete</i> Ya, Hapus!',
-        cancelButtonText: '<i class="material-symbols-rounded text-sm me-1">close</i> Batal',
+        confirmButtonText: 'Ya, Hapus!',
+        cancelButtonText: 'Batal',
         confirmButtonColor: '#d33',
         cancelButtonColor: '#344767',
         reverseButtons: true,
@@ -119,7 +119,7 @@ const confirmDelete = (id) => {
         }
     }).then((result) => {
         if (result.isConfirmed) {
-            router.delete(`/admin/mahasiswa/${id}`);
+            router.delete(`/admin/mahasiswa/${item.mahasiswa.id}`);
         }
     });
 };
@@ -207,7 +207,7 @@ const confirmDelete = (id) => {
                                                 <!-- <DropdownMenuItem @click="openEdit(item.dosen?.id)">Lihat Detail</DropdownMenuItem> -->
                                                 <DropdownMenuItem v-if="item.mahasiswa" @click="openEdit(item.mahasiswa.id)">Edit</DropdownMenuItem>
                                                 <DropdownMenuSeparator />
-                                                <DropdownMenuItem @click="confirmDelete(item.mahasiswa?.id)" class="text-red-600">Hapus</DropdownMenuItem>
+                                                <DropdownMenuItem @click="confirmDelete(item)" class="text-red-600">Hapus</DropdownMenuItem>
                                             </DropdownMenuContent>
                                         </DropdownMenu>
                                     </TableCell>

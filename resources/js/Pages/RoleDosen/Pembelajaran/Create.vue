@@ -2,7 +2,7 @@
 import Button from '@/components/ui/button/Button.vue';
 import { LucideX } from 'lucide-vue-next';
 import Layout from '../../../App.vue';
-import { Link, useForm, usePage } from '@inertiajs/vue3';
+import { Link, useForm, router } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
 const form = useForm({
@@ -14,6 +14,13 @@ const form = useForm({
     cover_path: null,
     remove_cover_path: false,
 });
+
+
+const cancel = () => {
+    router.visit(`/dosen/pembelajaran/materi`, {
+        preserveScroll: true,
+    })
+}
 
 const preview = ref(null);
 
@@ -180,20 +187,23 @@ function store() {
 
                         <!-- Actions -->
                         <div class="flex items-center justify-between pt-2">
-                            <Transition enter-active-class="transition duration-300" enter-from-class="opacity-0 translate-y-1" leave-active-class="transition duration-200" leave-to-class="opacity-0">
-                                <span v-if="form.wasSuccessful" class="flex items-center gap-1.5 text-xs text-green-600">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
-                                    Perubahan berhasil disimpan
-                                </span>
-                            </Transition>
-                            <button
-                                type="submit"
-                                class="ml-auto px-6 py-2 rounded-lg bg-green-700 hover:bg-green-800 text-white text-sm font-medium transition-colors shadow-sm"
-                            >
-                                Tambah Flipping
-                            </button>
+                            <div class="flex space-x-2 ml-auto">
+                                <button
+                                    type="button"
+                                    @click="cancel"
+                                    class="outline px-6 py-2 rounded-lg hover:bg-gray-100 text-gray-800 text-sm font-medium transition-colors shadow-sm"
+                                >
+                                    Batal
+                                </button>
+                                <button
+                                    type="submit"
+                                    :disabled="form.processing"
+                                    class="px-6 py-2 rounded-lg bg-green-700 hover:bg-green-800 text-white text-sm font-medium transition-colors shadow-sm"
+                                >
+                                    Tambah Flipping
+                                </button>
+                            </div>
                         </div>
-
                     </form>
                 </div>
             </div>
