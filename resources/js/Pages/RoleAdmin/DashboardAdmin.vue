@@ -1,66 +1,42 @@
 <script setup>
 import Layout from '../../App.vue';
 import { Toast } from '@/lib/toast';
-import { ref, onMounted, watch } from 'vue';
-import { usePage } from '@inertiajs/vue3';
+import { onMounted, onUnmounted, watch } from 'vue';
+import { usePage, router } from '@inertiajs/vue3';
 
 const props = defineProps({
-    count_dosen: Number,
-    count_mahasiswa: Number,
-    count_materi: Number,
+    stats: Object,
+    recent_submissions: Array,
 });
+
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 // sweet alert toast
 const page = usePage();
 
 const showFlashMessage = () => {
     const flash = page.props.flash;
-    const errors = page.props.errors;
-
     if (flash.success) {
-        Toast.fire({
-            icon: 'success',
-            title: 'Berhasil!',
-            text: flash.success,
-            showConfirmButton: false,
-            customClass: {
-                popup: 'glass-popup rounded-3xl shadow-blur p-6',
-                title: 'font-semibold',
-                icon: 'icon-custom bg-transparent'
-            },
-            timer: 2000
-        });
-    } else if (flash.warning) {
-        Toast.fire({
-            icon: 'warning',
-            text: flash.warning,
-            showConfirmButton: false,
-            customClass: {
-                popup: 'glass-popup rounded-3xl shadow-blur p-6',
-                title: 'font-semibold',
-                icon: 'icon-custom bg-transparent'
-            },
-            timer: 2000
-        });
-    }
-
-    if (Object.keys(errors).length > 0) {
-        const errorMessages = Object.values(errors).join('<br>');
-        Toast.fire({
-            icon: 'error',
-            title: 'Oops...',
-            html: errorMessages,
-            customClass: {
-                popup: 'glass-popup rounded-3xl shadow-blur p-6',
-                title: 'font-bold',
-                confirmButton: 'button-confirm px-6 py-2 rounded-xl text-white',
-            }
-        });
+        Toast.fire({ icon: 'success', title: 'Berhasil!', text: flash.success });
     }
 };
 
+let interval = null;
+
 onMounted(() => {
     showFlashMessage();
+    // Real-time polling every 10 seconds
+    interval = setInterval(() => {
+        router.reload({ 
+            only: ['stats', 'recent_submissions'],
+            preserveScroll: true,
+            preserveState: true
+        });
+    }, 10000);
+});
+
+onUnmounted(() => {
+    if (interval) clearInterval(interval);
 });
 
 watch(() => page.props.flash, () => {
@@ -74,32 +50,32 @@ watch(() => page.props.flash, () => {
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6">
             <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">
                 <p class="text-xs text-gray-400 mb-1">Jumlah Mahasiswa</p>
-                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">{{ count_mahasiswa }}</p>
-                <p class="text-xs text-emerald-400 mt-1">+20.1% from last month</p>
+                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">{{ stats.count_mahasiswa }}</p>
+                <p class="text-[10px] text-emerald-500 mt-1">Terdaftar Aktif</p>
             </div>
             <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">
                 <p class="text-xs text-gray-400 mb-1">Jumlah Dosen</p>
-                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">{{ count_dosen }}</p>
-                <p class="text-xs text-emerald-400 mt-1">+180.1% from last month</p>
+                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">{{ stats.count_dosen }}</p>
+                <p class="text-[10px] text-emerald-500 mt-1">Pengelola Modul</p>
             </div>
             <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">
                 <p class="text-xs text-gray-400 mb-1">Jumlah Materi</p>
-                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">{{ count_materi }}</p>
-                <p class="text-xs text-emerald-400 mt-1">+19% from last month</p>
+                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">{{ stats.count_materi }}</p>
+                <p class="text-[10px] text-emerald-500 mt-1">Unit Pembelajaran</p>
             </div>
             <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">
-                <p class="text-xs text-gray-400 mb-1">Jumlah Soal</p>
-                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">+573</p>
-                <p class="text-xs text-gray-400 mt-1">+201 since last hour</p>
+                <p class="text-xs text-gray-400 mb-1">Jumlah Quiz</p>
+                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">{{ stats.count_quiz }}</p>
+                <p class="text-[10px] text-emerald-500 mt-1">Sistem Evaluasi</p>
             </div>
         </div>
 
-        <!-- Chart + Recent Sales — stacked on mobile, side-by-side on lg -->
+        <!-- Chart + Recent Activity — stacked on mobile, side-by-side on lg -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4">
 
-            <!-- Revenue Chart -->
+            <!-- Statistik Chart -->
             <div class="lg:col-span-2 bg-white border border-gray-200 rounded-xl p-4 sm:p-5">
-                <h2 class="text-sm font-semibold text-gray-800 mb-4">Revenue Over Time</h2>
+                <h2 class="text-sm font-semibold text-gray-800 mb-4">Statistik Evaluasi</h2>
                 <div class="relative h-40 sm:h-52">
                     <svg viewBox="0 0 600 200" class="w-full h-full" preserveAspectRatio="none">
                         <line x1="0" y1="40" x2="600" y2="40" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
@@ -117,11 +93,11 @@ watch(() => page.props.flash, () => {
                     </svg>
                     <!-- Y-axis labels -->
                     <div class="absolute left-0 top-0 h-full flex flex-col justify-between pr-2 text-right">
-                        <span class="text-[10px] text-gray-400 leading-none">$800</span>
-                        <span class="text-[10px] text-gray-400 leading-none">$600</span>
-                        <span class="text-[10px] text-gray-400 leading-none">$400</span>
-                        <span class="text-[10px] text-gray-400 leading-none">$200</span>
-                        <span class="text-[10px] text-gray-400 leading-none">$0</span>
+                        <span class="text-[10px] text-gray-400 leading-none">100</span>
+                        <span class="text-[10px] text-gray-400 leading-none">80</span>
+                        <span class="text-[10px] text-gray-400 leading-none">60</span>
+                        <span class="text-[10px] text-gray-400 leading-none">40</span>
+                        <span class="text-[10px] text-gray-400 leading-none">0</span>
                     </div>
                 </div>
                 <!-- X-axis labels — show fewer on mobile -->
@@ -134,26 +110,27 @@ watch(() => page.props.flash, () => {
                 </div>
             </div>
 
-            <!-- Recent Sales -->
+            <!-- Aktivitas Terbaru -->
             <div class="bg-white border border-gray-200 rounded-xl p-4 sm:p-5">
-                <h2 class="text-sm font-semibold text-gray-800 mb-4">Recent Sales</h2>
+                <h2 class="text-sm font-semibold text-gray-800 mb-4">Aktivitas Quiz Terbaru</h2>
                 <div class="space-y-3 sm:space-y-4">
-                    <div v-for="sale in recentSales" :key="sale.email" class="flex items-center gap-3">
+                    <div v-for="sub in recent_submissions" :key="sub.id" class="flex items-center gap-3">
                         <div
-                            class="w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-xs font-semibold text-white"
-                            :style="{ background: sale.color }"
+                            class="w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-[10px] font-bold text-white bg-green-600"
                         >
-                            {{ sale.name.charAt(0) }}
+                            {{ sub.user_name.charAt(0) }}
                         </div>
                         <div class="flex-1 min-w-0">
-                            <p class="text-xs font-medium text-gray-800 truncate">{{ sale.name }}</p>
-                            <p class="text-xs text-gray-400 truncate">{{ sale.email }}</p>
+                            <p class="text-xs font-medium text-gray-800 truncate">{{ sub.user_name }}</p>
+                            <p class="text-[10px] text-gray-400 truncate">{{ sub.quiz_title }}</p>
                         </div>
-                        <span class="text-sm font-semibold text-gray-700 shrink-0">{{ sale.amount }}</span>
+                        <span class="text-xs font-bold" :class="sub.score >= 70 ? 'text-green-600' : 'text-red-500'">{{ sub.score }}</span>
+                    </div>
+                    <div v-if="recent_submissions.length === 0" class="py-4 text-center text-xs text-gray-400">
+                        Belum ada aktivitas.
                     </div>
                 </div>
             </div>
         </div>
     </Layout>
 </template>
-
