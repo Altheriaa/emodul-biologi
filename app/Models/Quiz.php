@@ -30,4 +30,9 @@ class Quiz extends Model
     {
         return $this->hasMany(QuizQuestion::class)->orderBy('order');
     }
+
+    public function scores(): HasMany
+    {
+        return $this->hasMany(QuizScore::class);
+    }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\Admin\DosenController;
 use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Admin\MateriController;
+use App\Http\Controllers\Admin\MonitoringQuizController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Admin\QuizQuestionController;
@@ -13,10 +14,14 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Dosen\DashboardDosenController;
 use App\Http\Controllers\Dosen\MateriController as DosenMateriController;
+use App\Http\Controllers\Dosen\MonitoringQuizController as DosenMonitoringQuizController;
 use App\Http\Controllers\Dosen\ProfileController as DosenProfileController;
+use App\Http\Controllers\Dosen\QuizController as DosenQuizController;
+use App\Http\Controllers\Dosen\QuizQuestionController as DosenQuizQuestionController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
 use App\Http\Controllers\Mahasiswa\MateriController as MahasiswaMateriController;
 use App\Http\Controllers\Mahasiswa\ProfileController;
+use App\Http\Controllers\Mahasiswa\QuizController as MahasiswaQuizController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -58,12 +63,11 @@ Route::middleware(['auth'])->group(function () {
         });
 
         Route::prefix('evaluasi')->group(function () {
-            Route::get('/quiz', function () {
-                return Inertia::render('RoleMahasiswa/Quiz');
-            });
-            Route::get('/quiz/start', function () {
-                return Inertia::render('RoleMahasiswa/QuizStart');
-            });
+            Route::get('/quiz', [MahasiswaQuizController::class, 'index']);
+            Route::get('/quiz/history', [MahasiswaQuizController::class, 'history']);
+            Route::get('/quiz/{quiz}/start', [MahasiswaQuizController::class, 'start']);
+            Route::post('/quiz/{quiz}/submit', [MahasiswaQuizController::class, 'submit']);
+            Route::get('/quiz/{quiz}/result', [MahasiswaQuizController::class, 'result']);
         });
 
         Route::get('/settings', [ProfileController::class, 'index']);
@@ -100,6 +104,22 @@ Route::middleware(['auth'])->group(function () {
         //         return Inertia::render('RoleMahasiswa/QuizStart');
         //     });
         // });
+
+        Route::prefix('evaluasi')->group(function () {
+            Route::get('/bank-soal', [DosenQuizController::class, 'index']);
+            Route::get('/bank-soal/create', [DosenQuizController::class, 'create']);
+            Route::post('/bank-soal', [DosenQuizController::class, 'store']);
+            Route::get('/bank-soal/{quiz}/edit', [DosenQuizController::class, 'edit']);
+            Route::put('/bank-soal/{quiz}', [DosenQuizController::class, 'update']);
+            Route::delete('/bank-soal/{quiz}', [DosenQuizController::class, 'destroy']);
+
+            // Quiz questions (soal)
+            Route::post('/bank-soal/{quiz}/soal', [DosenQuizQuestionController::class, 'store']);
+            Route::put('/bank-soal/{quiz}/soal/{question}', [DosenQuizQuestionController::class, 'update']);
+            Route::delete('/bank-soal/{quiz}/soal/{question}', [DosenQuizQuestionController::class, 'destroy']);
+
+            Route::get('/monitoring', [DosenMonitoringQuizController::class, 'index']);
+        });
 
         Route::get('/settings', [DosenProfileController::class, 'index']);
         Route::put('/settings', [DosenProfileController::class, 'update']);
@@ -140,6 +160,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/bank-soal/{quiz}/soal', [QuizQuestionController::class, 'store']);
             Route::put('/bank-soal/{quiz}/soal/{question}', [QuizQuestionController::class, 'update']);
             Route::delete('/bank-soal/{quiz}/soal/{question}', [QuizQuestionController::class, 'destroy']);
+            Route::get('/monitoring', [MonitoringQuizController::class, 'index']);
         });
 
         Route::resource('/mahasiswa', MahasiswaController::class);

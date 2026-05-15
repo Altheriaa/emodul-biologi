@@ -1,115 +1,142 @@
 <script setup>
 import Layout from '../../App.vue';
-import { Button } from '@/components/ui/button';
-import { Check, ArrowRight, StickyNote, Clock } from 'lucide-vue-next';
 import { router } from '@inertiajs/vue3';
+import { Clock, StickyNote, CheckCircle2, Trophy, ChevronRight, BookOpen, History } from 'lucide-vue-next';
 
-function startQuiz() {
-    router.visit('/mahasiswa/evaluasi/quiz/start');
-}
+const props = defineProps({
+    quizzes: Array,
+});
+
+const startQuiz = (quizId) => {
+    router.visit(`/mahasiswa/evaluasi/quiz/${quizId}/start`);
+};
+
+const statusColor = (quiz) => {
+    if (quiz.submitted_at === null) return null;
+    return quiz.is_passed ? 'passed' : 'failed';
+};
 </script>
 
 <template>
     <Layout>
-        <div class="grid grid-cols-1 gap-3 sm:gap-4 mb-2 sm:mb-4">
-            <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">
-                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">Quiz E-Modul Anatomi Tumbuhan</p>
-                <p class="text-xs sm:text-sm text-green-600 mt-1">Quiz sebagai evaluasi akhir pembelajaran e-modul anatomi tumbuhan</p>
+        <!-- Page Header -->
+        <div class="mb-6">
+            <div class="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                    <p class="text-xl sm:text-2xl font-bold text-gray-800 tracking-tight">Evaluasi Quiz</p>
+                    <p class="text-xs sm:text-sm text-green-600 mt-1">Kerjakan quiz sebagai bagian dari evaluasi akhir pembelajaran</p>
+                </div>
+                <button @click="router.visit('/mahasiswa/evaluasi/quiz/history')"
+                    class="flex items-center justify-center gap-2 px-4 py-2.5 bg-green-50 text-green-700 border border-green-200 rounded-xl text-sm font-bold hover:bg-green-100 transition-all">
+                    <History class="h-4 w-4" />
+                    Riwayat Nilai
+                </button>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4">
-            <!-- Revenue Chart -->
-            <div class="lg:col-span-1 bg-white border border-gray-200 rounded-xl p-4 sm:p-5 flex flex-col items-center justify-center space-y-3">
-                <div class="bg-green-100 p-4 rounded-full opacity-50 shadow-md">
-                    <Clock :size="75" color="#1a6b3c" :stroke-width="1" />
-                </div>
-                <h2 class="font-bold text-xl md:text-2xl mt-2"> 45 Menit</h2>
-                <h2 class="text-gray-400 text-sm"> Durasi Pengerjaan</h2>
-            </div>
-
-            <div class="lg:col-span-1 bg-white border border-gray-200 rounded-xl p-4 sm:p-5 flex flex-col items-center justify-center space-y-3">
-                <div class="bg-green-100 p-4 rounded-full opacity-50 shadow-md">
-                    <StickyNote :size="75" color="#1a6b3c" :stroke-width="1" />
-                </div>
-                <h2 class="font-bold text-xl md:text-2xl mt-2"> 25 Soal</h2>
-                <h2 class="text-gray-400 text-sm"> Pilihan Ganda</h2>
-            </div>
-
-            <div class="lg:col-span-1 bg-white border border-gray-200 rounded-xl p-4 sm:p-5 flex flex-col items-center justify-center space-y-3">
-                <div class="bg-green-100 p-3 rounded-full opacity-50 shadow-md">
-                    <Check :size="75" color="#1a6b3c" :stroke-width="1" />
-                </div>
-                <h2 class="font-bold text-xl md:text-2xl mt-2"> 70</h2>
-                <h2 class="text-gray-400 text-sm"> Passing Grade</h2>
-            </div>
+        <!-- Empty state -->
+        <div v-if="quizzes.length === 0"
+            class="bg-white border border-gray-200 rounded-xl p-16 shadow-sm text-center text-gray-400">
+            <BookOpen class="mx-auto h-12 w-12 mb-4 opacity-30" />
+            <p class="font-medium text-gray-500">Belum ada quiz yang tersedia</p>
+            <p class="text-sm mt-1">Tunggu hingga dosen atau admin mempublikasikan quiz.</p>
         </div>
 
-        <div class="col-start-1 col-span-4 row-start-2 row-span-1 bg-white border border-gray-200 rounded-xl p-4 sm:p-5 mt-3">
-            <h2 class="font-bold text-md text-gray-800">Petunjuk Pengerjaan Soal</h2> 
-            <hr class="border-gray-200 mt-2 mb-4">
+        <!-- Quiz Cards -->
+        <div v-else class="grid grid-cols-1 gap-4">
+            <div v-for="quiz in quizzes" :key="quiz.id"
+                class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow">
 
-            <div class="flex lg:flex-row flex-col space-y-0">
-                <!-- Step 1  -->
-                <div class="flex gap-3">
-                    <div class="flex flex-col items-center">
-                        <div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center shrink-0 mt-0.5">
-                            <div class="w-2 h-2 rounded-full bg-white"></div>
+                <!-- Card Header -->
+                <div class="p-5 sm:p-6">
+                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-1">
+                                <!-- Status badge -->
+                                <span v-if="statusColor(quiz) === 'passed'"
+                                    class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-700">
+                                    <CheckCircle2 class="h-3 w-3" /> Lulus
+                                </span>
+                                <span v-else-if="statusColor(quiz) === 'failed'"
+                                    class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-red-700">
+                                    Belum Lulus
+                                </span>
+                                <span v-else-if="quiz.is_ongoing"
+                                    class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-700 animate-pulse">
+                                    Sedang Dikerjakan
+                                </span>
+                                <span v-else
+                                    class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">
+                                    Belum Dikerjakan
+                                </span>
+                            </div>
+                            <h2 class="text-base sm:text-lg font-bold text-gray-800">{{ quiz.title }}</h2>
+                            <p v-if="quiz.description" class="text-sm text-gray-500 mt-1 line-clamp-2">{{ quiz.description }}</p>
                         </div>
-                        <div class="w-0.5 bg-gray-200 flex-1 lg:hidden my-1"></div>
+
+                        <!-- Score badge (jika sudah dikerjakan) -->
+                        <div v-if="quiz.score !== null" class="shrink-0 text-center">
+                            <div class="w-16 h-16 rounded-full flex items-center justify-center border-4"
+                                :class="quiz.is_passed ? 'border-green-500 bg-green-50' : 'border-red-400 bg-red-50'">
+                                <span class="text-xl font-bold"
+                                    :class="quiz.is_passed ? 'text-green-700' : 'text-red-600'">
+                                    {{ quiz.score }}
+                                </span>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-1">Nilai</p>
+                        </div>
                     </div>
-                    <div class="pb-5 space-y-1.5">
-                        <p class="text-sm font-semibold text-gray-800">Pastikan Koneksi Internet</p>
-                        <p class="text-xs text-gray-500 mt-0.5">Koneksi internet yang stabil sangat penting untuk menghindari gangguan saat mengerjakan ujian.</p>
+
+                    <!-- Info pills -->
+                    <div class="flex flex-wrap gap-3 mt-4">
+                        <div class="flex items-center gap-1.5 text-xs text-gray-500 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-100">
+                            <Clock class="h-3.5 w-3.5 text-green-600" />
+                            <span>{{ quiz.duration_minutes }} Menit</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 text-xs text-gray-500 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-100">
+                            <StickyNote class="h-3.5 w-3.5 text-green-600" />
+                            <span>{{ quiz.questions_count }} Soal Pilihan Ganda</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 text-xs text-gray-500 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-100">
+                            <Trophy class="h-3.5 w-3.5 text-green-600" />
+                            <span>Passing Grade 70</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Step 2 -->
-                <div class="flex gap-3">
-                    <div class="flex flex-col items-center">
-                        <div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center shrink-0 mt-0.5">
-                            <div class="w-2 h-2 rounded-full bg-white"></div>
+                <!-- Petunjuk -->
+                <div class="border-t border-gray-100 bg-gray-50/50 px-5 sm:px-6 py-4">
+                    <p class="text-xs font-semibold text-gray-600 mb-3">Petunjuk Pengerjaan</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+                        <div v-for="(tip, i) in [
+                            { title: 'Pastikan Koneksi Internet', desc: 'Koneksi stabil mencegah gangguan ujian.' },
+                            { title: 'Waktu Berjalan', desc: 'Timer mulai saat klik Mulai Quiz.' },
+                            { title: 'Tidak Dapat Dijeda', desc: 'Waktu terus berjalan jika keluar halaman.' },
+                            { title: 'Auto Submit', desc: 'Jawaban dikumpulkan otomatis saat waktu habis.' },
+                        ]" :key="i" class="flex items-start gap-2">
+                            <div class="mt-0.5 w-4 h-4 rounded-full bg-green-500 flex items-center justify-center shrink-0">
+                                <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+                            </div>
+                            <div>
+                                <p class="text-xs font-semibold text-gray-700">{{ tip.title }}</p>
+                                <p class="text-xs text-gray-400 leading-snug mt-0.5">{{ tip.desc }}</p>
+                            </div>
                         </div>
-                        <div class="w-0.5 bg-gray-200 flex-1 lg:hidden my-1"></div>
-                    </div>
-                    <div class="pb-5 space-y-1.5">
-                        <p class="text-sm font-semibold text-gray-800">Waktu Berjalan</p>
-                        <p class="text-xs text-gray-500 mt-0.5">Waktu akan terus berjalan sewaktu klik mulai Quiz, pastikan untuk menyelesaikannya tepat waktu.</p>
                     </div>
                 </div>
 
-                <!-- Step 3 -->
-                <div class="flex gap-3">
-                    <div class="flex flex-col items-center">
-                        <div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center shrink-0 mt-0.5">
-                            <div class="w-2 h-2 rounded-full bg-white"></div>
-                        </div>
-                        <div class="w-0.5 bg-gray-200 flex-1 lg:hidden my-1"></div>
-                    </div>
-                    <div class="pb-5 space-y-1.5">
-                        <p class="text-sm font-semibold text-gray-800">Tidak Dapat dijeda</p>
-                        <p class="text-xs text-gray-500 mt-0.5">Tidak ada jeda dalam pengerjaan ujian, jika keluar dari halaman waktu akan terus berjalan.</p>
-                    </div>
-                </div>
-
-                <!-- Step 4 -->
-                <div class="flex gap-3">
-                    <div class="flex flex-col items-center">
-                        <div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center shrink-0 mt-0.5">
-                            <div class="w-2 h-2 rounded-full bg-white"></div>
-                        </div>
-                    </div>
-                    <div class="pb-5 space-y-1.5">
-                        <p class="text-sm font-semibold text-gray-800">Sistem akan mengumpulkan jawaban</p>
-                        <p class="text-xs text-gray-500 mt-0.5">Sistem akan mengumpulkan jawaban secara otomatis jika waktu habis.</p>
-                    </div>
+                <!-- Action button -->
+                <div class="px-5 sm:px-6 py-4 border-t border-gray-100">
+                    <button @click="quiz.submitted_at ? router.visit(`/mahasiswa/evaluasi/quiz/${quiz.id}/result`) : startQuiz(quiz.id)"
+                        class="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-sm transition-colors"
+                        :class="quiz.submitted_at
+                            ? 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                            : (quiz.is_ongoing ? 'bg-amber-500 hover:bg-amber-600 text-white shadow-sm' : 'bg-green-600 hover:bg-green-700 text-white shadow-sm')">
+                        <span>{{ quiz.submitted_at ? 'Lihat Hasil' : (quiz.is_ongoing ? 'Lanjutkan Quiz' : 'Mulai Quiz') }}</span>
+                        <ChevronRight class="h-4 w-4" />
+                    </button>
                 </div>
             </div>
-
-            <hr class="border-gray-200 mb-4">
-
-            <button @click="startQuiz" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors">Mulai Quiz</button>
         </div>
     </Layout>
 </template>
-

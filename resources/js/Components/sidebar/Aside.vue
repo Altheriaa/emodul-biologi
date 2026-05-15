@@ -69,9 +69,8 @@ const navigation = computed(() => {
                 icon: NotepadText,
                 id: 'evaluasi',
                 children: [
-                    { label: 'Quiz', href: '/admin/evaluasi/quiz' },
                     { label: 'Bank Soal', href: '/admin/evaluasi/bank-soal' },
-                    { label: 'Hasil Quiz', href: '/admin/evaluasi/hasil-quiz' },
+                    { label: 'Hasil Quiz', href: '/admin/evaluasi/monitoring' },
                 ]
             },
             { label: 'Kelola Mahasiswa', href: '/admin/mahasiswa', icon: Users },
@@ -106,7 +105,8 @@ const navigation = computed(() => {
                 icon: NotepadText,
                 id: 'evaluasi',
                 children: [
-                    { label: 'Quiz', href: '/dosen/evaluasi/quiz' },
+                    { label: 'Bank Soal', href: '/dosen/evaluasi/bank-soal' },
+                    { label: 'Hasil Quiz', href: '/dosen/evaluasi/monitoring' },
                 ]
             },
             { label: 'Settings', href: '/dosen/settings', icon: Settings },
