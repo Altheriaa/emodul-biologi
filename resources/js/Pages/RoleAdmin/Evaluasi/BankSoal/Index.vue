@@ -207,7 +207,7 @@ const confirmDelete = (item) => {
                         <p class="text-sm text-muted-foreground order-2 sm:order-1">
                             Menampilkan {{ quizzes.from || 0 }}
                             sampai {{ quizzes.to || 0 }}
-                            dari {{ quizzes.total }} data dosen.
+                            dari {{ quizzes.total }} data bank soal.
                         </p>
 
                         <div class="flex items-center gap-2 w-full sm:w-auto order-1 sm:order-2">

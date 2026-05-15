@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Admin\MateriController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\QuizController;
+use App\Http\Controllers\Admin\QuizQuestionController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -134,6 +135,11 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/bank-soal/{quiz}/edit', [QuizController::class, 'edit']);
             Route::put('/bank-soal/{quiz}', [QuizController::class, 'update']);
             Route::delete('/bank-soal/{quiz}', [QuizController::class, 'destroy']);
+
+            // Quiz questions (soal)
+            Route::post('/bank-soal/{quiz}/soal', [QuizQuestionController::class, 'store']);
+            Route::put('/bank-soal/{quiz}/soal/{question}', [QuizQuestionController::class, 'update']);
+            Route::delete('/bank-soal/{quiz}/soal/{question}', [QuizQuestionController::class, 'destroy']);
         });
 
         Route::resource('/mahasiswa', MahasiswaController::class);
