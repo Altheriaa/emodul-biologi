@@ -38,9 +38,9 @@ function store() {
   <form @submit.prevent="store" :class="cn('flex flex-col gap-6', props.class)">
     <FieldGroup>
       <div class="flex flex-col items-center gap-1 text-center">
-        <h1 class="text-2xl font-bold">Create your account</h1>
+        <h1 class="text-2xl font-bold">Buat Akun</h1>
         <p class="text-muted-foreground text-sm text-balance">
-          Fill in the form below to create your account
+          Isi form dibawah untuk membuat akun
         </p>
       </div>
       <Field>

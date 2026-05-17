@@ -36,9 +36,9 @@ const page = usePage();
   <form @submit.prevent="store" :class="cn('flex flex-col gap-6', props.class)">
     <FieldGroup>
       <div class="flex flex-col items-center gap-1 text-center">
-        <h1 class="text-2xl font-bold">Login to your account</h1>
+        <h1 class="text-2xl font-bold">Masuk ke Akun Anda</h1>
         <p class="text-muted-foreground text-sm text-balance">
-          Enter your email below to login to your account
+          Masukkan Email Anda untuk Masuk ke Akun Anda
         </p>
       </div>
       <Field>
@@ -52,7 +52,7 @@ const page = usePage();
             href="/forgot-password"
             class="ml-auto text-sm underline-offset-4 hover:underline"
           >
-            Forgot your password?
+            Lupa Password Anda?
           </Link>
         </div>
         <Input id="password" type="password" required v-model="post.password"/>
