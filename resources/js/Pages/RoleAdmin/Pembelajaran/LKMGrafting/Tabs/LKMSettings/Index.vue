@@ -1,20 +1,22 @@
 <script setup>
-import Layout from '../../../App.vue';
-import { router } from '@inertiajs/vue3';
+import Layout from '../../Index.vue';
+
 import { ref, onMounted, watch, computed } from 'vue';
-import { usePage } from '@inertiajs/vue3';
-import Swal from 'sweetalert2';
-import { Search, Plus, MoreHorizontal, UserRoundCog } from 'lucide-vue-next';
+import { usePage, router } from '@inertiajs/vue3';
+import { Search, Plus, UserRoundCog, CheckCircle2, Archive, Clock, XCircle } from 'lucide-vue-next';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
+import { MoreHorizontal } from 'lucide-vue-next';
+import { Badge } from '@/components/ui/badge';
 import { Toast } from '@/lib/toast';
+import Swal from 'sweetalert2';
 
 // Data Props From Controller
 const props = defineProps({
-    dosens: Object,
+    lkms: Object,
     filters: Object,
     errors : Object
 });
@@ -26,7 +28,7 @@ let searchTimeout = null;
 watch(searchQuery, (value) => {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
-        router.get('/admin/dosen', 
+        router.get('/admin/pembelajaran/lkm-grafting/settings', 
             { search: value || undefined },
             { preserveState: true, replace: true }
         );
@@ -92,22 +94,22 @@ watch(() => page.props.flash, () => {
 
 
 const openCreate = () => {
-    router.visit("/admin/dosen/create");
+    router.visit("/admin/pembelajaran/lkm-grafting/settings/create");
 };
 
 const openEdit = (id) => {
-    router.visit(`/admin/dosen/${id}/edit`);
+    router.visit(`/admin/pembelajaran/lkm-grafting/settings/${id}/edit`);
 };  
 
 // confirm delete
 const confirmDelete = (item) => {
     Swal.fire({
         title: 'Hapus Data?',
-        text: `Data "${item.name}" akan dihapus permanen!`,
+        text: `Data "${item.title}" akan dihapus permanen!`,
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: '<i class="material-symbols-rounded text-sm me-1">delete</i> Ya, Hapus!',
-        cancelButtonText: '<i class="material-symbols-rounded text-sm me-1">close</i> Batal',
+        confirmButtonText: 'Ya, Hapus!',
+        cancelButtonText: 'Batal',
         confirmButtonColor: '#d33',
         cancelButtonColor: '#344767',
         reverseButtons: true,
@@ -119,21 +121,19 @@ const confirmDelete = (item) => {
         }
     }).then((result) => {
         if (result.isConfirmed) {
-            router.delete(`/admin/dosen/${item.dosen.id}`);
+            router.delete(`/admin/pembelajaran/lkm-grafting/settings/${item.id}`);
         }
     });
 };
-
 </script>
 
 <template>
     <Layout>
-        <!-- Content Area -->
-        <div class="w-full">
-            <Card class="border-gray-200 shadow-sm overflow-hidden">
+        <div class="w-full mt-4">
+            <Card class="border-gray-200 overflow-hidden">
                 <div class="px-6 flex flex-row gap-2">
-                    <UserRoundCog />
-                    <h2 class="font-bold text-lg sm:text-xl text-gray-800">Kelola Dosen</h2> 
+                    <Settings />
+                    <h2 class="font-bold text-lg sm:text-xl text-gray-800">Settings LKM</h2> 
                 </div>
                 <hr class="border-gray-200">
                 <CardHeader class="sm:px-6">
@@ -143,7 +143,7 @@ const confirmDelete = (item) => {
                             <Input
                                 v-model="searchQuery"
                                 type="search"
-                                placeholder="Cari NUPTK atau Nama..."
+                                placeholder="Cari Settings LKM..."
                                 class="pl-8 h-10"
                             />
                         </div>
@@ -153,7 +153,7 @@ const confirmDelete = (item) => {
                             </Button> -->
                             <Button variant="outline" @click="openCreate" class="flex-1 md:flex-none h-10 border-green-600 text-green-700 hover:bg-green-50">
                                 <Plus class="h-4 w-4" />
-                                <span class="hidden sm:inline">Tambah Dosen</span>
+                                <span class="hidden sm:inline">Tambah Setting</span>
                                 <span class="sm:hidden">Tambah</span>
                             </Button>
                         </div>
@@ -166,35 +166,53 @@ const confirmDelete = (item) => {
                             <TableHeader>
                                 <TableRow class="bg-gray-50/50">
                                     <TableHead class="w-[120px] pl-4 sm:pl-6">NO</TableHead>
-                                    <TableHead class="w-[120px] pl-4 sm:pl-6">NUPTK</TableHead>
-                                    <TableHead class="px-4">Nama</TableHead>
-                                    <TableHead class="px-4">Jabatan</TableHead>
-                                    <TableHead class="px-4">Email</TableHead>
+                                    <TableHead class="w-[120px] pl-4 sm:pl-6">Dibuat Oleh</TableHead>
+                                    <TableHead class="w-[120px] pl-4 sm:pl-6">Pertemuan</TableHead>
+                                    <TableHead class="w-[120px] pl-4 sm:pl-6">Judul LKM</TableHead>
+                                    <TableHead class="w-[120px] pl-4 sm:pl-6">Deskripsi</TableHead>
+                                    <TableHead class="px-4">Dibuka Pada</TableHead>
+                                    <TableHead class="px-4">Deadline</TableHead>
+                                    <TableHead class="px-4">Aktif</TableHead>
+                                    <TableHead class="px-4">Submit Waktu Terlambat</TableHead>
                                     <TableHead class="text-right pr-4 sm:pr-6">Aksi</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                <TableRow v-if="dosens.data.length === 0">
-                                    <TableCell colspan="6" class="text-center py-10 text-muted-foreground">
-                                        Tidak ada data dosen ditemukan.
+                                <TableRow v-if="lkms.data.length === 0">
+                                    <TableCell colspan="10" class="text-center py-10 text-muted-foreground">
+                                        Tidak ada data LKM Settings ditemukan.
                                     </TableCell>
                                 </TableRow>
-                                <TableRow v-for="(item, index) in dosens.data" :key="item.id" class="hover:bg-gray-50/50 transition-colors">
-                                    <TableCell class="font-medium pl-4 sm:pl-6 py-4">{{ (dosens.current_page - 1) * dosens.per_page + index + 1 }}</TableCell>
-                                    <TableCell class="font-medium pl-4 sm:pl-6 py-4">{{ item.dosen?.nuptk || '-' }}</TableCell>
-                                    <TableCell class="px-4 py-4">{{ item.name }}</TableCell>
-                                    <TableCell class="px-4 py-4">{{ item.dosen?.jabatan || '-' }}</TableCell>
-                                    <TableCell class="px-4 py-4">{{ item.email }}</TableCell>
-                                    <!-- <TableCell class="px-4 py-4">
-                                        <Badge 
-                                            :variant="item.status === 'Selesai' ? 'default' : 'secondary'"
-                                            class="flex w-fit items-center gap-1"
-                                        >
-                                            <CheckCircle2 v-if="item.status === 'Selesai'" class="h-3 w-3" />
-                                            <Clock v-else class="h-3 w-3" />
-                                            {{ item.status }}
+                                <TableRow v-for="(item, index) in lkms.data" :key="item.id" class="hover:bg-gray-50/50 transition-colors">
+                                    <TableCell class="font-medium pl-4 sm:pl-6 py-4">{{ (lkms.current_page - 1) * lkms.per_page + index + 1 }}</TableCell>
+                                    <TableCell class="font-medium pl-4 sm:pl-6 py-4">{{ item.created_by.name }}</TableCell>
+                                    <TableCell class="font-medium pl-4 sm:pl-6 py-4">{{ item.pertemuan }}</TableCell>
+                                    <TableCell class="px-4 py-4">{{ item.title }}</TableCell>
+                                    <TableCell class="px-4 py-4">{{ item.deskripsi }}</TableCell>
+                                    <TableCell class="px-4 py-4">{{ item.open_at }}</TableCell>
+                                    <TableCell class="px-4 py-4">{{ item.deadline_at }}</TableCell>
+                                    <TableCell class="px-4 py-4">
+                                        <Badge :class="{
+                                            'flex w-fit items-center gap-1': true,
+                                            'bg-green-500 hover:bg-green-600 text-white border-transparent': item.is_active,
+                                            'bg-red-500 hover:bg-red-600 text-white border-transparent': !item.is_active,
+                                        }"> 
+                                            <CheckCircle2 v-if="item.is_active" class="h-3 w-3" />
+                                            <XCircle v-else class="h-3 w-3" />
+                                            <span class="capitalize">{{ item.is_active ? 'Aktif' : 'Tidak Aktif' }}</span>
                                         </Badge>
-                                    </TableCell> -->
+                                    </TableCell>
+                                    <TableCell class="px-4 py-4">
+                                        <Badge :class="{
+                                            'flex w-fit items-center gap-1': true,
+                                            'bg-green-500 hover:bg-green-600 text-white border-transparent': item.allow_late_submit,
+                                            'bg-red-500 hover:bg-red-600 text-white border-transparent': !item.allow_late_submit,
+                                        }">
+                                            <CheckCircle2 v-if="item.allow_late_submit" class="h-3 w-3" />
+                                            <XCircle v-else class="h-3 w-3" />
+                                            <span class="capitalize">{{ item.allow_late_submit ? 'Ya' : 'Tidak' }}</span>
+                                        </Badge>
+                                    </TableCell>
                                     <TableCell class="text-right pr-4 sm:pr-6 py-4">
                                         <DropdownMenu>
                                             <DropdownMenuTrigger as-child>
@@ -204,8 +222,7 @@ const confirmDelete = (item) => {
                                             </DropdownMenuTrigger>
                                             <DropdownMenuContent align="end">
                                                 <DropdownMenuLabel>Opsi</DropdownMenuLabel>
-                                                <!-- <DropdownMenuItem @click="openEdit(item.dosen?.id)">Lihat Detail</DropdownMenuItem> -->
-                                                <DropdownMenuItem v-if="item.dosen" @click="openEdit(item.dosen.id)">Edit</DropdownMenuItem>
+                                                <DropdownMenuItem @click="openEdit(item.id)">Edit</DropdownMenuItem>
                                                 <DropdownMenuSeparator />
                                                 <DropdownMenuItem @click="confirmDelete(item)" class="text-red-600">Hapus</DropdownMenuItem>
                                             </DropdownMenuContent>
@@ -217,11 +234,11 @@ const confirmDelete = (item) => {
                     </div>
                     
                     <!-- Pagination Area -->
-                    <div class="flex flex-col sm:flex-row items-center justify-between px-4 py-5 sm:px-0 sm:py-4 gap-4">
+                     <div class="flex flex-col sm:flex-row items-center justify-between px-4 py-5 sm:px-0 sm:py-4 gap-4">
                         <p class="text-sm text-muted-foreground order-2 sm:order-1">
-                            Menampilkan {{ dosens.from || 0 }}
-                            sampai {{ dosens.to || 0 }}
-                            dari {{ dosens.total }} data dosen.
+                            Menampilkan {{ lkms.from || 0 }}
+                            sampai {{ lkms.to || 0 }}
+                            dari {{ lkms.total }} data bank soal.
                         </p>
 
                         <div class="flex items-center gap-2 w-full sm:w-auto order-1 sm:order-2">
@@ -230,9 +247,9 @@ const confirmDelete = (item) => {
                             <Button
                                 variant="outline"
                                 size="sm"
-                                :disabled="!dosens.prev_page_url"
-                                @click="dosens.prev_page_url && router.get(
-                                    dosens.prev_page_url,
+                                :disabled="!lkms.prev_page_url"
+                                @click="lkms.prev_page_url && router.get(
+                                    lkms.prev_page_url,
                                     {},
                                     {
                                         preserveState: true,
@@ -254,9 +271,9 @@ const confirmDelete = (item) => {
                             <Button
                                 variant="outline"
                                 size="sm"
-                                :disabled="!dosens.next_page_url"
-                                @click="dosens.next_page_url && router.get(
-                                    dosens.next_page_url,
+                                :disabled="!lkms.next_page_url"
+                                @click="lkms.next_page_url && router.get(
+                                    lkms.next_page_url,
                                     {},
                                     {
                                         preserveState: true,
@@ -275,4 +292,3 @@ const confirmDelete = (item) => {
         </div>
     </Layout>
 </template>
-

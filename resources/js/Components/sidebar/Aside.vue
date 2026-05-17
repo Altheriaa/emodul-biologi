@@ -61,7 +61,7 @@ const navigation = computed(() => {
                 id: 'pembelajaran',
                 children: [
                     { label: 'Materi', href: '/admin/pembelajaran/materi' },
-                    { label: 'LKM-Grafting', href: '#' },
+                    { label: 'LKM-Grafting', href: '/admin/pembelajaran/lkm-grafting' },
                 ]
             },
             { 

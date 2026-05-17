@@ -31,7 +31,7 @@ class User extends Authenticatable
     }
 
     protected $fillable = [
-        'role'
+        'role',
     ];
 
     public function isAdmin()
@@ -59,7 +59,13 @@ class User extends Authenticatable
         return $this->hasOne(Mahasiswa::class);
     }
 
-    public function quizzes(){
+    public function quizzes()
+    {
         return $this->hasMany(Quiz::class, 'created_by');
+    }
+
+    public function lkmSettings()
+    {
+        return $this->hasMany(LkmSetting::class, 'created_by');
     }
 }

@@ -1,7 +1,7 @@
 <script setup>
 import Button from '@/components/ui/button/Button.vue';
 import { LucideX } from 'lucide-vue-next';
-import Layout from '../../../App.vue';
+import Layout from '../../../../App.vue';
 import { Link, useForm, usePage, router } from '@inertiajs/vue3';
 import { ref } from 'vue';
 

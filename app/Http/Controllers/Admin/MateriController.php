@@ -5,26 +5,28 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Materi;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class MateriController extends Controller
 {
-    public function index() {
+    public function index()
+    {
 
         $materis = Materi::orderBy('tanggal_rilis', 'desc')->get();
 
-        return Inertia::render('RoleAdmin/Pembelajaran/Index', [
+        return Inertia::render('RoleAdmin/Pembelajaran/Materi/Index', [
             'materis' => $materis,
         ]);
     }
 
-    public function create() {
-        return Inertia::render('RoleAdmin/Pembelajaran/Create');
+    public function create()
+    {
+        return Inertia::render('RoleAdmin/Pembelajaran/Materi/Create');
     }
 
-    public function store(Request $request) {
-        
+    public function store(Request $request)
+    {
+
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
             'deskripsi' => 'required|string',
@@ -34,7 +36,7 @@ class MateriController extends Controller
             'cover_path' => 'nullable|file|mimes:jpeg,png,jpg,webp|max:2048',
             'remove_cover_path' => 'nullable|boolean',
         ]);
-        
+
         if ($request->hasFile('cover_path')) {
             $validated['cover_path'] = $request->file('cover_path')->store('cover_path', 'public');
         } elseif ($request->boolean('remove_cover_path')) {
@@ -61,7 +63,7 @@ class MateriController extends Controller
     {
         $materi = Materi::findOrFail($id);
 
-        return Inertia::render('RoleAdmin/Pembelajaran/Detail', [
+        return Inertia::render('RoleAdmin/Pembelajaran/Materi/Detail', [
             'materi' => $materi,
         ]);
     }
@@ -70,12 +72,13 @@ class MateriController extends Controller
     {
         $materi = Materi::findOrFail($id);
 
-        return Inertia::render('RoleAdmin/Pembelajaran/Edit', [
+        return Inertia::render('RoleAdmin/Pembelajaran/Materi/Edit', [
             'materi' => $materi,
         ]);
     }
 
-    public function update(Request $request, string $id) {
+    public function update(Request $request, string $id)
+    {
 
         $materi = Materi::findOrFail($id);
 

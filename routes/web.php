@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\Admin\DosenController;
+use App\Http\Controllers\Admin\LKMGraftingController;
 use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Admin\MateriController;
 use App\Http\Controllers\Admin\MonitoringQuizController;
@@ -139,6 +140,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         Route::prefix('pembelajaran')->group(function () {
+            // Materi
             Route::get('/materi', [MateriController::class, 'index']);
             Route::get('/materi/create', [MateriController::class, 'create']);
             Route::post('/materi', [MateriController::class, 'store']);
@@ -146,6 +148,18 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/materi/{materi}', [MateriController::class, 'show']);
             Route::get('/materi/{materi}/edit', [MateriController::class, 'edit']);
             Route::put('/materi/{materi}', [MateriController::class, 'update']);
+
+            // LKM-Grafting Settings
+            Route::get('/lkm-grafting', [LKMGraftingController::class, 'index']);
+            Route::get('/lkm-grafting/settings', [LKMGraftingController::class, 'indexSetting']);
+            Route::get('/lkm-grafting/settings/create', [LKMGraftingController::class, 'createSetting']);
+            Route::post('/lkm-grafting/settings', [LKMGraftingController::class, 'storeSetting']);
+            Route::delete('/lkm-grafting/settings/{setting}', [LKMGraftingController::class, 'destroySetting']);
+            Route::get('/lkm-grafting/settings/{setting}/edit', [LKMGraftingController::class, 'editSetting']);
+            Route::put('/lkm-grafting/settings/{setting}', [LKMGraftingController::class, 'updateSetting']);
+
+            // LKM-Grafting Submission
+            Route::get('/lkm-grafting/submission', [LKMGraftingController::class, 'indexSubmission']);
         });
 
         Route::prefix('evaluasi')->group(function () {
