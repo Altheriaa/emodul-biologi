@@ -26,7 +26,7 @@ class DashboardAdminController extends Controller
             ->map(fn ($score) => [
                 'id' => $score->id,
                 'user_name' => $score->user->name,
-                'quiz_title' => $score->quiz->title,
+                'quiz_title' => $score->quiz->title ?? 'Quiz tanpa judul',
                 'score' => $score->score,
                 'submitted_at' => $score->submitted_at->diffForHumans(),
             ]);

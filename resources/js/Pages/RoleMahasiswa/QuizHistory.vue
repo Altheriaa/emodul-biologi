@@ -30,7 +30,7 @@ const goBack = () => {
     <Layout>
         <!-- Page Header -->
         <div class="mb-6">
-            <div class="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div class="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div class="flex items-center gap-4">
                     <div>
                         <p class="text-xl sm:text-2xl font-bold text-gray-800 tracking-tight">Riwayat Nilai</p>
@@ -63,7 +63,7 @@ const goBack = () => {
         </div> -->
 
         <!-- History Table/List -->
-        <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
             <div v-if="filteredHistory.length > 0" class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>

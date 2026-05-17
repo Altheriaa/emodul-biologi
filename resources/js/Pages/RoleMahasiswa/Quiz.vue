@@ -21,7 +21,7 @@ const statusColor = (quiz) => {
     <Layout>
         <!-- Page Header -->
         <div class="mb-6">
-            <div class="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div class="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                     <p class="text-xl sm:text-2xl font-bold text-gray-800 tracking-tight">Evaluasi Quiz</p>
                     <p class="text-xs sm:text-sm text-green-600 mt-1">Kerjakan quiz sebagai bagian dari evaluasi akhir pembelajaran</p>
@@ -36,7 +36,7 @@ const statusColor = (quiz) => {
 
         <!-- Empty state -->
         <div v-if="quizzes.length === 0"
-            class="bg-white border border-gray-200 rounded-xl p-16 shadow-sm text-center text-gray-400">
+            class="bg-white border border-gray-200 rounded-xl p-16 text-center text-gray-400">
             <BookOpen class="mx-auto h-12 w-12 mb-4 opacity-30" />
             <p class="font-medium text-gray-500">Belum ada quiz yang tersedia</p>
             <p class="text-sm mt-1">Tunggu hingga dosen atau admin mempublikasikan quiz.</p>
@@ -45,7 +45,7 @@ const statusColor = (quiz) => {
         <!-- Quiz Cards -->
         <div v-else class="grid grid-cols-1 gap-4">
             <div v-for="quiz in quizzes" :key="quiz.id"
-                class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                class="bg-white border border-gray-200 rounded-xl overflow-hidden">
 
                 <!-- Card Header -->
                 <div class="p-5 sm:p-6">
