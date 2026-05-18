@@ -159,7 +159,7 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/lkm-grafting/settings/{setting}', [LKMGraftingController::class, 'updateSetting']);
 
             // LKM-Grafting Submission
-            Route::get('/lkm-grafting/submission', [LKMGraftingController::class, 'indexSubmission']);
+            Route::get('/lkm-grafting/submissions', [LKMGraftingController::class, 'indexSubmission']);
         });
 
         Route::prefix('evaluasi')->group(function () {

@@ -22,6 +22,11 @@ class LkmSetting extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
+    public function submissions()
+    {
+        return $this->hasMany(LkmSubmission::class, 'lkm_setting_id');
+    }
+
     protected function casts(): array
     {
         return [

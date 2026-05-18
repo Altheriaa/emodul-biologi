@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\LkmSetting;
+use App\Models\LkmSubmission;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -117,8 +118,30 @@ class LKMGraftingController extends Controller
         return redirect('/admin/pembelajaran/lkm-grafting/settings')->with('success', 'Data LKM berhasil dihapus!');
     }
 
-    public function indexSubmission()
+    public function indexSubmission(Request $request)
     {
-        return Inertia::render('RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSubmission');
+        $search = $request->input('search');
+        $submissions = LkmSubmission::with(['mahasiswa.user', 'lkmSetting'])
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('pertemuan', 'like', "%{$search}%")
+                        ->orWhereHas('mahasiswa', function ($mahasiswa) use ($search) {
+                            $mahasiswa->where('nim', 'like', "%{$search}%");
+                        })
+                        ->orWhereHas('mahasiswa.user', function ($user) use ($search) {
+                            $user->where('name', 'like', "%{$search}%");
+                        });
+                });
+            })
+            ->orderBy('lkm_setting_id', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->simplePaginate(10)
+            ->withQueryString();
+
+        return Inertia::render('RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSubmissions/Index', [
+            'submissions' => $submissions,
+            'title' => 'LKM Submissions',
+            'filters' => ['search' => $search],
+        ]);
     }
 }
