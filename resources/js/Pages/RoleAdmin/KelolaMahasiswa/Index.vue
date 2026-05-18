@@ -165,7 +165,7 @@ const confirmDelete = (item) => {
                         <Table>
                             <TableHeader>
                                 <TableRow class="bg-gray-50/50">
-                                    <TableHead class="w-[120px] pl-4 sm:pl-6">NO</TableHead>
+                                    <!-- <TableHead class="w-[120px] pl-4 sm:pl-6">NO</TableHead> -->
                                     <TableHead class="w-[120px] pl-4 sm:pl-6">NIM</TableHead>
                                     <TableHead class="px-4">Nama</TableHead>
                                     <TableHead class="px-4">Angkatan</TableHead>
@@ -180,7 +180,7 @@ const confirmDelete = (item) => {
                                     </TableCell>
                                 </TableRow>
                                 <TableRow v-for="(item, index) in mahasiswas.data" :key="item.id" class="hover:bg-gray-50/50 transition-colors">
-                                    <TableCell class="font-medium pl-4 sm:pl-6 py-4">{{ (mahasiswas.current_page - 1) * mahasiswas.per_page + index + 1 }}</TableCell>
+                                    <!-- <TableCell class="font-medium pl-4 sm:pl-6 py-4">{{ (mahasiswas.current_page - 1) * mahasiswas.per_page + index + 1 }}</TableCell> -->
                                     <TableCell class="font-medium pl-4 sm:pl-6 py-4">{{ item.mahasiswa?.nim || '-' }}</TableCell>
                                     <TableCell class="px-4 py-4">{{ item.name }}</TableCell>
                                     <TableCell class="px-4 py-4">{{ item.mahasiswa?.angkatan || '-' }}</TableCell>

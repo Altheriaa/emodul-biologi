@@ -165,7 +165,6 @@ const confirmDelete = (item) => {
                         <Table>
                             <TableHeader>
                                 <TableRow class="bg-gray-50/50">
-                                    <TableHead class="w-[120px] pl-4 sm:pl-6">NO</TableHead>
                                     <TableHead class="w-[120px] pl-4 sm:pl-6">Dibuat Oleh</TableHead>
                                     <TableHead class="w-[120px] pl-4 sm:pl-6">Pertemuan</TableHead>
                                     <TableHead class="w-[120px] pl-4 sm:pl-6">Judul LKM</TableHead>
@@ -184,7 +183,6 @@ const confirmDelete = (item) => {
                                     </TableCell>
                                 </TableRow>
                                 <TableRow v-for="(item, index) in lkms.data" :key="item.id" class="hover:bg-gray-50/50 transition-colors">
-                                    <TableCell class="font-medium pl-4 sm:pl-6 py-4">{{ (lkms.current_page - 1) * lkms.per_page + index + 1 }}</TableCell>
                                     <TableCell class="font-medium pl-4 sm:pl-6 py-4">{{ item.created_by.name }}</TableCell>
                                     <TableCell class="font-medium pl-4 sm:pl-6 py-4">{{ item.pertemuan }}</TableCell>
                                     <TableCell class="px-4 py-4">{{ item.title }}</TableCell>
