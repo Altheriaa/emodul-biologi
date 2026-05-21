@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('lkm_p2_specs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('lkm_submission_id')->constrained('lkm_submissions')->onDelete('cascade');
-            $table->string('batang_atas_rootstock'); // Input Batang atas (rootstock) [cite: 725]
-            $table->string('batang_bawah_scion');     // Input Batang Bawah (scion) [cite: 725]
-            $table->string('usia_batang_atas');      // Input Usia Batang atas (rootstock) [cite: 725]
-            $table->string('usia_batang_bawah');     // Input Usia Batang Bawah (scion) [cite: 725]
-            $table->integer('jumlah_mata_tunas');     // Input Jumlah mata tunas [cite: 725]
+            $table->string('batang_atas_rootstock')->nullable(); // Input Batang atas (rootstock) [cite: 725]
+            $table->string('batang_bawah_scion')->nullable();     // Input Batang Bawah (scion) [cite: 725]
+            $table->string('usia_batang_atas')->nullable();      // Input Usia Batang atas (rootstock) [cite: 725]
+            $table->string('usia_batang_bawah')->nullable();     // Input Usia Batang Bawah (scion) [cite: 725]
+            $table->integer('jumlah_mata_tunas')->nullable();     // Input Jumlah mata tunas [cite: 725]
             $table->timestamps();
         });
 
@@ -26,8 +26,8 @@ return new class extends Migration
         Schema::create('lkm_p2_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('lkm_submission_id')->constrained('lkm_submissions')->onDelete('cascade');
-            $table->string('nama_item'); // Isi nama alat atau bahan [cite: 722]
-            $table->enum('jenis', ['alat', 'bahan']); // Pembeda kategori [cite: 722]
+            $table->string('nama_item')->nullable(); // Isi nama alat atau bahan [cite: 722]
+            $table->enum('jenis', ['alat', 'bahan'])->nullable(); // Pembeda kategori [cite: 722]
             $table->timestamps();
         });
 
@@ -36,8 +36,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('lkm_submission_id')->constrained('lkm_submissions')->onDelete('cascade');
             $table->integer('step_number'); // Nomor urut langkah kerja (1-10) [cite: 727, 729]
-            $table->string('nama_tahap');   // Judul tahap pengerjaan [cite: 727]
-            $table->text('penjelasan');     // Deskripsi penjelasan langkah pengerjaan [cite: 727]
+            $table->string('nama_tahap')->nullable();   // Judul tahap pengerjaan [cite: 727]
+            $table->text('penjelasan')->nullable();     // Deskripsi penjelasan langkah pengerjaan [cite: 727]
             $table->timestamps();
         });
     }

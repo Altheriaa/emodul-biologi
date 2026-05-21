@@ -1,5 +1,5 @@
 <script setup>
-import Layout from '../../../App.vue';
+import Layout from '../../../../App.vue';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, StickyNote, Plus, Trash, Pencil } from 'lucide-vue-next';
 import { router, usePage } from '@inertiajs/vue3';

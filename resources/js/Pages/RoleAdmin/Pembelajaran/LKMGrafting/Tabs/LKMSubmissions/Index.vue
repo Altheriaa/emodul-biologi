@@ -133,7 +133,7 @@ watch(() => page.props.flash, () => {
             <Card class="border-gray-200 overflow-hidden">
                 <div class="px-6 flex flex-row gap-2">
                     <Settings />
-                    <h2 class="font-bold text-lg sm:text-xl text-gray-800">Submissions LKM</h2> 
+                    <h2 class="font-bold text-lg sm:text-xl text-gray-800">Monitoring Submissions LKM</h2> 
                 </div>
                 <hr class="border-gray-200">
                 <CardHeader class="sm:px-6">
@@ -159,7 +159,6 @@ watch(() => page.props.flash, () => {
                                     <TableHead class="px-4">Nama Mahasiswa</TableHead>
                                     <TableHead class="px-4">Pertemuan</TableHead>
                                     <TableHead class="px-4">Status</TableHead>
-                                    <TableHead class="px-4">Catatan Dosen</TableHead>
                                     <TableHead class="text-right pr-4 sm:pr-6">Aksi</TableHead>
                                 </TableRow>
                             </TableHeader>
@@ -184,7 +183,6 @@ watch(() => page.props.flash, () => {
                                             <span class="capitalize">{{ item.status == 'submitted' ? 'Submitted' : 'Drafted' }}</span>
                                         </Badge>
                                     </TableCell>
-                                    <TableCell class="font-medium pl-4 sm:pl-6 py-4">{{ item.catatan_dosen }}</TableCell>
                                     <TableCell class="text-right pr-4 sm:pr-6 py-4">
                                         <DropdownMenu>
                                             <DropdownMenuTrigger as-child>

@@ -20,6 +20,7 @@ use App\Http\Controllers\Dosen\ProfileController as DosenProfileController;
 use App\Http\Controllers\Dosen\QuizController as DosenQuizController;
 use App\Http\Controllers\Dosen\QuizQuestionController as DosenQuizQuestionController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
+use App\Http\Controllers\Mahasiswa\LKMGraftingController as MahasiswaLKMGraftingController;
 use App\Http\Controllers\Mahasiswa\MateriController as MahasiswaMateriController;
 use App\Http\Controllers\Mahasiswa\ProfileController;
 use App\Http\Controllers\Mahasiswa\QuizController as MahasiswaQuizController;
@@ -61,6 +62,11 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('pembelajaran')->group(function () {
             Route::get('/materi', [MahasiswaMateriController::class, 'index']);
             Route::get('/materi/{materi}', [MahasiswaMateriController::class, 'show']);
+
+            // LKM Grafting
+            Route::get('/lkm-grafting', [MahasiswaLKMGraftingController::class, 'index']);
+            Route::get('/lkm-grafting/form/{pertemuan}', [MahasiswaLKMGraftingController::class, 'showForm']);
+            Route::post('/lkm-grafting/form/{pertemuan}', [MahasiswaLKMGraftingController::class, 'storeData']);
         });
 
         Route::prefix('evaluasi')->group(function () {

@@ -132,7 +132,7 @@ const navigation = computed(() => {
                 id: 'pembelajaran',
                 children: [
                     { label: 'Materi', href: '/mahasiswa/pembelajaran/materi' },
-                    { label: 'LKM-Grafting', href: '#' },
+                    { label: 'LKM-Grafting', href: '/mahasiswa/pembelajaran/lkm-grafting' },
                 ]
             },
             { 

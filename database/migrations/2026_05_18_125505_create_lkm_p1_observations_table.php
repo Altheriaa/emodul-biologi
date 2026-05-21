@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lkm_p1_observations', function (Blueprint $table) { 
+        Schema::create('lkm_p1_observations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('lkm_submission_id')->constrained('lkm_submissions')->onDelete('cascade');
             $table->string('nama_tanaman'); // Mangga, Alpukat, Durian [cite: 687]
@@ -24,10 +24,10 @@ return new class extends Migration
         Schema::create('lkm_p1_questions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('lkm_submission_id')->constrained('lkm_submissions')->onDelete('cascade');
-            $table->text('q1_jenis_tumbuhan_cocok'); // Jenis tumbuhan cocok untuk grafting [cite: 704]
-            $table->text('q2_jaringan_terlibat');     // Jaringan tumbuhan yang terlibat [cite: 708]
-            $table->text('q3_peran_kambium');          // Peran struktur jaringan kambium [cite: 711]
-            $table->text('q4_pemilihan_batang_bawah'); // Pengaruh pemilihan batang bawah [cite: 713]
+            $table->text('q1_jenis_tumbuhan_cocok')->nullable(); // Jenis tumbuhan cocok untuk grafting [cite: 704]
+            $table->text('q2_jaringan_terlibat')->nullable();     // Jaringan tumbuhan yang terlibat [cite: 708]
+            $table->text('q3_peran_kambium')->nullable();          // Peran struktur jaringan kambium [cite: 711]
+            $table->text('q4_pemilihan_batang_bawah')->nullable(); // Pengaruh pemilihan batang bawah [cite: 713]
             $table->timestamps();
         });
     }
