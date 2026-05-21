@@ -151,7 +151,7 @@ const openEdit = (id) => {
                             <!-- <Button variant="ghost" size="sm" class="flex-1 md:flex-none h-10 border md:border-none">
                                 <Filter class="mr-2 h-4 w-4" /> Filter
                             </Button> -->
-                            <Button v-if="lkms.length < 4" variant="outline" @click="openCreate" class="flex-1 md:flex-none h-10 border-green-600 text-green-700 hover:bg-green-50">
+                            <Button variant="outline" @click="openCreate" class="flex-1 md:flex-none h-10 border-green-600 text-green-700 hover:bg-green-50">
                                 <Plus class="h-4 w-4" />
                                 <span class="hidden sm:inline">Tambah Setting</span>
                                 <span class="sm:hidden">Tambah</span>
