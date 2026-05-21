@@ -146,6 +146,37 @@ class LKMGraftingController extends Controller
                 ['lkm_submission_id' => $submission->id],
                 $request->specifications
             );
+
+            // p2Steps (Penjelasan Prosedur)
+            $submission->p2Steps()->delete();
+            if ($request->has('steps') && is_array($request->steps)) {
+                foreach ($request->steps as $step) {
+                    if (! empty($step['nama_tahap']) || ! empty($step['penjelasan'])) {
+                        $submission->p2Steps()->create([
+                            'step_number' => $step['step_number'],
+                            'nama_tahap' => $step['nama_tahap'],
+                            'penjelasan' => $step['penjelasan'],
+                        ]);
+                    }
+                }
+            }
+        }
+
+        // LKM 3
+
+        // LKM 4
+        if ($pertemuan == 4) {
+            // Essay
+            $submission->p4Finals()->updateOrCreate(
+                ['lkm_submission_id' => $submission->id],
+                $request->finalQuestions
+            );
+
+            // Essay reflection
+            $submission->p4Reflections()->updateOrCreate(
+                ['lkm_submission_id' => $submission->id],
+                $request->reflections
+            );
         }
 
         // JIKA MAHASISWA KLIK "SUBMIT FINAL"

@@ -102,29 +102,29 @@ const openEdit = (id) => {
 };  
 
 // confirm delete
-const confirmDelete = (item) => {
-    Swal.fire({
-        title: 'Hapus Data?',
-        text: `Data "${item.title}" akan dihapus permanen!`,
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Ya, Hapus!',
-        cancelButtonText: 'Batal',
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#344767',
-        reverseButtons: true,
-        customClass: {
-            popup: 'glass-popup rounded-3xl shadow-blur p-6',
-            title: 'font-weight-bold',
-            confirmButton: 'px-4 py-2 rounded-xl',
-            cancelButton: 'px-4 py-2 rounded-xl',
-        }
-    }).then((result) => {
-        if (result.isConfirmed) {
-            router.delete(`/admin/pembelajaran/lkm-grafting/settings/${item.id}`);
-        }
-    });
-};
+// const confirmDelete = (item) => {
+//     Swal.fire({
+//         title: 'Hapus Data?',
+//         text: `Data "${item.title}" akan dihapus permanen!`,
+//         icon: 'warning',
+//         showCancelButton: true,
+//         confirmButtonText: 'Ya, Hapus!',
+//         cancelButtonText: 'Batal',
+//         confirmButtonColor: '#d33',
+//         cancelButtonColor: '#344767',
+//         reverseButtons: true,
+//         customClass: {
+//             popup: 'glass-popup rounded-3xl shadow-blur p-6',
+//             title: 'font-weight-bold',
+//             confirmButton: 'px-4 py-2 rounded-xl',
+//             cancelButton: 'px-4 py-2 rounded-xl',
+//         }
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             router.delete(`/admin/pembelajaran/lkm-grafting/settings/${item.id}`);
+//         }
+//     });
+// };
 </script>
 
 <template>
@@ -151,7 +151,7 @@ const confirmDelete = (item) => {
                             <!-- <Button variant="ghost" size="sm" class="flex-1 md:flex-none h-10 border md:border-none">
                                 <Filter class="mr-2 h-4 w-4" /> Filter
                             </Button> -->
-                            <Button variant="outline" @click="openCreate" class="flex-1 md:flex-none h-10 border-green-600 text-green-700 hover:bg-green-50">
+                            <Button v-if="lkms.length < 4" variant="outline" @click="openCreate" class="flex-1 md:flex-none h-10 border-green-600 text-green-700 hover:bg-green-50">
                                 <Plus class="h-4 w-4" />
                                 <span class="hidden sm:inline">Tambah Setting</span>
                                 <span class="sm:hidden">Tambah</span>
@@ -222,7 +222,7 @@ const confirmDelete = (item) => {
                                                 <DropdownMenuLabel>Opsi</DropdownMenuLabel>
                                                 <DropdownMenuItem @click="openEdit(item.id)">Edit</DropdownMenuItem>
                                                 <DropdownMenuSeparator />
-                                                <DropdownMenuItem @click="confirmDelete(item)" class="text-red-600">Hapus</DropdownMenuItem>
+                                                <!-- <DropdownMenuItem @click="confirmDelete(item)" class="text-red-600">Hapus</DropdownMenuItem> -->
                                             </DropdownMenuContent>
                                         </DropdownMenu>
                                     </TableCell>
@@ -236,7 +236,7 @@ const confirmDelete = (item) => {
                         <p class="text-sm text-muted-foreground order-2 sm:order-1">
                             Menampilkan {{ lkms.from || 0 }}
                             sampai {{ lkms.to || 0 }}
-                            dari {{ lkms.total }} data bank soal.
+                            dari {{ lkms.total }} data lkm settings.
                         </p>
 
                         <div class="flex items-center gap-2 w-full sm:w-auto order-1 sm:order-2">

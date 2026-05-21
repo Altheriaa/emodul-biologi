@@ -62,6 +62,7 @@ const submit = () => {
                                 Pertemuan <span class="text-red-500">*</span>
                             </label>
                             <input
+                                disabled
                                 id="pertemuan"
                                 v-model="form.pertemuan"
                                 type="number"

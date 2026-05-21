@@ -18,6 +18,7 @@ const isReadOnly = computed(() => props.submission.status === 'submitted');
 // Inisialisasi Data Form menggunakan Inertia useForm
 // Kita ambil data dari relasi jika sudah ada (saat lanjut draft), jika belum pakai default kosong
 const form = useForm({
+
     // --- Pertemuan 1 ---
     observations: props.submission.p1_observations?.length > 0 
         ? props.submission.p1_observations 
@@ -41,7 +42,6 @@ const form = useForm({
             { nama_tanaman: 'Mangga', organ: 'Bijian', morfologis: '', anatomis: '' },
             { nama_tanaman: 'Alpukat', organ: 'Bijian', morfologis: '', anatomis: '' },
             { nama_tanaman: 'Durian', organ: 'Bijian', morfologis: '', anatomis: '' },
-            // ... (bisa Anda tambahkan organ lain seperti Daun, Bunga, Buah, Biji)
         ],
     questions: props.submission.p1_questions || {
         q1_jenis_tumbuhan_cocok: '',
@@ -55,7 +55,7 @@ const form = useForm({
         const loadedAlats = props.submission.p2_items?.filter(i => i.jenis === 'alat') || [];
         const loadedBahans = props.submission.p2_items?.filter(i => i.jenis === 'bahan') || [];
         const rows = [];
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 15; i++) {
             rows.push({
                 alat: loadedAlats[i]?.nama_item || '',
                 bahan: loadedBahans[i]?.nama_item || ''
@@ -72,17 +72,47 @@ const form = useForm({
         jumlah_mata_tunas: '',
     },
 
+    steps: (() => {
+        const loadedSteps = props.submission.p2_steps || [];
+        const rows = [];
+        for (let i = 0; i < 15; i++) {
+            const stepData = loadedSteps.find(s => s.step_number === i + 1);
+            rows.push({
+                step_number: i + 1,
+                nama_tahap: stepData?.nama_tahap || '',
+                penjelasan: stepData?.penjelasan || ''
+            });
+        }
+        return rows;
+    })(),
 
     // --- Pertemuan 3 ---
+
     // --- Pertemuan 4 ---
+    finalQuestions: props.submission.p4_finals || {
+        is_berhasil: '',
+        jumlah_tunas_berhasil_tumbuh: '',
+        jumlah_daun: '',
+        ukuran_daun: '',
+        warna_daun: '',
+        warna_batang_atas: '',
+        warna_batang_bawah: '',
+        deskripsi_kondisi_tanaman: '',
+    },
 
-    // --- Data Khusus Pertemuan 2 ---
-    // specs: props.submission.p2_specs || { ... },
-    // items: props.submission.p2_items || [],
-    // steps: props.submission.p2_steps || [],
-
-    // --- Data Khusus Pertemuan 3 & 4 ---
-    // ... siapkan juga state defaultnya di sini
+    reflections: props.submission.p4_reflections || {
+        r1_tujuan_grafting: '',
+        r2_karakteristik_anatomi_batang: '',
+        r3_kesejajaran_kambium: '',
+        r4_peran_hormon_auksin: '',
+        r5_faktor_anatomi_ketidakcocokan: '',
+        r6_proses_tumbuhan_pulih: '',
+        r7_peran_kutikula: '',
+        r8_anatomi_daun_mempengaruhi: '',
+        r9_struktur_sel_epidermis: '',
+        r10_kondisi_lingkungan: '',
+        r11_fungsi_sungkup: '',
+    },
 });
 
 const submitData = (actionType) => {
@@ -376,7 +406,7 @@ watch(() => page.props.flash, () => {
                     </div>
 
                     <!-- specs -->
-                     <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
+                    <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
                         <div class="p-5 border-b border-gray-100 bg-gray-50">
                             <h2 class="text-lg font-bold text-gray-800">2. Prosedur kerja</h2>
                             <p class="text-xs mt-1">Sebutkan jenis tumbuhan yang digunakan untuk grafting!</p>
@@ -454,13 +484,346 @@ watch(() => page.props.flash, () => {
                             </div>
                         </div>
                     </div>
+
+                    <!-- Penjelasan Prosedur -->
+                    <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
+                        <div class="p-5 border-b border-gray-100 bg-gray-50">
+                            <p class="text-xs text-gray-500 mt-1">Uraikan tahap-tahap yang dilaksanakan untuk melakukan grafting dari awal sampai akhir!!</p>
+                        </div>
+                        <div class="p-5 overflow-x-auto">
+                            <table class="w-full text-left border-collapse border border-gray-200">
+                                <thead>
+                                    <tr class="bg-gray-50 text-sm text-gray-600">
+                                        <th class="p-3 border border-gray-200 font-semibold">No</th>
+                                        <th class="p-3 border border-gray-200 font-semibold w-1/4">Tahap</th>
+                                        <th class="p-3 border border-gray-200 font-semibold w-3/4">Penjelasan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(step, index) in form.steps" :key="index">
+                                        <td class="p-3 border border-gray-200 text-sm font-medium text-gray-700 bg-gray-50/50">
+                                            {{ index + 1 }}
+                                        </td>
+                                        <td class="p-3 border border-gray-200">
+                                            <textarea 
+                                                v-model="step.nama_tahap" 
+                                                :disabled="isReadOnly"
+                                                class="w-full text-sm border-0 focus:ring-0 p-2 resize-none bg-transparent placeholder-gray-300 disabled:text-gray-500" 
+                                                rows="2" 
+                                                placeholder="Tulis Tahap..."></textarea>
+                                        </td>
+                                        <td class="p-3 border border-gray-200">
+                                            <textarea 
+                                                v-model="step.penjelasan" 
+                                                :disabled="isReadOnly"
+                                                class="w-full text-sm border-0 focus:ring-0 p-2 resize-none bg-transparent placeholder-gray-300 disabled:text-gray-500" 
+                                                rows="2" 
+                                                placeholder="Tulis Penjelasan..."></textarea>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </template>
 
+                <!-- LKM 3 -->
                 <template v-else-if="submission.pertemuan == 3">
-                    </template>
+                </template>
                 
+                <!-- LKM 4 -->
                 <template v-else-if="submission.pertemuan == 4">
-                    </template>
+                    <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
+                        <div class="p-5 border-b border-gray-100 bg-gray-50">
+                            <h1 class="text-xl font-bold text-gray-800">1. Analisis Keberhasilan Tanaman Hasil Grafting</h1>
+                            <p class="text-xs text-gray-500 mt-1">Uraikan tahap-tahap yang dilaksanakan untuk melakukan grafting dari awal sampai akhir!!</p>
+                        </div>
+                        <div class="p-5 overflow-x-auto">
+                            <table class="w-full text-left border-collapse border border-gray-200">
+                                <thead>
+                                    <tr class="bg-gray-50 text-sm text-gray-600">
+                                        <th class="p-3 border border-gray-200 font-semibold w-1/4">Variabel Analisis</th>
+                                        <th class="p-3 border border-gray-200 font-semibold w-3/4">Hasil Analisis</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="p-3 border border-gray-200">
+                                            <span class="text-sm font-medium text-gray-700">Keberhasilan</span>
+                                        </td>
+                                        <td class="p-3 border border-gray-200">
+                                            <div class="flex items-center gap-2">
+                                                <input type="radio" id="berhasil" v-model="form.finalQuestions.is_berhasil" value="1" :disabled="isReadOnly" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <label for="berhasil" class="text-sm font-medium text-gray-700">Berhasil</label>
+                                                <input type="radio" id="gagal" v-model="form.finalQuestions.is_berhasil" value="0" :disabled="isReadOnly" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <label for="gagal" class="text-sm font-medium text-gray-700">Gagal</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 border border-gray-200">
+                                            <span class="text-sm font-medium text-gray-700">Jumlah tunas yang berhasil tumbuh</span>
+                                        </td>
+                                        <td class="p-3 border border-gray-200">
+                                            <input 
+                                                v-model="form.finalQuestions.jumlah_tunas_berhasil_tumbuh" 
+                                                type="number"
+                                                :disabled="isReadOnly"
+                                                class="w-full text-sm border-0 focus:ring-0 p-2 resize-none bg-transparent placeholder-gray-300 disabled:text-gray-500" 
+                                                placeholder="Tulis Jumlah...">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 border border-gray-200">
+                                            <span class="text-sm font-medium text-gray-700">Jumlah Daun</span>
+                                        </td>
+                                        <td class="p-3 border border-gray-200">
+                                            <input 
+                                                v-model="form.finalQuestions.jumlah_daun" 
+                                                type="number"
+                                                :disabled="isReadOnly"
+                                                class="w-full text-sm border-0 focus:ring-0 p-2 resize-none bg-transparent placeholder-gray-300 disabled:text-gray-500" 
+                                                placeholder="Tulis Jumlah...">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 border border-gray-200">
+                                            <span class="text-sm font-medium text-gray-700">Ukuran Daun</span>
+                                        </td>
+                                        <td class="p-3 border border-gray-200">
+                                            <textarea 
+                                                v-model="form.finalQuestions.ukuran_daun" 
+                                                :disabled="isReadOnly"
+                                                class="w-full text-sm border-0 focus:ring-0 p-2 resize-none bg-transparent placeholder-gray-300 disabled:text-gray-500" 
+                                                rows="2" 
+                                                placeholder="Tulis Penjelasan..."></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 border border-gray-200">
+                                            <span class="text-sm font-medium text-gray-700">Warna Daun</span>
+                                        </td>
+                                        <td class="p-3 border border-gray-200">
+                                            <textarea 
+                                                v-model="form.finalQuestions.warna_daun" 
+                                                :disabled="isReadOnly"
+                                                class="w-full text-sm border-0 focus:ring-0 p-2 resize-none bg-transparent placeholder-gray-300 disabled:text-gray-500" 
+                                                rows="2" 
+                                                placeholder="Tulis Penjelasan..."></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 border border-gray-200">
+                                            <span class="text-sm font-medium text-gray-700">Warna Batang Atas</span>
+                                        </td>
+                                        <td class="p-3 border border-gray-200">
+                                            <textarea 
+                                                v-model="form.finalQuestions.warna_batang_atas" 
+                                                :disabled="isReadOnly"
+                                                class="w-full text-sm border-0 focus:ring-0 p-2 resize-none bg-transparent placeholder-gray-300 disabled:text-gray-500" 
+                                                rows="2" 
+                                                placeholder="Tulis Penjelasan..."></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 border border-gray-200">
+                                            <span class="text-sm font-medium text-gray-700">Warna Batang Bawah</span>
+                                        </td>
+                                        <td class="p-3 border border-gray-200">
+                                            <textarea 
+                                                v-model="form.finalQuestions.warna_batang_bawah" 
+                                                :disabled="isReadOnly"
+                                                class="w-full text-sm border-0 focus:ring-0 p-2 resize-none bg-transparent placeholder-gray-300 disabled:text-gray-500" 
+                                                rows="2" 
+                                                placeholder="Tulis Penjelasan..."></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 border border-gray-200">
+                                            <span class="text-sm font-medium text-gray-700">Kondisi (uraikan jenis kondisi tanaman Anda baik berhasil atau tidak)</span>
+                                        </td>
+                                        <td class="p-3 border border-gray-200">
+                                            <textarea 
+                                                v-model="form.finalQuestions.deskripsi_kondisi_tanaman" 
+                                                :disabled="isReadOnly"
+                                                class="w-full text-sm border-0 focus:ring-0 p-2 resize-none bg-transparent placeholder-gray-300 disabled:text-gray-500" 
+                                                rows="2" 
+                                                placeholder="Tulis Penjelasan..."></textarea>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- refleksi -->
+                    <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
+                        <div class="p-5 border-b border-gray-100 bg-gray-50">
+                            <h2 class="text-lg font-bold text-gray-800">2. Refleksi</h2>
+                            <p class="text-xs mt-1">Jawablah serangkaian pertanyaan di bawah ini pada kolom yang telah disediakan!</p>
+                        </div>
+                        <div class="p-5 space-y-6">
+
+                            <!-- Q1 -->
+                            <div class="space-y-2">
+                                <label class="text-sm font-semibold text-gray-800 flex gap-2">
+                                    <span class="text-green-600">Q:</span>
+                                    Apa tujuan dilakukan grafting?
+                                </label>
+                                <textarea 
+                                    v-model="form.reflections.r1_tujuan_grafting" 
+                                    :disabled="isReadOnly"
+                                    type="text"
+                                    class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" 
+                                    placeholder="Jawaban Anda..."
+                                />
+                            </div>
+
+                            <!-- Q2 -->
+                            <div class="space-y-2">
+                                <label class="text-sm font-semibold text-gray-800 flex gap-2">
+                                    <span class="text-green-600">Q:</span>
+                                    Bagaimana karakteristik anatomi batang yang mempengaruhi keberhasilan grafting antara batang bawah dengan batang atas?
+                                </label>
+                                <textarea 
+                                    v-model="form.reflections.r2_karakteristik_anatomi_batang" 
+                                    :disabled="isReadOnly"
+                                    type="text"
+                                    class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" 
+                                    placeholder="Jawaban Anda..."
+                                />
+                            </div>
+
+                            <!-- Q3 -->
+                            <div class="space-y-2">
+                                <label class="text-sm font-semibold text-gray-800 flex gap-2">
+                                    <span class="text-green-600">Q:</span>
+                                    Mengapa kesejajaran jaringan kambium sangat penting dalam teknik grafting?
+                                </label>
+                                <textarea 
+                                    v-model="form.reflections.r3_kesejajaran_kambium" 
+                                    :disabled="isReadOnly"
+                                    type="text"
+                                    class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" 
+                                    placeholder="Jawaban Anda..."
+                                />
+                            </div>
+
+                            <!-- Q4 -->
+                            <div class="space-y-2">
+                                <label class="text-sm font-semibold text-gray-800 flex gap-2">
+                                    <span class="text-green-600">Q:</span>
+                                   Bagaimana peran hormon tanaman, seperti auksin, dalam pembentukan jaringan baru setelah grafting?
+                                </label>
+                                <textarea 
+                                    v-model="form.reflections.r4_peran_hormon_auksin" 
+                                    :disabled="isReadOnly"
+                                    type="text"
+                                    class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" 
+                                    placeholder="Jawaban Anda..."
+                                />
+                            </div>
+                            <!-- Q5 -->
+                            <div class="space-y-2">
+                                <label class="text-sm font-semibold text-gray-800 flex gap-2">
+                                    <span class="text-green-600">Q:</span>
+                                    Apa faktor anatomi yang menyebabkan ketidakcocokan antara dua spesies yang dicoba untuk digrafting?
+                                </label>
+                                <textarea 
+                                    v-model="form.reflections.r5_faktor_anatomi_ketidakcocokan" 
+                                    :disabled="isReadOnly"
+                                    type="text"
+                                    class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" 
+                                    placeholder="Jawaban Anda..."
+                                />
+                            </div>
+                            <!-- Q6 -->
+                            <div class="space-y-2">
+                                <label class="text-sm font-semibold text-gray-800 flex gap-2">
+                                    <span class="text-green-600">Q:</span>
+                                    Bagaimana tumbuhan dapat pulih pada tempat terjadi grafting?
+                                </label>
+                                <textarea 
+                                    v-model="form.reflections.r6_proses_tumbuhan_pulih" 
+                                    :disabled="isReadOnly"
+                                    type="text"
+                                    class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" 
+                                    placeholder="Jawaban Anda..."
+                                />
+                            </div>
+                            <!-- Q7 -->
+                            <div class="space-y-2">
+                                <label class="text-sm font-semibold text-gray-800 flex gap-2">
+                                    <span class="text-green-600">Q:</span>
+                                    Apa peran kutikula dalam mencegah kehilangan air selama tahap awal grafting?
+                                </label>
+                                <textarea 
+                                    v-model="form.reflections.r7_peran_kutikula" 
+                                    :disabled="isReadOnly"
+                                    type="text"
+                                    class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" 
+                                    placeholder="Jawaban Anda..."
+                                />
+                            </div>
+                            <!-- Q8 -->
+                            <div class="space-y-2">
+                                <label class="text-sm font-semibold text-gray-800 flex gap-2">
+                                    <span class="text-green-600">Q:</span>
+                                    Bagaimana anatomi daun dapat mempengaruhi pertumbuhan dan keberhasilan grafting?
+                                </label>
+                                <textarea 
+                                    v-model="form.reflections.r8_anatomi_daun_mempengaruhi" 
+                                    :disabled="isReadOnly"
+                                    type="text"
+                                    class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" 
+                                    placeholder="Jawaban Anda..."
+                                />
+                            </div>
+                            <!-- Q9 -->
+                            <div class="space-y-2">
+                                <label class="text-sm font-semibold text-gray-800 flex gap-2">
+                                    <span class="text-green-600">Q:</span>
+                                    Apa pengaruh perbedaan struktur sel epidermis pada batang bawah terhadap keberhasilan penyatuan dalam grafting?
+                                </label>
+                                <textarea 
+                                    v-model="form.reflections.r9_struktur_sel_epidermis" 
+                                    :disabled="isReadOnly"
+                                    type="text"
+                                    class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" 
+                                    placeholder="Jawaban Anda..."
+                                />
+                            </div>
+                            <!-- Q10 -->
+                            <div class="space-y-2">
+                                <label class="text-sm font-semibold text-gray-800 flex gap-2">
+                                    <span class="text-green-600">Q:</span>
+                                    Bagaimana kondisi lingkungan, seperti suhu dan kelembapan, mempengaruhi keberhasilan grafting?
+                                </label>
+                                <textarea 
+                                    v-model="form.reflections.r10_kondisi_lingkungan" 
+                                    :disabled="isReadOnly"
+                                    type="text"
+                                    class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" 
+                                    placeholder="Jawaban Anda..."
+                                />
+                            </div>
+                            <!-- Q11 -->
+                            <div class="space-y-2">
+                                <label class="text-sm font-semibold text-gray-800 flex gap-2">
+                                    <span class="text-green-600">Q:</span>
+                                    Apa fungsi sungkup yang dilakukan pada proses grafting?
+                                </label>
+                                <textarea 
+                                    v-model="form.reflections.r11_fungsi_sungkup" 
+                                    :disabled="isReadOnly"
+                                    type="text"
+                                    class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" 
+                                    placeholder="Jawaban Anda..."
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </template>
 
 
                 <div v-if="!isReadOnly" class="bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-50">

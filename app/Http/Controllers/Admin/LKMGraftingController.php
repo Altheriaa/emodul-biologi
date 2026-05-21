@@ -109,14 +109,14 @@ class LKMGraftingController extends Controller
 
     }
 
-    public function destroySetting(string $id)
-    {
-        $lkm = LkmSetting::findOrFail($id);
+    // public function destroySetting(string $id)
+    // {
+    //     $lkm = LkmSetting::findOrFail($id);
 
-        $lkm->delete();
+    //     $lkm->delete();
 
-        return redirect('/admin/pembelajaran/lkm-grafting/settings')->with('success', 'Data LKM berhasil dihapus!');
-    }
+    //     return redirect('/admin/pembelajaran/lkm-grafting/settings')->with('success', 'Data LKM berhasil dihapus!');
+    // }
 
     public function indexSubmission(Request $request)
     {

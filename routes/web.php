@@ -160,7 +160,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/lkm-grafting/settings', [LKMGraftingController::class, 'indexSetting']);
             Route::get('/lkm-grafting/settings/create', [LKMGraftingController::class, 'createSetting']);
             Route::post('/lkm-grafting/settings', [LKMGraftingController::class, 'storeSetting']);
-            Route::delete('/lkm-grafting/settings/{setting}', [LKMGraftingController::class, 'destroySetting']);
+            // Route::delete('/lkm-grafting/settings/{setting}', [LKMGraftingController::class, 'destroySetting']);
             Route::get('/lkm-grafting/settings/{setting}/edit', [LKMGraftingController::class, 'editSetting']);
             Route::put('/lkm-grafting/settings/{setting}', [LKMGraftingController::class, 'updateSetting']);
 
