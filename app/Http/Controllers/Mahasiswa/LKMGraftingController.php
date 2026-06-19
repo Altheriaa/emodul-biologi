@@ -67,16 +67,19 @@ class LKMGraftingController extends Controller
             'status' => 'draft',
         ]);
 
-        // Eager load data spesifik sesuai nomor pertemuan untuk di-edit
+        // Eager load data spesifik sesuai nomor pertemuan
         $submission->load([
             'lkmSetting',
-            'p1Observations', 'p1Questions',
-            'p2Specs', 'p2Items', 'p2Steps',
-            'p3Monitorings',
-            'p4Finals', 'p4Reflections',
+            // P1
+            'p1Questions', 'p1Specs', 'p1Items', 'p1Procedures', 'p1Schedules',
+            // P2
+            'p2Items', 'p2Specs', 'p2Procedures', 'p2Monitorings', 'p2Questions',
+            // P3
+            'p3Growths', 'p3Scions', 'p3Rootstocks', 'p3Connections', 'p3Questions',
+            // P4
+            'p4Analyses', 'p4DeepQuestions', 'p4SelfAssessments', 'p4Reflections',
         ]);
 
-        // Arahkan ke file Vue yang berbeda secara dinamis berdasarkan nomor pertemuan
         return Inertia::render('RoleMahasiswa/Pembelajaran/LKMGrafting/Form', [
             'submission' => $submission,
         ]);
@@ -96,83 +99,238 @@ class LKMGraftingController extends Controller
             return redirect()->back()->with('error', 'LKM ini sudah dikunci.');
         }
 
-        // LKM 1
+        // =============================================================
+        // LKM 1 (Sintak 1-3)
+        // =============================================================
         if ($pertemuan == 1) {
-            // Essay
+            // Sintak 1: Pertanyaan Esensial
             $submission->p1Questions()->updateOrCreate(
                 ['lkm_submission_id' => $submission->id],
                 $request->questions
             );
 
-            // Tabel Pengamatan
-            foreach ($request->observations as $obs) {
-                $submission->p1Observations()->updateOrCreate(
-                    [
-                        'lkm_submission_id' => $submission->id,
-                        'nama_tanaman' => $obs['nama_tanaman'],
-                        'organ' => $obs['organ'],
-                    ],
-                    [
-                        'morfologis' => $obs['morfologis'],
-                        'anatomis' => $obs['anatomis'],
-                    ]
-                );
+            // Sintak 2: Pemilihan Tanaman (Specs)
+            $submission->p1Specs()->delete();
+            if ($request->has('specs') && is_array($request->specs)) {
+                foreach ($request->specs as $spec) {
+                    if (! empty($spec['variabel'])) {
+                        $submission->p1Specs()->create([
+                            'variabel' => $spec['variabel'],
+                            'tanaman_a' => $spec['tanaman_a'],
+                            'tanaman_b' => $spec['tanaman_b'],
+                            'alasan_pemilihan' => $spec['alasan_pemilihan'],
+                        ]);
+                    }
+                }
+            }
+
+            // Sintak 2: Alat & Bahan
+            $submission->p1Items()->delete();
+            if ($request->has('items') && is_array($request->items)) {
+                foreach ($request->items as $index => $item) {
+                    if (! empty($item['alat']) || ! empty($item['bahan'])) {
+                        $submission->p1Items()->create([
+                            'nomor' => $index + 1,
+                            'alat' => $item['alat'],
+                            'bahan' => $item['bahan'],
+                        ]);
+                    }
+                }
+            }
+
+            // Sintak 3: Prosedur Kerja
+            $submission->p1Procedures()->delete();
+            if ($request->has('procedures') && is_array($request->procedures)) {
+                foreach ($request->procedures as $proc) {
+                    if (! empty($proc['tahap']) || ! empty($proc['penjelasan'])) {
+                        $submission->p1Procedures()->create([
+                            'step_number' => $proc['step_number'],
+                            'tahap' => $proc['tahap'],
+                            'penjelasan' => $proc['penjelasan'],
+                        ]);
+                    }
+                }
+            }
+
+            // Sintak 3: Jadwal Capaian
+            $submission->p1Schedules()->delete();
+            if ($request->has('schedules') && is_array($request->schedules)) {
+                foreach ($request->schedules as $sched) {
+                    if (! empty($sched['target_kegiatan'])) {
+                        $submission->p1Schedules()->create([
+                            'pertemuan_ke' => $sched['pertemuan_ke'],
+                            'target_kegiatan' => $sched['target_kegiatan'],
+                        ]);
+                    }
+                }
             }
         }
 
-        // LKM 2
+        // =============================================================
+        // LKM 2 (Sintak 4)
+        // =============================================================
         if ($pertemuan == 2) {
-            // p2items
+            // Persiapan Alat & Bahan
             $submission->p2Items()->delete();
             if ($request->has('items') && is_array($request->items)) {
-                foreach ($request->items as $item) {
-                    if (! empty($item['alat'])) {
+                foreach ($request->items as $index => $item) {
+                    if (! empty($item['nama_item'])) {
                         $submission->p2Items()->create([
-                            'nama_item' => $item['alat'],
-                            'jenis' => 'alat',
-                        ]);
-                    }
-                    if (! empty($item['bahan'])) {
-                        $submission->p2Items()->create([
-                            'nama_item' => $item['bahan'],
-                            'jenis' => 'bahan',
+                            'nomor' => $index + 1,
+                            'nama_item' => $item['nama_item'],
                         ]);
                     }
                 }
             }
 
-            // Essay
-            $submission->p2Specs()->updateOrCreate(
+            // Identifikasi Spesimen
+            $submission->p2Specs()->delete();
+            if ($request->has('specs') && is_array($request->specs)) {
+                foreach ($request->specs as $spec) {
+                    if (! empty($spec['keterangan'])) {
+                        $submission->p2Specs()->create([
+                            'keterangan' => $spec['keterangan'],
+                            'batang_bawah' => $spec['batang_bawah'],
+                            'batang_atas' => $spec['batang_atas'],
+                            'alasan' => $spec['alasan'],
+                        ]);
+                    }
+                }
+            }
+
+            // Prosedur Pelaksanaan
+            $submission->p2Procedures()->delete();
+            if ($request->has('procedures') && is_array($request->procedures)) {
+                foreach ($request->procedures as $proc) {
+                    if (! empty($proc['tahap_kegiatan']) || ! empty($proc['kondisi_jaringan'])) {
+                        $submission->p2Procedures()->create([
+                            'step_number' => $proc['step_number'],
+                            'tahap_kegiatan' => $proc['tahap_kegiatan'],
+                            'kondisi_jaringan' => $proc['kondisi_jaringan'],
+                        ]);
+                    }
+                }
+            }
+
+            // Monitoring Proyek
+            $submission->p2Monitorings()->delete();
+            if ($request->has('monitorings') && is_array($request->monitorings)) {
+                foreach ($request->monitorings as $mon) {
+                    if (! empty($mon['aspek'])) {
+                        $submission->p2Monitorings()->create([
+                            'aspek' => $mon['aspek'],
+                            'hasil_pengamatan' => $mon['hasil_pengamatan'],
+                        ]);
+                    }
+                }
+            }
+
+            // Pertanyaan Esensial P2
+            $submission->p2Questions()->updateOrCreate(
                 ['lkm_submission_id' => $submission->id],
-                $request->specifications
+                $request->p2questions
             );
-
-            // p2Steps (Penjelasan Prosedur)
-            $submission->p2Steps()->delete();
-            if ($request->has('steps') && is_array($request->steps)) {
-                foreach ($request->steps as $step) {
-                    if (! empty($step['nama_tahap']) || ! empty($step['penjelasan'])) {
-                        $submission->p2Steps()->create([
-                            'step_number' => $step['step_number'],
-                            'nama_tahap' => $step['nama_tahap'],
-                            'penjelasan' => $step['penjelasan'],
-                        ]);
-                    }
-                }
-            }
         }
 
-        // LKM 3
+        // =============================================================
+        // LKM 3 (Sintak 5)
+        // =============================================================
+        if ($pertemuan == 3) {
+            // Pengamatan Pertumbuhan Tunas & Daun
+            $submission->p3Growths()->delete();
+            if ($request->has('growths') && is_array($request->growths)) {
+                foreach ($request->growths as $growth) {
+                    if (! empty($growth['parameter'])) {
+                        $submission->p3Growths()->create([
+                            'parameter' => $growth['parameter'],
+                            'data_jumlah' => $growth['data_jumlah'],
+                            'deskripsi_kondisi' => $growth['deskripsi_kondisi'],
+                        ]);
+                    }
+                }
+            }
 
-        // LKM 4
-        if ($pertemuan == 4) {
-            // Essay
-            $submission->p4Finals()->updateOrCreate(
+            // Pengamatan Kondisi Batang Atas (Scion)
+            $submission->p3Scions()->delete();
+            if ($request->has('scions') && is_array($request->scions)) {
+                foreach ($request->scions as $scion) {
+                    if (! empty($scion['parameter'])) {
+                        $submission->p3Scions()->create([
+                            'parameter' => $scion['parameter'],
+                            'kondisi_deskripsi' => $scion['kondisi_deskripsi'],
+                        ]);
+                    }
+                }
+            }
+
+            // Pengamatan Kondisi Batang Bawah (Rootstock)
+            $submission->p3Rootstocks()->delete();
+            if ($request->has('rootstocks') && is_array($request->rootstocks)) {
+                foreach ($request->rootstocks as $rootstock) {
+                    if (! empty($rootstock['parameter'])) {
+                        $submission->p3Rootstocks()->create([
+                            'parameter' => $rootstock['parameter'],
+                            'kondisi_deskripsi' => $rootstock['kondisi_deskripsi'],
+                        ]);
+                    }
+                }
+            }
+
+            // Pengamatan Kondisi Sambungan
+            $submission->p3Connections()->updateOrCreate(
                 ['lkm_submission_id' => $submission->id],
-                $request->finalQuestions
+                [
+                    'rincian_sambungan' => $request->connection['rincian_sambungan'] ?? null,
+                    'is_tumbuh_tunas' => $request->connection['is_tumbuh_tunas'] ?? null,
+                    'alasan' => $request->connection['alasan'] ?? null,
+                ]
             );
 
-            // Essay reflection
+            // Pertanyaan Esensial P3
+            $submission->p3Questions()->updateOrCreate(
+                ['lkm_submission_id' => $submission->id],
+                $request->p3questions
+            );
+        }
+
+        // =============================================================
+        // LKM 4 (Sintak 6)
+        // =============================================================
+        if ($pertemuan == 4) {
+            // Analisis Keberhasilan
+            $submission->p4Analyses()->delete();
+            if ($request->has('analyses') && is_array($request->analyses)) {
+                foreach ($request->analyses as $analysis) {
+                    if (! empty($analysis['variabel_analisis'])) {
+                        $submission->p4Analyses()->create([
+                            'variabel_analisis' => $analysis['variabel_analisis'],
+                            'hasil_pengamatan' => $analysis['hasil_pengamatan'],
+                        ]);
+                    }
+                }
+            }
+
+            // Pertanyaan Analisis Mendalam
+            $submission->p4DeepQuestions()->updateOrCreate(
+                ['lkm_submission_id' => $submission->id],
+                $request->deepQuestions
+            );
+
+            // Penilaian Diri
+            $submission->p4SelfAssessments()->delete();
+            if ($request->has('selfAssessments') && is_array($request->selfAssessments)) {
+                foreach ($request->selfAssessments as $assessment) {
+                    if (! empty($assessment['aspek'])) {
+                        $submission->p4SelfAssessments()->create([
+                            'aspek' => $assessment['aspek'],
+                            'skor' => $assessment['skor'],
+                            'catatan' => $assessment['catatan'],
+                        ]);
+                    }
+                }
+            }
+
+            // Refleksi Essay
             $submission->p4Reflections()->updateOrCreate(
                 ['lkm_submission_id' => $submission->id],
                 $request->reflections

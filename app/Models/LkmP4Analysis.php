@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class LkmP2Spec extends Model
+class LkmP4Analysis extends Model
 {
+    protected $table = 'lkm_p4_analyses';
+
     protected $guarded = [];
 
     public function submission(): BelongsTo

@@ -1,5 +1,4 @@
 <script setup>
-import { GalleryVerticalEnd } from "lucide-vue-next"
 import { useForm } from '@inertiajs/vue3'
 import { Button } from '@/components/ui/button'
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'

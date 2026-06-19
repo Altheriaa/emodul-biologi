@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class LkmP2Spec extends Model
+class LkmP4DeepQuestion extends Model
 {
     protected $guarded = [];
 
