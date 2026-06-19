@@ -7,6 +7,7 @@ use App\Models\LkmSetting;
 use App\Models\LkmSubmission;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -251,26 +252,54 @@ class LKMGraftingController extends Controller
             }
 
             // Pengamatan Kondisi Batang Atas (Scion)
+            $oldScions = $submission->p3Scions->keyBy('parameter');
             $submission->p3Scions()->delete();
             if ($request->has('scions') && is_array($request->scions)) {
                 foreach ($request->scions as $scion) {
                     if (! empty($scion['parameter'])) {
+                        $path = null;
+
+                        if (isset($scion['dokumentasi_file']) && $scion['dokumentasi_file'] instanceof UploadedFile) {
+                            $path = $scion['dokumentasi_file']->store('lkm_dokumentasi', 'public');
+                        } else {
+                            // Reuse old path if no new file uploaded
+                            $oldScion = $oldScions->get($scion['parameter']);
+                            if ($oldScion) {
+                                $path = $oldScion->dokumentasi_path;
+                            }
+                        }
+
                         $submission->p3Scions()->create([
                             'parameter' => $scion['parameter'],
-                            'kondisi_deskripsi' => $scion['kondisi_deskripsi'],
+                            'kondisi_deskripsi' => $scion['kondisi_deskripsi'] ?? null,
+                            'dokumentasi_path' => $path,
                         ]);
                     }
                 }
             }
 
             // Pengamatan Kondisi Batang Bawah (Rootstock)
+            $oldRootstocks = $submission->p3Rootstocks->keyBy('parameter');
             $submission->p3Rootstocks()->delete();
             if ($request->has('rootstocks') && is_array($request->rootstocks)) {
                 foreach ($request->rootstocks as $rootstock) {
                     if (! empty($rootstock['parameter'])) {
+                        $path = null;
+
+                        if (isset($rootstock['dokumentasi_file']) && $rootstock['dokumentasi_file'] instanceof UploadedFile) {
+                            $path = $rootstock['dokumentasi_file']->store('lkm_dokumentasi', 'public');
+                        } else {
+                            // Reuse old path if no new file uploaded
+                            $oldRootstock = $oldRootstocks->get($rootstock['parameter']);
+                            if ($oldRootstock) {
+                                $path = $oldRootstock->dokumentasi_path;
+                            }
+                        }
+
                         $submission->p3Rootstocks()->create([
                             'parameter' => $rootstock['parameter'],
-                            'kondisi_deskripsi' => $rootstock['kondisi_deskripsi'],
+                            'kondisi_deskripsi' => $rootstock['kondisi_deskripsi'] ?? null,
+                            'dokumentasi_path' => $path,
                         ]);
                     }
                 }

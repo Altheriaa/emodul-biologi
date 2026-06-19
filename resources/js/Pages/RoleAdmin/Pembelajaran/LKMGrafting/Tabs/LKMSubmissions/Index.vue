@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 
 // Data Props From Controller
 const props = defineProps({
-    submissions: Object,
+    mahasiswas: Object,
     filters: Object,
     errors : Object
 });
@@ -101,7 +101,6 @@ watch(() => page.props.flash, () => {
 //     router.visit(`/admin/pembelajaran/lkm-grafting/settings/${id}/edit`);
 // };  
 
-// confirm delete
 // const confirmDelete = (item) => {
 //     Swal.fire({
 //         title: 'Hapus Data?',
@@ -125,6 +124,10 @@ watch(() => page.props.flash, () => {
 //         }
 //     });
 // };
+
+const openDetail = (id) => {
+    router.visit(`/admin/pembelajaran/lkm-grafting/submissions/mahasiswa/${id}`);
+};
 </script>
 
 <template>
@@ -157,32 +160,18 @@ watch(() => page.props.flash, () => {
                                 <TableRow class="bg-gray-50/50">
                                     <TableHead class="px-4">NIM</TableHead>
                                     <TableHead class="px-4">Nama Mahasiswa</TableHead>
-                                    <TableHead class="px-4">Pertemuan</TableHead>
-                                    <TableHead class="px-4">Status</TableHead>
                                     <TableHead class="text-right pr-4 sm:pr-6">Aksi</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                <TableRow v-if="submissions.data.length === 0">
-                                    <TableCell colspan="10" class="text-center py-10 text-muted-foreground">
-                                        Tidak ada data LKM Submissions ditemukan.
+                                <TableRow v-if="mahasiswas.data.length === 0">
+                                    <TableCell colspan="3" class="text-center py-10 text-muted-foreground">
+                                        Tidak ada data Mahasiswa ditemukan.
                                     </TableCell>
                                 </TableRow>
-                                <TableRow v-for="(item, index) in submissions.data" :key="item.id" class="hover:bg-gray-50/50 transition-colors">
-                                    <TableCell class="font-medium pl-4 sm:pl-6 py-4">{{ item.mahasiswa.nim }}</TableCell>
-                                    <TableCell class="font-medium pl-4 sm:pl-6 py-4">{{ item.mahasiswa.user.name }}</TableCell>
-                                    <TableCell class="px-4 py-4">{{ item.lkm_setting.pertemuan }}</TableCell>
-                                    <TableCell class="px-4 py-4">
-                                        <Badge :class="{
-                                            'flex w-fit items-center gap-1': true,
-                                            'bg-green-500 hover:bg-green-600 text-white border-transparent': item.status == 'submitted',
-                                            'bg-yellow-500 hover:bg-yellow-600 text-white border-transparent': item.status == 'draft',
-                                        }"> 
-                                            <CheckCircle2 v-if="item.status == 'submitted'" class="h-3 w-3" />
-                                            <CircleDashed v-else class="h-3 w-3" />
-                                            <span class="capitalize">{{ item.status == 'submitted' ? 'Submitted' : 'Drafted' }}</span>
-                                        </Badge>
-                                    </TableCell>
+                                <TableRow v-for="(item, index) in mahasiswas.data" :key="item.id" class="hover:bg-gray-50/50 transition-colors">
+                                    <TableCell class="font-medium pl-4 sm:pl-6 py-4">{{ item.nim }}</TableCell>
+                                    <TableCell class="font-medium pl-4 sm:pl-6 py-4">{{ item.user.name }}</TableCell>
                                     <TableCell class="text-right pr-4 sm:pr-6 py-4">
                                         <DropdownMenu>
                                             <DropdownMenuTrigger as-child>
@@ -194,7 +183,6 @@ watch(() => page.props.flash, () => {
                                                 <DropdownMenuLabel>Opsi</DropdownMenuLabel>
                                                 <DropdownMenuItem @click="openDetail(item.id)">Detail</DropdownMenuItem>
                                                 <DropdownMenuSeparator />
-                                                <!-- <DropdownMenuItem @click="confirmDelete(item)" class="text-red-600">Hapus</DropdownMenuItem> -->
                                             </DropdownMenuContent>
                                         </DropdownMenu>
                                     </TableCell>
@@ -206,9 +194,9 @@ watch(() => page.props.flash, () => {
                     <!-- Pagination Area -->
                      <div class="flex flex-col sm:flex-row items-center justify-between px-4 py-5 sm:px-0 sm:py-4 gap-4">
                         <p class="text-sm text-muted-foreground order-2 sm:order-1">
-                            Menampilkan {{ submissions.from || 0 }}
-                            sampai {{ submissions.to || 0 }}
-                            dari {{ submissions.total }} data submissions LKM.
+                            Menampilkan {{ mahasiswas.from || 0 }}
+                            sampai {{ mahasiswas.to || 0 }}
+                            dari {{ mahasiswas.total }} data mahasiswa.
                         </p>
 
                         <div class="flex items-center gap-2 w-full sm:w-auto order-1 sm:order-2">
@@ -217,9 +205,9 @@ watch(() => page.props.flash, () => {
                             <Button
                                 variant="outline"
                                 size="sm"
-                                :disabled="!submissions.prev_page_url"
-                                @click="submissions.prev_page_url && router.get(
-                                    submissions.prev_page_url,
+                                :disabled="!mahasiswas.prev_page_url"
+                                @click="mahasiswas.prev_page_url && router.get(
+                                    mahasiswas.prev_page_url,
                                     {},
                                     {
                                         preserveState: true,
@@ -232,18 +220,13 @@ watch(() => page.props.flash, () => {
                                 Sebelumnya
                             </Button>
 
-                            <!-- Current Page -->
-                            <!-- <div class="text-sm text-muted-foreground px-2">
-                                Halaman {{ dosens.current_page }}
-                            </div> -->
-
                             <!-- Next -->
                             <Button
                                 variant="outline"
                                 size="sm"
-                                :disabled="!submissions.next_page_url"
-                                @click="submissions.next_page_url && router.get(
-                                    submissions.next_page_url,
+                                :disabled="!mahasiswas.next_page_url"
+                                @click="mahasiswas.next_page_url && router.get(
+                                    mahasiswas.next_page_url,
                                     {},
                                     {
                                         preserveState: true,

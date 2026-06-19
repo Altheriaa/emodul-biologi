@@ -166,6 +166,8 @@ Route::middleware(['auth'])->group(function () {
 
             // LKM-Grafting Submission
             Route::get('/lkm-grafting/submissions', [LKMGraftingController::class, 'indexSubmission']);
+            Route::get('/lkm-grafting/submissions/mahasiswa/{mahasiswaId}', [LKMGraftingController::class, 'showMahasiswaSubmissions']);
+            Route::get('/lkm-grafting/submissions/{id}', [LKMGraftingController::class, 'showSubmission']);
         });
 
         Route::prefix('evaluasi')->group(function () {

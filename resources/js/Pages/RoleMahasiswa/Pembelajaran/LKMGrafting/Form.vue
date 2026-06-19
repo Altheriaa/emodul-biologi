@@ -1,19 +1,41 @@
 <script setup>
 import Layout from '../../../../App.vue';
 import { Button } from '@/components/ui/button';
-import { Send, Save } from 'lucide-vue-next';
+import { Send, Save, Camera, X, Image, ArrowLeft } from 'lucide-vue-next';
 import { router, usePage, useForm } from '@inertiajs/vue3';
 import { Toast } from '@/lib/toast';
 import Swal from 'sweetalert2';
 import { Badge } from '@/components/ui/badge';
-import { onMounted, watch, computed } from 'vue';
+import { onMounted, watch, computed, ref } from 'vue';
 
 const props = defineProps({
     submission: Object,
+    isAdmin: {
+        type: Boolean,
+        default: false
+    }
 });
 
 // Cek apakah form harus dikunci (hanya bisa dilihat)
-const isReadOnly = computed(() => props.submission.status === 'submitted');
+const isReadOnly = computed(() => props.submission.status === 'submitted' || props.isAdmin);
+
+const activePreviewImage = ref(null);
+
+const openImagePreview = (imageUrl) => {
+    activePreviewImage.value = imageUrl;
+};
+
+const closeImagePreview = () => {
+    activePreviewImage.value = null;
+};
+
+const goBack = () => {
+    if (props.isAdmin) {
+        router.visit(`/admin/pembelajaran/lkm-grafting/submissions/mahasiswa/${props.submission.mahasiswa_id}`);
+    } else {
+        router.visit('/mahasiswa/pembelajaran/lkm-grafting');
+    }
+};
 
 // =============================================================
 // Inisialisasi Data Form menggunakan Inertia useForm
@@ -124,24 +146,24 @@ const form = useForm({
 
     // Pengamatan Kondisi Batang Atas (Scion)
     scions: props.submission.p3_scions?.length > 0
-        ? props.submission.p3_scions
+        ? props.submission.p3_scions.map(s => ({ ...s, dokumentasi_file: null }))
         : [
-            { parameter: 'Warna Batang', kondisi_deskripsi: '' },
-            { parameter: 'Turgiditas', kondisi_deskripsi: '' },
-            { parameter: 'Pertumbuhan Baru', kondisi_deskripsi: '' },
-            { parameter: 'Kondisi Sambungan', kondisi_deskripsi: '' },
-            { parameter: 'Tanda Nekrosis', kondisi_deskripsi: '' },
+            { parameter: 'Warna Batang', kondisi_deskripsi: '', dokumentasi_file: null },
+            { parameter: 'Turgiditas', kondisi_deskripsi: '', dokumentasi_file: null },
+            { parameter: 'Pertumbuhan Baru', kondisi_deskripsi: '', dokumentasi_file: null },
+            { parameter: 'Kondisi Sambungan', kondisi_deskripsi: '', dokumentasi_file: null },
+            { parameter: 'Tanda Nekrosis', kondisi_deskripsi: '', dokumentasi_file: null },
         ],
 
     // Pengamatan Kondisi Batang Bawah (Rootstock)
     rootstocks: props.submission.p3_rootstocks?.length > 0
-        ? props.submission.p3_rootstocks
+        ? props.submission.p3_rootstocks.map(r => ({ ...r, dokumentasi_file: null }))
         : [
-            { parameter: 'Warna Batang', kondisi_deskripsi: '' },
-            { parameter: 'Kondisi Akar', kondisi_deskripsi: '' },
-            { parameter: 'Tunas Baru', kondisi_deskripsi: '' },
-            { parameter: 'Kondisi Sambungan', kondisi_deskripsi: '' },
-            { parameter: 'Kondisi Daun Tersisa', kondisi_deskripsi: '' },
+            { parameter: 'Warna Batang', kondisi_deskripsi: '', dokumentasi_file: null },
+            { parameter: 'Kondisi Akar', kondisi_deskripsi: '', dokumentasi_file: null },
+            { parameter: 'Tunas Baru', kondisi_deskripsi: '', dokumentasi_file: null },
+            { parameter: 'Kondisi Sambungan', kondisi_deskripsi: '', dokumentasi_file: null },
+            { parameter: 'Kondisi Daun Tersisa', kondisi_deskripsi: '', dokumentasi_file: null },
         ],
 
     // Pengamatan Kondisi Sambungan
@@ -253,11 +275,62 @@ const executeSubmit = (actionType) => {
         payload.monitorings = form.p2monitorings;
         payload.p2questions = form.p2questions;
     } else if (pertemuan === 3) {
-        payload.growths = form.growths;
-        payload.scions = form.scions;
-        payload.rootstocks = form.rootstocks;
-        payload.connection = form.connection;
-        payload.p3questions = form.p3questions;
+        // For P3 we need FormData because of file uploads
+        const formData = new FormData();
+        formData.append('action', actionType);
+
+        // Growths
+        form.growths.forEach((g, i) => {
+            formData.append(`growths[${i}][parameter]`, g.parameter || '');
+            formData.append(`growths[${i}][data_jumlah]`, g.data_jumlah || '');
+            formData.append(`growths[${i}][deskripsi_kondisi]`, g.deskripsi_kondisi || '');
+        });
+
+        // Scions (with file uploads)
+        form.scions.forEach((s, i) => {
+            formData.append(`scions[${i}][parameter]`, s.parameter || '');
+            formData.append(`scions[${i}][kondisi_deskripsi]`, s.kondisi_deskripsi || '');
+            if (s.dokumentasi_file instanceof File) {
+                formData.append(`scions[${i}][dokumentasi_file]`, s.dokumentasi_file);
+            }
+        });
+
+        // Rootstocks (with file uploads)
+        form.rootstocks.forEach((r, i) => {
+            formData.append(`rootstocks[${i}][parameter]`, r.parameter || '');
+            formData.append(`rootstocks[${i}][kondisi_deskripsi]`, r.kondisi_deskripsi || '');
+            if (r.dokumentasi_file instanceof File) {
+                formData.append(`rootstocks[${i}][dokumentasi_file]`, r.dokumentasi_file);
+            }
+        });
+
+        // Connection
+        formData.append('connection[rincian_sambungan]', form.connection.rincian_sambungan || '');
+        if (form.connection.is_tumbuh_tunas !== null) {
+            formData.append('connection[is_tumbuh_tunas]', form.connection.is_tumbuh_tunas ? '1' : '0');
+        }
+        formData.append('connection[alasan]', form.connection.alasan || '');
+
+        // P3 Questions
+        Object.keys(form.p3questions).forEach(key => {
+            formData.append(`p3questions[${key}]`, form.p3questions[key] || '');
+        });
+
+        router.post(`/mahasiswa/pembelajaran/lkm-grafting/form/${pertemuan}`, formData, {
+            preserveScroll: true,
+            forceFormData: true,
+            onSuccess: () => {
+                if (actionType === 'submit') {
+                    Toast.fire({ icon: 'success', title: 'Berhasil!', text: 'LKM berhasil dikumpulkan.' });
+                } else {
+                    Toast.fire({ icon: 'success', title: 'Tersimpan!', text: 'Progres LKM berhasil disimpan sebagai Draft.' });
+                }
+            },
+            onError: () => {
+                Toast.fire({ icon: 'error', title: 'Oops!', text: 'Pastikan semua form telah diisi dengan benar.' });
+            }
+        });
+        return; // Early return — we handle P3 separately with FormData
     } else if (pertemuan === 4) {
         payload.analyses = form.analyses;
         payload.deepQuestions = form.deepQuestions;
@@ -280,6 +353,9 @@ const executeSubmit = (actionType) => {
     });
 };
 
+const getFilePreview = (file) => {
+    return file ? URL.createObjectURL(file) : null;
+};
 
 // sweet alert toast
 const page = usePage();
@@ -343,27 +419,32 @@ watch(() => page.props.flash, () => {
 <template>
     <Layout>
         <div class="grid grid-cols-1 gap-3 sm:gap-4 mb-2 sm:mb-4">
-            <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">
-                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">LKM Grafting {{ submission?.pertemuan ?? 'Judul LKM' }}</p>
-                <p class="text-sm sm:text-s text-green-600 mt-1">{{ submission.lkm_setting?.deskripsi ?? '-' }}</p>
-                <template v-if="props.submission.status === 'submitted'">
-                    <Badge :class="{
-                        'mt-2': true,
-                        'flex w-fit items-center gap-1': true,
-                        'bg-green-500 hover:bg-green-600 text-white border-transparent': true,
-                    }"> 
-                        <span class="capitalize">Status : Submitted</span>
-                    </Badge>
-                </template>
-                <template v-else>
-                    <Badge :class="{
-                        'mt-2': true,
-                        'flex w-fit items-center gap-1': true,
-                        'bg-yellow-500 hover:bg-yellow-600 text-white border-transparent': true,
-                    }"> 
-                        <span class="capitalize">Status : Draft</span>
-                    </Badge>
-                </template>
+            <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4 flex items-start gap-3">
+                <Button type="button" variant="ghost" size="icon" @click="goBack" class="mt-1 flex-shrink-0 hover:bg-gray-100 rounded-lg">
+                    <ArrowLeft class="w-5 h-5 text-gray-600" />
+                </Button>
+                <div class="flex-grow">
+                    <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">LKM Grafting {{ submission?.pertemuan ?? 'Judul LKM' }}</p>
+                    <p class="text-sm sm:text-s text-green-600 mt-1">{{ submission.lkm_setting?.deskripsi ?? '-' }}</p>
+                    <template v-if="props.submission.status === 'submitted'">
+                        <Badge :class="{
+                            'mt-2': true,
+                            'flex w-fit items-center gap-1': true,
+                            'bg-green-500 hover:bg-green-600 text-white border-transparent': true,
+                        }"> 
+                            <span class="capitalize">Status : Submitted</span>
+                        </Badge>
+                    </template>
+                    <template v-else>
+                        <Badge :class="{
+                            'mt-2': true,
+                            'flex w-fit items-center gap-1': true,
+                            'bg-yellow-500 hover:bg-yellow-600 text-white border-transparent': true,
+                        }"> 
+                            <span class="capitalize">Status : Draft</span>
+                        </Badge>
+                    </template>
+                </div>
             </div>
         </div>
 
@@ -593,8 +674,8 @@ watch(() => page.props.flash, () => {
                             <table class="w-full text-left border-collapse border border-gray-200">
                                 <thead>
                                     <tr class="bg-gray-50 text-sm text-gray-600">
-                                        <th class="p-3 border border-gray-200 font-semibold w-1/4">Pertemuan Ke-</th>
-                                        <th class="p-3 border border-gray-200 font-semibold w-3/4">Target Kegiatan</th>
+                                        <th class="p-3 border border-gray-200 font-semibold w-16">Pertemuan Ke-</th>
+                                        <th class="p-3 border border-gray-200 font-semibol">Target Kegiatan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -904,8 +985,9 @@ watch(() => page.props.flash, () => {
                             <table class="w-full text-left border-collapse border border-gray-200">
                                 <thead>
                                     <tr class="bg-gray-50 text-sm text-gray-600">
-                                        <th class="p-3 border border-gray-200 font-semibold w-1/4">Parameter</th>
-                                        <th class="p-3 border border-gray-200 font-semibold w-3/4">Deskripsi Kondisi</th>
+                                        <th class="p-3 border border-gray-200 font-semibold w-1/5">Parameter</th>
+                                        <th class="p-3 border border-gray-200 font-semibold w-2/5">Deskripsi Kondisi</th>
+                                        <th class="p-3 border border-gray-200 font-semibold w-2/5">Dokumentasi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -920,6 +1002,46 @@ watch(() => page.props.flash, () => {
                                                 class="w-full text-sm border-0 focus:ring-0 p-2 resize-none bg-transparent placeholder-gray-300 disabled:text-gray-500" 
                                                 rows="2" 
                                                 placeholder="Deskripsi kondisi..."></textarea>
+                                        </td>
+                                        <td class="p-3 border border-gray-200">
+                                            <!-- Existing uploaded image -->
+                                            <div v-if="scion.dokumentasi_path && !scion.dokumentasi_file" class="mb-2">
+                                                <div class="relative inline-block group">
+                                                    <img 
+                                                        :src="`/storage/${scion.dokumentasi_path}`" 
+                                                        alt="Dokumentasi" 
+                                                        class="w-24 h-24 object-cover rounded-lg border border-gray-200 cursor-pointer hover:opacity-90 hover:scale-[1.02] transition-all duration-200"
+                                                        @click="openImagePreview(`/storage/${scion.dokumentasi_path}`)"
+                                                    >
+                                                    <button v-if="!isReadOnly" type="button" @click="scion.dokumentasi_path = null" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-0.5 hover:bg-red-600 transition-colors">
+                                                        <X class="w-3 h-3" />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <!-- New file preview -->
+                                            <div v-if="scion.dokumentasi_file" class="mb-2">
+                                                <div class="relative inline-block group">
+                                                    <img 
+                                                        :src="getFilePreview(scion.dokumentasi_file)" 
+                                                        alt="Preview" 
+                                                        class="w-24 h-24 object-cover rounded-lg border border-green-300 cursor-pointer hover:opacity-90 hover:scale-[1.02] transition-all duration-200"
+                                                        @click="openImagePreview(getFilePreview(scion.dokumentasi_file))"
+                                                    >
+                                                    <button v-if="!isReadOnly" type="button" @click="scion.dokumentasi_file = null" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-0.5 hover:bg-red-600 transition-colors">
+                                                        <X class="w-3 h-3" />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <!-- Upload button -->
+                                            <label v-if="!isReadOnly && !scion.dokumentasi_file" class="flex items-center gap-2 cursor-pointer text-sm text-green-600 hover:text-green-700 transition-colors">
+                                                <Camera class="w-4 h-4" />
+                                                <span>Upload Foto</span>
+                                                <input 
+                                                    type="file" 
+                                                    accept="image/*" 
+                                                    class="hidden" 
+                                                    @change="(e) => { scion.dokumentasi_file = e.target.files[0]; }">
+                                            </label>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -936,8 +1058,9 @@ watch(() => page.props.flash, () => {
                             <table class="w-full text-left border-collapse border border-gray-200">
                                 <thead>
                                     <tr class="bg-gray-50 text-sm text-gray-600">
-                                        <th class="p-3 border border-gray-200 font-semibold w-1/4">Parameter</th>
-                                        <th class="p-3 border border-gray-200 font-semibold w-3/4">Deskripsi Kondisi</th>
+                                        <th class="p-3 border border-gray-200 font-semibold w-1/5">Parameter</th>
+                                        <th class="p-3 border border-gray-200 font-semibold w-2/5">Deskripsi Kondisi</th>
+                                        <th class="p-3 border border-gray-200 font-semibold w-2/5">Dokumentasi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -952,6 +1075,46 @@ watch(() => page.props.flash, () => {
                                                 class="w-full text-sm border-0 focus:ring-0 p-2 resize-none bg-transparent placeholder-gray-300 disabled:text-gray-500" 
                                                 rows="2" 
                                                 placeholder="Deskripsi kondisi..."></textarea>
+                                        </td>
+                                        <td class="p-3 border border-gray-200">
+                                            <!-- Existing uploaded image -->
+                                            <div v-if="rootstock.dokumentasi_path && !rootstock.dokumentasi_file" class="mb-2">
+                                                <div class="relative inline-block group">
+                                                    <img 
+                                                        :src="`/storage/${rootstock.dokumentasi_path}`" 
+                                                        alt="Dokumentasi" 
+                                                        class="w-24 h-24 object-cover rounded-lg border border-gray-200 cursor-pointer hover:opacity-90 hover:scale-[1.02] transition-all duration-200"
+                                                        @click="openImagePreview(`/storage/${rootstock.dokumentasi_path}`)"
+                                                    >
+                                                    <button v-if="!isReadOnly" type="button" @click="rootstock.dokumentasi_path = null" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-0.5 hover:bg-red-600 transition-colors">
+                                                        <X class="w-3 h-3" />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <!-- New file preview -->
+                                            <div v-if="rootstock.dokumentasi_file" class="mb-2">
+                                                <div class="relative inline-block group">
+                                                    <img 
+                                                        :src="getFilePreview(rootstock.dokumentasi_file)" 
+                                                        alt="Preview" 
+                                                        class="w-24 h-24 object-cover rounded-lg border border-green-300 cursor-pointer hover:opacity-90 hover:scale-[1.02] transition-all duration-200"
+                                                        @click="openImagePreview(getFilePreview(rootstock.dokumentasi_file))"
+                                                    >
+                                                    <button v-if="!isReadOnly" type="button" @click="rootstock.dokumentasi_file = null" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-0.5 hover:bg-red-600 transition-colors">
+                                                        <X class="w-3 h-3" />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <!-- Upload button -->
+                                            <label v-if="!isReadOnly && !rootstock.dokumentasi_file" class="flex items-center gap-2 cursor-pointer text-sm text-green-600 hover:text-green-700 transition-colors">
+                                                <Camera class="w-4 h-4" />
+                                                <span>Upload Foto</span>
+                                                <input 
+                                                    type="file" 
+                                                    accept="image/*" 
+                                                    class="hidden" 
+                                                    @change="(e) => { rootstock.dokumentasi_file = e.target.files[0]; }">
+                                            </label>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -1285,6 +1448,28 @@ watch(() => page.props.flash, () => {
                     </div>
                 </div>
             </form>
+            </div>
+        </div>
+
+        <!-- Image Preview Modal -->
+        <div 
+            v-if="activePreviewImage" 
+            class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 transition-all duration-300"
+            @click="closeImagePreview"
+        >
+            <div class="relative max-w-4xl w-full max-h-[90vh] flex flex-col items-center justify-center" @click.stop>
+                <button 
+                    type="button" 
+                    @click="closeImagePreview" 
+                    class="absolute -top-14 right-2 sm:right-0 bg-white/10 hover:bg-white/20 text-white rounded-full p-2 transition-colors border border-white/10 cursor-pointer"
+                >
+                    <X class="w-6 h-6" />
+                </button>
+                <img 
+                    :src="activePreviewImage" 
+                    alt="Preview Besar" 
+                    class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl border border-white/10" 
+                />
             </div>
         </div>
     </Layout>

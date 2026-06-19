@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\LkmSetting;
 use App\Models\LkmSubmission;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -23,8 +24,8 @@ class LKMGraftingController extends Controller
             ->when($search, function ($query, $search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('title', 'like', "%{$search}%")
-                    ->orWhere('deskripsi', 'like', "%{$search}%")
-                    ->orWhere('pertemuan', 'like', "%{$search}%");
+                        ->orWhere('deskripsi', 'like', "%{$search}%")
+                        ->orWhere('pertemuan', 'like', "%{$search}%");
                 });
             })
             ->orderBy('pertemuan', 'desc')
@@ -85,7 +86,7 @@ class LKMGraftingController extends Controller
         $lkm = LkmSetting::findOrFail($id);
 
         $request->validate([
-            'pertemuan' => 'integer|required|unique:lkm_settings,pertemuan,'. $lkm->id,
+            'pertemuan' => 'integer|required|unique:lkm_settings,pertemuan,'.$lkm->id,
             'title' => 'string|required',
             'deskripsi' => 'string|required',
             'open_at' => 'date|required',
@@ -121,27 +122,68 @@ class LKMGraftingController extends Controller
     public function indexSubmission(Request $request)
     {
         $search = $request->input('search');
-        $submissions = LkmSubmission::with(['mahasiswa.user', 'lkmSetting'])
+
+        $mahasiswas = Mahasiswa::with('user')
+            ->whereHas('submissions')
             ->when($search, function ($query, $search) {
-                $query->where(function ($q) use ($search) {
-                    $q->where('pertemuan', 'like', "%{$search}%")
-                        ->orWhereHas('mahasiswa', function ($mahasiswa) use ($search) {
-                            $mahasiswa->where('nim', 'like', "%{$search}%");
-                        })
-                        ->orWhereHas('mahasiswa.user', function ($user) use ($search) {
-                            $user->where('name', 'like', "%{$search}%");
-                        });
-                });
+                $query->where('nim', 'like', "%{$search}%")
+                    ->orWhereHas('user', function ($user) use ($search) {
+                        $user->where('name', 'like', "%{$search}%");
+                    });
             })
-            ->orderBy('lkm_setting_id', 'desc')
-            ->orderBy('created_at', 'desc')
             ->simplePaginate(10)
             ->withQueryString();
 
         return Inertia::render('RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSubmissions/Index', [
-            'submissions' => $submissions,
+            'mahasiswas' => $mahasiswas,
             'title' => 'LKM Submissions',
             'filters' => ['search' => $search],
+        ]);
+    }
+
+    public function showMahasiswaSubmissions($mahasiswaId)
+    {
+        $mahasiswa = Mahasiswa::with('user')->findOrFail($mahasiswaId);
+        $settings = LkmSetting::orderBy('pertemuan', 'asc')->get();
+
+        $submissions = LkmSubmission::where('mahasiswa_id', $mahasiswaId)
+            ->get()
+            ->keyBy('pertemuan');
+
+        $lkmData = $settings->map(function ($setting) use ($submissions) {
+            $submission = $submissions->get($setting->pertemuan);
+
+            return [
+                'pertemuan' => $setting->pertemuan,
+                'title' => $setting->title,
+                'status' => $submission ? $submission->status : 'Belum Mengerjakan',
+                'submission_id' => $submission ? $submission->id : null,
+            ];
+        });
+
+        return Inertia::render('RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSubmissions/ShowMahasiswa', [
+            'mahasiswa' => $mahasiswa,
+            'lkmData' => $lkmData,
+        ]);
+    }
+
+    public function showSubmission($id)
+    {
+        $submission = LkmSubmission::with([
+            'lkmSetting', 'mahasiswa.user',
+            // P1
+            'p1Questions', 'p1Specs', 'p1Items', 'p1Procedures', 'p1Schedules',
+            // P2
+            'p2Items', 'p2Specs', 'p2Procedures', 'p2Monitorings', 'p2Questions',
+            // P3
+            'p3Growths', 'p3Scions', 'p3Rootstocks', 'p3Connections', 'p3Questions',
+            // P4
+            'p4Analyses', 'p4DeepQuestions', 'p4SelfAssessments', 'p4Reflections',
+        ])->findOrFail($id);
+
+        return Inertia::render('RoleMahasiswa/Pembelajaran/LKMGrafting/Form', [
+            'submission' => $submission,
+            'isAdmin' => true,
         ]);
     }
 }

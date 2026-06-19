@@ -12,10 +12,10 @@ const tabs = [
         name: 'LKM Submission',
         href: '/admin/pembelajaran/lkm-grafting/submissions',
     },
-    {
-        name: 'Penilaian',
-        href: '/admin/pembelajaran/lkm-grafting/gradings',
-    },
+    // {
+    //     name: 'Penilaian',
+    //     href: '/admin/pembelajaran/lkm-grafting/gradings',
+    // },
 ]
 </script>
 
