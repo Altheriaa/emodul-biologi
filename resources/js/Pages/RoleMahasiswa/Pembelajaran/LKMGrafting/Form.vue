@@ -1,7 +1,7 @@
 <script setup>
 import Layout from '../../../../App.vue';
 import { Button } from '@/components/ui/button';
-import { Send, Save, Camera, X, Image, ArrowLeft } from 'lucide-vue-next';
+import { Send, Save, Camera, X, Image, ArrowLeft, NotepadText } from 'lucide-vue-next';
 import { router, usePage, useForm } from '@inertiajs/vue3';
 import { Toast } from '@/lib/toast';
 import Swal from 'sweetalert2';
@@ -15,6 +15,8 @@ const props = defineProps({
         default: false
     }
 });
+
+const page = usePage();
 
 // Cek apakah form harus dikunci (hanya bisa dilihat)
 const isReadOnly = computed(() => props.submission.status === 'submitted' || props.isAdmin);
@@ -30,8 +32,11 @@ const closeImagePreview = () => {
 };
 
 const goBack = () => {
-    if (props.isAdmin) {
+    const role = page.props.auth.user.role;
+    if (role === 'admin') {
         router.visit(`/admin/pembelajaran/lkm-grafting/submissions/mahasiswa/${props.submission.mahasiswa_id}`);
+    } else if (role === 'dosen') {
+        router.visit(`/dosen/pembelajaran/lkm-grafting/submissions/mahasiswa/${props.submission.mahasiswa_id}`);
     } else {
         router.visit('/mahasiswa/pembelajaran/lkm-grafting');
     }
@@ -65,14 +70,24 @@ const form = useForm({
         ],
 
     // Sintak 2: Alat & Bahan
-    items: props.submission.p1_items?.length > 0
-        ? props.submission.p1_items
-        : Array.from({ length: 10 }, (_, i) => ({ alat: '', bahan: '' })),
+    items: (() => {
+        const saved = props.submission.p1_items || [];
+        const padded = [...saved];
+        while (padded.length < 10) {
+            padded.push({ alat: '', bahan: '' });
+        }
+        return padded;
+    })(),
 
     // Sintak 3: Prosedur Kerja
-    procedures: props.submission.p1_procedures?.length > 0
-        ? props.submission.p1_procedures
-        : Array.from({ length: 10 }, (_, i) => ({ step_number: i + 1, tahap: '', penjelasan: '' })),
+    procedures: (() => {
+        const saved = props.submission.p1_procedures || [];
+        const padded = [...saved];
+        while (padded.length < 10) {
+            padded.push({ step_number: padded.length + 1, tahap: '', penjelasan: '' });
+        }
+        return padded;
+    })(),
 
     // Sintak 3: Jadwal Capaian
     schedules: props.submission.p1_schedules?.length > 0
@@ -86,9 +101,14 @@ const form = useForm({
 
     // --- Pertemuan 2 (Sintak 4) ---
     // Persiapan Alat & Bahan (single column)
-    p2items: props.submission.p2_items?.length > 0
-        ? props.submission.p2_items
-        : Array.from({ length: 10 }, () => ({ nama_item: '' })),
+    p2items: (() => {
+        const saved = props.submission.p2_items || [];
+        const padded = [...saved];
+        while (padded.length < 10) {
+            padded.push({ nama_item: '' });
+        }
+        return padded;
+    })(),
 
     // Identifikasi Spesimen
     p2specs: props.submission.p2_specs?.length > 0
@@ -103,9 +123,14 @@ const form = useForm({
         ],
 
     // Prosedur Pelaksanaan Grafting
-    p2procedures: props.submission.p2_procedures?.length > 0
-        ? props.submission.p2_procedures
-        : Array.from({ length: 10 }, (_, i) => ({ step_number: i + 1, tahap_kegiatan: '', kondisi_jaringan: '' })),
+    p2procedures: (() => {
+        const saved = props.submission.p2_procedures || [];
+        const padded = [...saved];
+        while (padded.length < 10) {
+            padded.push({ step_number: padded.length + 1, tahap_kegiatan: '', kondisi_jaringan: '' });
+        }
+        return padded;
+    })(),
 
     // Monitoring Proyek
     p2monitorings: props.submission.p2_monitorings?.length > 0
@@ -358,7 +383,6 @@ const getFilePreview = (file) => {
 };
 
 // sweet alert toast
-const page = usePage();
 
 const showFlashMessage = () => {
     const flash = page.props.flash;
@@ -448,6 +472,14 @@ watch(() => page.props.flash, () => {
             </div>
         </div>
 
+        <div v-if="submission.catatan_dosen" class="bg-green-50 border border-green-200 rounded-xl p-4 mb-4 shadow-sm flex items-start gap-3">
+            <NotepadText class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+            <div>
+                <h3 class="font-bold text-green-800 text-sm">Catatan / Feedback dari Dosen:</h3>
+                <p class="text-xs sm:text-sm text-green-700 mt-1 whitespace-pre-line leading-relaxed">{{ submission.catatan_dosen }}</p>
+            </div>
+        </div>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
             <div 
                 class="col-span-3 bg-white border border-gray-200 rounded-xl p-4 sm:p-5 flex flex-col justify-between h-full"
@@ -466,6 +498,22 @@ watch(() => page.props.flash, () => {
                             <p class="text-xs text-gray-500 mt-1">Jawablah pertanyaan-pertanyaan berikut berdasarkan pemahaman Anda tentang teknik grafting dan jaringan tumbuhan.</p>
                         </div>
                         <div class="p-5 space-y-6">
+                            <!-- Skenario Pemantik Box -->
+                            <div class="border-2 border-green-300 rounded-xl p-5 bg-green-50/10">
+                                <h3 class="text-sm font-bold text-gray-800 tracking-wider text-center uppercase mb-3">Skenario Pemantik</h3>
+                                <p class="text-sm text-gray-700 leading-relaxed text-justify mb-4">
+                                    Bayangkan Anda adalah seorang petani buah yang ingin menghasilkan mangga harum manis dengan sistem perakaran yang kuat dan tahan terhadap penyakit. Salah satu cara yang dapat ditempuh adalah dengan teknik grafting menyambungkan batang mangga harum manis (scion) ke batang pohon kuwini yang kuat (rootstock).
+                                </p>
+                                <p class="text-sm text-green-600 font-medium leading-relaxed text-justify">
+                                    Namun, mengapa tidak semua grafting berhasil? Apa yang terjadi di tingkat jaringan saat dua batang disambungkan? Bagaimana kambium berperan? Faktor lingkungan apa yang memengaruhi proses ini?
+                                </p>
+                            </div>
+
+                            <!-- Intro Text -->
+                            <p class="text-sm font-semibold text-gray-700 leading-relaxed">
+                                Berdasarkan skenario di atas, rumuskan pertanyaan esensial yang akan menjadi fokus proyek Anda!
+                            </p>
+
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q1:</span>
@@ -709,30 +757,40 @@ watch(() => page.props.flash, () => {
                             <h2 class="text-lg font-bold text-gray-800">Sintak 4: Persiapan Alat dan Bahan</h2>
                             <p class="text-xs text-gray-500 mt-1">Tuliskan alat dan bahan yang digunakan untuk pelaksanaan grafting!</p>
                         </div>
-                        <div class="p-5 overflow-x-auto">
-                            <table class="w-full text-left border-collapse border border-gray-200">
-                                <thead>
-                                    <tr class="bg-gray-50 text-sm text-gray-600">
-                                        <th class="p-3 border border-gray-200 font-semibold w-16">No</th>
-                                        <th class="p-3 border border-gray-200 font-semibold">Alat/Bahan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="(item, index) in form.p2items" :key="index">
-                                        <td class="p-3 border border-gray-200 text-sm font-medium text-gray-700 bg-gray-50/50 text-center">
-                                            {{ index + 1 }}
-                                        </td>
-                                        <td class="p-3 border border-gray-200">
-                                            <textarea 
-                                                v-model="item.nama_item" 
-                                                :disabled="isReadOnly"
-                                                class="w-full text-sm border-0 focus:ring-0 p-2 resize-none bg-transparent placeholder-gray-300 disabled:text-gray-500" 
-                                                rows="2" 
-                                                placeholder="Tuliskan alat/bahan..."></textarea>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="p-5 space-y-6">
+                            <!-- Petunjuk Pelaksanaan Box -->
+                            <div class="border-2 border-green-300 rounded-xl p-5 bg-green-50/10">
+                                <h3 class="text-sm font-bold text-gray-800 tracking-wider mb-2">Petunjuk Pelaksanaan</h3>
+                                <p class="text-sm text-gray-700 leading-relaxed text-justify">
+                                    Pada pertemuan ini, Anda akan melaksanakan teknik grafting sesuai dengan rancangan yang telah dibuat pada Pertemuan 1. Ikuti prosedur dengan teliti, dokumentasikan setiap langkah, dan catat semua pengamatan secara jujur dan sistematis.
+                                </p>
+                            </div>
+
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse border border-gray-200">
+                                    <thead>
+                                        <tr class="bg-gray-50 text-sm text-gray-600">
+                                            <th class="p-3 border border-gray-200 font-semibold w-16">No</th>
+                                            <th class="p-3 border border-gray-200 font-semibold">Alat/Bahan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(item, index) in form.p2items" :key="index">
+                                            <td class="p-3 border border-gray-200 text-sm font-medium text-gray-700 bg-gray-50/50 text-center">
+                                                {{ index + 1 }}
+                                            </td>
+                                            <td class="p-3 border border-gray-200">
+                                                <textarea 
+                                                    v-model="item.nama_item" 
+                                                    :disabled="isReadOnly"
+                                                    class="w-full text-sm border-0 focus:ring-0 p-2 resize-none bg-transparent placeholder-gray-300 disabled:text-gray-500" 
+                                                    rows="2" 
+                                                    placeholder="Tuliskan alat/bahan..."></textarea>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
@@ -940,39 +998,49 @@ watch(() => page.props.flash, () => {
                             <h2 class="text-lg font-bold text-gray-800">Sintak 5: Pengamatan Pertumbuhan Tunas dan Daun</h2>
                             <p class="text-xs text-gray-500 mt-1">Amati dan catat perkembangan tunas serta daun pada tanaman hasil grafting.</p>
                         </div>
-                        <div class="p-5 overflow-x-auto">
-                            <table class="w-full text-left border-collapse border border-gray-200">
-                                <thead>
-                                    <tr class="bg-gray-50 text-sm text-gray-600">
-                                        <th class="p-3 border border-gray-200 font-semibold w-1/4">Parameter</th>
-                                        <th class="p-3 border border-gray-200 font-semibold w-1/4">Data/Jumlah</th>
-                                        <th class="p-3 border border-gray-200 font-semibold w-1/2">Deskripsi Kondisi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="(growth, index) in form.growths" :key="index">
-                                        <td class="p-3 border border-gray-200 text-sm font-medium text-gray-700 bg-gray-50/50">
-                                            {{ growth.parameter }}
-                                        </td>
-                                        <td class="p-3 border border-gray-200">
-                                            <input 
-                                                v-model="growth.data_jumlah" 
-                                                :disabled="isReadOnly"
-                                                type="text"
-                                                class="w-full text-sm border-0 focus:ring-0 p-2 bg-transparent placeholder-gray-300 disabled:text-gray-500" 
-                                                placeholder="Data...">
-                                        </td>
-                                        <td class="p-3 border border-gray-200">
-                                            <textarea 
-                                                v-model="growth.deskripsi_kondisi" 
-                                                :disabled="isReadOnly"
-                                                class="w-full text-sm border-0 focus:ring-0 p-2 resize-none bg-transparent placeholder-gray-300 disabled:text-gray-500" 
-                                                rows="2" 
-                                                placeholder="Deskripsi kondisi..."></textarea>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="p-5 space-y-6">
+                            <!-- Tujuan Pertemuan Ini Box -->
+                            <div class="border-2 border-green-300 rounded-xl p-5 bg-green-50/10">
+                                <h3 class="text-sm font-bold text-gray-800 tracking-wider mb-2">Tujuan Pertemuan Ini</h3>
+                                <p class="text-sm text-gray-700 leading-relaxed text-justify">
+                                    Pada pertemuan ini, Anda akan mengamati dan mendokumentasikan perkembangan tanaman hasil grafting yang telah dilakukan pada Pertemuan 2. Amati secara cermat setiap perubahan yang terjadi, baik pada scion, rootstock, maupun sambungan antar keduanya. Data yang dikumpulkan akan menjadi dasar analisis pada Pertemuan 4.
+                                </p>
+                            </div>
+
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse border border-gray-200">
+                                    <thead>
+                                        <tr class="bg-gray-50 text-sm text-gray-600">
+                                            <th class="p-3 border border-gray-200 font-semibold w-1/4">Parameter</th>
+                                            <th class="p-3 border border-gray-200 font-semibold w-1/4">Data/Jumlah</th>
+                                            <th class="p-3 border border-gray-200 font-semibold w-1/2">Deskripsi Kondisi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(growth, index) in form.growths" :key="index">
+                                            <td class="p-3 border border-gray-200 text-sm font-medium text-gray-700 bg-gray-50/50">
+                                                {{ growth.parameter }}
+                                            </td>
+                                            <td class="p-3 border border-gray-200">
+                                                <input 
+                                                    v-model="growth.data_jumlah" 
+                                                    :disabled="isReadOnly"
+                                                    type="text"
+                                                    class="w-full text-sm border-0 focus:ring-0 p-2 bg-transparent placeholder-gray-300 disabled:text-gray-500" 
+                                                    placeholder="Data...">
+                                            </td>
+                                            <td class="p-3 border border-gray-200">
+                                                <textarea 
+                                                    v-model="growth.deskripsi_kondisi" 
+                                                    :disabled="isReadOnly"
+                                                    class="w-full text-sm border-0 focus:ring-0 p-2 resize-none bg-transparent placeholder-gray-300 disabled:text-gray-500" 
+                                                    rows="2" 
+                                                    placeholder="Deskripsi kondisi..."></textarea>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
@@ -1218,30 +1286,40 @@ watch(() => page.props.flash, () => {
                             <h1 class="text-xl font-bold text-gray-800">Sintak 6: Analisis Keberhasilan Tanaman Hasil Grafting</h1>
                             <p class="text-xs text-gray-500 mt-1">Analisis keberhasilan tanaman grafting Anda berdasarkan variabel-variabel berikut.</p>
                         </div>
-                        <div class="p-5 overflow-x-auto">
-                            <table class="w-full text-left border-collapse border border-gray-200">
-                                <thead>
-                                    <tr class="bg-gray-50 text-sm text-gray-600">
-                                        <th class="p-3 border border-gray-200 font-semibold w-1/4">Variabel Analisis</th>
-                                        <th class="p-3 border border-gray-200 font-semibold w-3/4">Hasil Pengamatan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="(analysis, index) in form.analyses" :key="index">
-                                        <td class="p-3 border border-gray-200 text-sm font-medium text-gray-700 bg-gray-50/50">
-                                            {{ analysis.variabel_analisis }}
-                                        </td>
-                                        <td class="p-3 border border-gray-200">
-                                            <textarea 
-                                                v-model="analysis.hasil_pengamatan" 
-                                                :disabled="isReadOnly"
-                                                class="w-full text-sm border-0 focus:ring-0 p-2 resize-none bg-transparent placeholder-gray-300 disabled:text-gray-500" 
-                                                rows="2" 
-                                                placeholder="Tulis hasil pengamatan..."></textarea>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="p-5 space-y-6">
+                            <!-- Tujuan Pertemuan Ini Box -->
+                            <div class="border-2 border-green-300 rounded-xl p-5 bg-green-50/10">
+                                <h3 class="text-sm font-bold text-gray-800 tracking-wider mb-2">Tujuan Pertemuan Ini</h3>
+                                <p class="text-sm text-gray-700 leading-relaxed text-justify">
+                                    Pada pertemuan akhir ini, kelompok Anda akan menganalisis secara menyeluruh keberhasilan proyek grafting, mempresentasikan hasil proyek kepada kelas, dan merefleksikan proses pembelajaran yang telah dilalui. Sintak ini bertujuan untuk mengintegrasikan pengetahuan anatomi tumbuhan dengan pengalaman praktis grafting.
+                                </p>
+                            </div>
+
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse border border-gray-200">
+                                    <thead>
+                                        <tr class="bg-gray-50 text-sm text-gray-600">
+                                            <th class="p-3 border border-gray-200 font-semibold w-1/4">Variabel Analisis</th>
+                                            <th class="p-3 border border-gray-200 font-semibold w-3/4">Hasil Pengamatan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(analysis, index) in form.analyses" :key="index">
+                                            <td class="p-3 border border-gray-200 text-sm font-medium text-gray-700 bg-gray-50/50">
+                                                {{ analysis.variabel_analisis }}
+                                            </td>
+                                            <td class="p-3 border border-gray-200">
+                                                <textarea 
+                                                    v-model="analysis.hasil_pengamatan" 
+                                                    :disabled="isReadOnly"
+                                                    class="w-full text-sm border-0 focus:ring-0 p-2 resize-none bg-transparent placeholder-gray-300 disabled:text-gray-500" 
+                                                    rows="2" 
+                                                    placeholder="Tulis hasil pengamatan..."></textarea>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 

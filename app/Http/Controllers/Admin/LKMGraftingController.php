@@ -158,6 +158,7 @@ class LKMGraftingController extends Controller
                 'title' => $setting->title,
                 'status' => $submission ? $submission->status : 'Belum Mengerjakan',
                 'submission_id' => $submission ? $submission->id : null,
+                'catatan_dosen' => $submission ? $submission->catatan_dosen : null,
             ];
         });
 
@@ -185,5 +186,20 @@ class LKMGraftingController extends Controller
             'submission' => $submission,
             'isAdmin' => true,
         ]);
+    }
+
+    public function updateCatatan(Request $request, $id)
+    {
+        $submission = LkmSubmission::findOrFail($id);
+
+        $request->validate([
+            'catatan_dosen' => 'nullable|string',
+        ]);
+
+        $submission->update([
+            'catatan_dosen' => $request->catatan_dosen,
+        ]);
+
+        return back()->with('success', 'Catatan berhasil diperbarui!');
     }
 }

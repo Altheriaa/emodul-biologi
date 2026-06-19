@@ -1,9 +1,9 @@
 <script setup>
-import Layout from '../../Index.vue';
+import Layout from '../../../../App.vue';
 import { usePage, router } from '@inertiajs/vue3';
 import { ArrowLeft, CheckCircle2, CircleDashed, XCircle } from 'lucide-vue-next';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Swal from 'sweetalert2';
@@ -15,11 +15,11 @@ const props = defineProps({
 });
 
 const goBack = () => {
-    router.visit('/admin/pembelajaran/lkm-grafting/submissions');
+    router.visit('/dosen/pembelajaran/lkm-grafting/submissions');
 };
 
 const openDetail = (submissionId) => {
-    router.visit(`/admin/pembelajaran/lkm-grafting/submissions/${submissionId}`);
+    router.visit(`/dosen/pembelajaran/lkm-grafting/submissions/${submissionId}`);
 };
 
 const editCatatan = (item) => {
@@ -44,7 +44,7 @@ const editCatatan = (item) => {
         }
     }).then((result) => {
         if (result.isConfirmed) {
-            router.post(`/admin/pembelajaran/lkm-grafting/submissions/${item.submission_id}/catatan`, {
+            router.post(`/dosen/pembelajaran/lkm-grafting/submissions/${item.submission_id}/catatan`, {
                 catatan_dosen: result.value
             }, {
                 preserveScroll: true,
@@ -64,15 +64,23 @@ const editCatatan = (item) => {
 
 <template>
     <Layout>
+        <div class="grid grid-cols-1 gap-3 sm:gap-4 mb-2 sm:mb-4">
+            <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4 shadow-sm flex items-center gap-3">
+                <Button variant="ghost" size="icon" @click="goBack" class="mr-1 hover:bg-gray-100 rounded-lg">
+                    <ArrowLeft class="w-5 h-5 text-gray-600" />
+                </Button>
+                <div>
+                    <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">Detail Submission Mahasiswa</p>
+                    <p class="text-xs sm:text-sm text-green-600 mt-0.5">Daftar pengerjaan LKM oleh {{ mahasiswa.user.name }} (NIM: {{ mahasiswa.nim }})</p>
+                </div>
+            </div>
+        </div>
+
         <div class="w-full mt-4">
             <Card class="border-gray-200 overflow-hidden">
-                <div class="px-6 flex flex-row gap-2 items-center mb-4 mt-6">
-                    <Button variant="ghost" size="icon" @click="goBack" class="mr-2">
-                        <ArrowLeft class="w-5 h-5" />
-                    </Button>
-                    <h2 class="font-bold text-lg sm:text-xl text-gray-800">Detail Submission: {{ mahasiswa.user.name }} ({{ mahasiswa.nim }})</h2> 
+                <div class="px-6 py-4 border-b border-gray-200 bg-gray-50/50">
+                    <h2 class="font-bold text-lg text-gray-800">Detail Submission: {{ mahasiswa.user.name }} ({{ mahasiswa.nim }})</h2> 
                 </div>
-                <hr class="border-gray-200">
                 
                 <CardContent class="p-0 sm:p-6 mt-4">
                     <div class="rounded-none sm:rounded-md border-y sm:border overflow-x-auto">

@@ -14,6 +14,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Dosen\DashboardDosenController;
+use App\Http\Controllers\Dosen\LKMGraftingController as DosenLKMGraftingController;
 use App\Http\Controllers\Dosen\MateriController as DosenMateriController;
 use App\Http\Controllers\Dosen\MonitoringQuizController as DosenMonitoringQuizController;
 use App\Http\Controllers\Dosen\ProfileController as DosenProfileController;
@@ -101,6 +102,12 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/materi/{materi}', [DosenMateriController::class, 'show']);
             Route::get('/materi/{materi}/edit', [DosenMateriController::class, 'edit']);
             Route::put('/materi/{materi}', [DosenMateriController::class, 'update']);
+
+            // LKM Grafting Submission for Dosen
+            Route::get('/lkm-grafting/submissions', [DosenLKMGraftingController::class, 'indexSubmission']);
+            Route::get('/lkm-grafting/submissions/mahasiswa/{mahasiswaId}', [DosenLKMGraftingController::class, 'showMahasiswaSubmissions']);
+            Route::get('/lkm-grafting/submissions/{id}', [DosenLKMGraftingController::class, 'showSubmission']);
+            Route::post('/lkm-grafting/submissions/{id}/catatan', [DosenLKMGraftingController::class, 'updateCatatan']);
         });
 
         // Route::prefix('evaluasi')->group(function () {
@@ -168,6 +175,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/lkm-grafting/submissions', [LKMGraftingController::class, 'indexSubmission']);
             Route::get('/lkm-grafting/submissions/mahasiswa/{mahasiswaId}', [LKMGraftingController::class, 'showMahasiswaSubmissions']);
             Route::get('/lkm-grafting/submissions/{id}', [LKMGraftingController::class, 'showSubmission']);
+            Route::post('/lkm-grafting/submissions/{id}/catatan', [LKMGraftingController::class, 'updateCatatan']);
         });
 
         Route::prefix('evaluasi')->group(function () {
