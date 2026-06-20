@@ -254,6 +254,9 @@ onBeforeUnmount(() => {
                                 <p class="text-base sm:text-lg font-semibold text-gray-800 leading-relaxed mb-7">
                                     {{ currentQuestion.question_text }}
                                 </p>
+                                <div v-if="currentQuestion.image" class="mb-7">
+                                    <img :src="`/storage/${currentQuestion.image}`" alt="Soal Image" class="max-h-64 rounded-xl border border-gray-200" />
+                                </div>
 
                                 <div class="grid grid-cols-1 gap-3">
                                     <button

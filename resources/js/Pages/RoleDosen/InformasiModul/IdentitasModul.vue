@@ -16,12 +16,12 @@ import { Check } from 'lucide-vue-next';
                 <h2 class="font-bold text-md text-gray-800">Deskripsi Modul</h2> 
                 <hr class="border-gray-200 mt-3">
                 <p class="text-xs sm:text-sm text-gray-800 mt-2">
-                    Modul ini menyajikan materi ajar mata kuliah Anatomi Tumbuhan yang difokuskan pada pengenalan struktur, organisasi, fungsi, serta
-                    interaksi komponen penyusun tumbuhan mulai dari tingkat sel, jaringan, hingga organ. Materi yang disajikan mencakup komponen kimia 
-                    penyusun sel, struktur dan ultrstruktur sel tumbuhan, dinding sel, plasma membrane, mekanisme transpor melalui membrane, sintesis 
-                    protein dan organel, sistem endomembrane, retikulum endoplasma, kompleks golgi, vakuola, mitokondria, kloroplas, fotosintesis, peroksosom 
-                    dan glioksisom, sitoskeleton, pergerakan dan posisi organel, jaringan tumbuhan (meristem dan jaringan dewasa), struktur dan fungsi organ tumbuhan 
-                    (akar, batang, daun, bunga, buah dan biji).</p>
+                    E-Modul Biologi ini disusun oleh Nakhlatul Faradisa, mahasiswa Universitas Abulyatama Aceh, 
+                    sebagai media pembelajaran untuk membantu mahasiswa memahami materi jaringan tumbuhan. Modul ini 
+                    menggunakan pendekatan Project Based Learning (PjBL) yang mendorong pembelajaran aktif, kreatif, 
+                    dan kontekstual guna meningkatkan kemampuan berpikir kritis, pemecahan masalah, serta kolaborasi. 
+                    Materi disajikan secara sistematis dengan memanfaatkan teknik grafting sebagai sarana untuk memahami 
+                    struktur dan fungsi jaringan tumbuhan secara lebih mendalam.</p>
             </div>
             <div class="md:col-span-3 md:row-span-2 md:col-start-1 md:row-start-4 bg-white border border-gray-200 rounded-xl p-4 sm:p-5">
                 <h2 class="font-bold text-md text-gray-800">Tujuan Pembelajaran</h2> 
@@ -29,23 +29,19 @@ import { Check } from 'lucide-vue-next';
                 <ol class="lg:text-xs xl:text-sm text-sm sm:text-base space-y-2 px-2">
                     <li class="flex items-start gap-2">
                         <Check class="w-4 h-4 text-green-500 shrink-0 mt-0.5" /> 
-                        Mampu menjelaskan dan memahami tentang struktur sel tumbuhan,
+                        Mendukung Pembelajaran Berbasis Proyek ( Projek Based Learning /PjBL)
                     </li>
                     <li class="flex items-start gap-2">
                         <Check class="w-4 h-4 text-green-500 shrink-0 mt-0.5" /> 
-                        Mampu menjelaskan dan memahami tentang proses pertumbuhan dan perkembangan tumbuhan,
+                        Meningkatkan Kemampuan Berpikir Kritis dan Pemecahan Masalah
                     </li>
                     <li class="flex items-start gap-2">
                         <Check class="w-4 h-4 text-green-500 shrink-0 mt-0.5" /> 
-                        Mampu menjelaskan dan memahami tentang konsep jaringan dan sistem jaringan pada tumbuhan,
+                        Menfasilitasi Pembelajaran Mandiri yang Efektif
                     </li>
                     <li class="flex items-start gap-2">
                         <Check class="w-4 h-4 text-green-500 shrink-0 mt-0.5" /> 
-                        Mampu menjelaskan dan memahami tentang Struktur organ reproduksi : Bunga, Buah dan Biji,
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <Check class="w-4 h-4 text-green-500 shrink-0 mt-0.5" /> 
-                        Mampu memahami dan menjelaskan tentang proses polinasi dan fertilisasi pada tumbuhan.
+                        Memberikan Pemahaman Materi secara Mendalam
                     </li>
                 </ol>
             </div>
@@ -111,10 +107,6 @@ import { Check } from 'lucide-vue-next';
                         </div>
                     </div>
                 </div>
-                <!-- CTA Button -->
-                <a href="/mahasiswa/pembelajaran/materi" class="mt-5 block w-full text-center px-4 py-3 rounded-xl bg-green-500 hover:bg-green-600 text-white font-semibold text-sm transition-colors shadow-sm">
-                    Mulai Modul →
-                </a>
             </div>
         </div>
     </Layout>

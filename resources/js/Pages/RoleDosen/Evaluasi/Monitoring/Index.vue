@@ -73,11 +73,12 @@ const formatDate = (date) => {
                                     <TableHead class="px-4 text-center">Jawaban Benar</TableHead>
                                     <TableHead class="px-4">Status</TableHead>
                                     <TableHead class="px-4">Waktu Selesai</TableHead>
+                                    <TableHead class="px-4 pr-6">Aksi</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 <TableRow v-if="scores.data.length === 0">
-                                    <TableCell colspan="7" class="text-center py-10 text-muted-foreground">
+                                    <TableCell colspan="8" class="text-center py-10 text-muted-foreground">
                                         Tidak ada data hasil quiz ditemukan.
                                     </TableCell>
                                 </TableRow>
@@ -86,7 +87,8 @@ const formatDate = (date) => {
                                     <TableCell class="px-4 py-4">
                                         <div class="flex flex-col">
                                             <span class="font-semibold text-gray-900">{{ item.user?.name }}</span>
-                                            <span class="text-xs text-gray-500">{{ item.user?.email }}</span>
+                                            <span v-if="item.user?.mahasiswa?.nim" class="text-xs text-gray-500">NIM: {{ item.user.mahasiswa.nim }}</span>
+                                            <span class="text-xs text-gray-400">{{ item.user?.email }}</span>
                                         </div>
                                     </TableCell>
                                     <TableCell class="px-4 py-4">{{ item.quiz?.title }}</TableCell>
@@ -116,6 +118,9 @@ const formatDate = (date) => {
                                             <Calendar class="h-3 w-3" />
                                             {{ formatDate(item.submitted_at) }}
                                         </div>
+                                    </TableCell>
+                                    <TableCell class="px-4 pr-6 py-4">
+                                        <Button variant="outline" size="sm" @click="router.get(`/dosen/evaluasi/monitoring/${item.id}`)">Detail</Button>
                                     </TableCell>
                                 </TableRow>
                             </TableBody>

@@ -99,6 +99,7 @@ class QuizController extends Controller
             return [
                 'id' => $q->id,
                 'question_text' => $q->question_text,
+                'image' => $q->image,
                 'order' => $q->order,
                 'options' => $q->options->map(fn ($o) => [
                     'id' => $o->id,
@@ -196,25 +197,19 @@ class QuizController extends Controller
      */
     public function result(string $quizId)
     {
-        $quiz = Quiz::findOrFail($quizId);
         $userId = Auth::id();
 
-        $score = QuizScore::where('quiz_id', $quizId)
+        $score = QuizScore::with(['quiz.questions.options'])
+            ->where('quiz_id', $quizId)
             ->where('user_id', $userId)
             ->firstOrFail();
 
         return Inertia::render('RoleMahasiswa/QuizResult', [
             'quiz' => [
-                'id' => $quiz->id,
-                'title' => $quiz->title,
+                'id' => $score->quiz->id,
+                'title' => $score->quiz->title,
             ],
-            'score' => [
-                'score' => $score->score,
-                'is_passed' => $score->is_passed,
-                'correct_answers' => $score->correct_answers,
-                'total_questions' => $score->total_questions,
-                'submitted_at' => $score->submitted_at,
-            ],
+            'score' => $score,
         ]);
     }
 

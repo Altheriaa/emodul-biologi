@@ -133,6 +133,7 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/bank-soal/{quiz}/soal/{question}', [DosenQuizQuestionController::class, 'destroy']);
 
             Route::get('/monitoring', [DosenMonitoringQuizController::class, 'index']);
+            Route::get('/monitoring/{score}', [DosenMonitoringQuizController::class, 'show']);
         });
 
         Route::get('/settings', [DosenProfileController::class, 'index']);
@@ -191,6 +192,7 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/bank-soal/{quiz}/soal/{question}', [QuizQuestionController::class, 'update']);
             Route::delete('/bank-soal/{quiz}/soal/{question}', [QuizQuestionController::class, 'destroy']);
             Route::get('/monitoring', [MonitoringQuizController::class, 'index']);
+            Route::get('/monitoring/{score}', [MonitoringQuizController::class, 'show']);
         });
 
         Route::resource('/mahasiswa', MahasiswaController::class);

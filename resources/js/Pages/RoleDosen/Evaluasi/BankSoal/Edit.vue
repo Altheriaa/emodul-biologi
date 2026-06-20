@@ -16,6 +16,7 @@ const props = defineProps({
 });
 
 const page = usePage();
+const isPublished = computed(() => props.quiz.status === 'published');
 
 const showFlashMessage = () => {
     const flash = page.props.flash;
@@ -60,8 +61,30 @@ const defaultOptions = () => [
 
 const questionForm = useForm({
     question_text: '',
+    image: null,
+    remove_image: false,
     options: defaultOptions(),
 });
+
+const imagePreview = ref(null);
+
+const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        questionForm.image = file;
+        questionForm.remove_image = false;
+        imagePreview.value = URL.createObjectURL(file);
+    }
+};
+
+const removeImage = () => {
+    questionForm.image = null;
+    questionForm.remove_image = true;
+    imagePreview.value = null;
+    // reset file input if needed
+    const fileInput = document.getElementById('question_image');
+    if (fileInput) fileInput.value = '';
+};
 
 const modalTitle = computed(() => editingQuestion.value ? 'Edit Pertanyaan' : 'Tambah Pertanyaan');
 
@@ -69,6 +92,9 @@ const openCreate = () => {
     editingQuestion.value = null;
     questionForm.reset();
     questionForm.question_text = '';
+    questionForm.image = null;
+    questionForm.remove_image = false;
+    imagePreview.value = null;
     questionForm.options = defaultOptions();
     showModal.value = true;
 };
@@ -76,6 +102,9 @@ const openCreate = () => {
 const openEdit = (q) => {
     editingQuestion.value = q;
     questionForm.question_text = q.question_text;
+    questionForm.image = null;
+    questionForm.remove_image = false;
+    imagePreview.value = q.image ? `/storage/${q.image}` : null;
     questionForm.options = q.options.map(o => ({
         option_text: o.option_text,
         is_correct: o.is_correct,
@@ -115,14 +144,17 @@ const submitQuestion = () => {
     }
 
     if (editingQuestion.value) {
-        questionForm.put(
+        questionForm.transform((data) => ({
+            ...data,
+            _method: 'put',
+        })).post(
             `/dosen/evaluasi/bank-soal/${props.quiz.id}/soal/${editingQuestion.value.id}`,
-            { onSuccess: closeModal, preserveScroll: true }
+            { onSuccess: closeModal, preserveScroll: true, forceFormData: true }
         );
     } else {
         questionForm.post(
             `/dosen/evaluasi/bank-soal/${props.quiz.id}/soal`,
-            { onSuccess: closeModal, preserveScroll: true }
+            { onSuccess: closeModal, preserveScroll: true, forceFormData: true }
         );
     }
 };
@@ -223,12 +255,17 @@ const confirmDelete = (q) => {
                                 {{ questions.length }} soal
                             </span>
                         </h2>
-                        <Button variant="outline" @click="openCreate"
-                            class="h-9 border-green-600 text-green-700 hover:bg-green-50 gap-1.5">
-                            <Plus class="h-4 w-4" />
-                            <span class="hidden sm:inline">Tambah Pertanyaan</span>
-                            <span class="sm:hidden">Tambah</span>
-                        </Button>
+                        <div class="flex items-center gap-3">
+                            <span v-if="isPublished" class="text-xs text-amber-600 font-medium bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-lg">
+                                Pertanyaan dikunci karena kuis telah dipublikasikan. Ubah status ke Draft untuk mengubah pertanyaan.
+                            </span>
+                            <Button variant="outline" @click="openCreate" :disabled="isPublished"
+                                class="h-9 border-green-600 text-green-700 hover:bg-green-50 gap-1.5 disabled:opacity-50">
+                                <Plus class="h-4 w-4" />
+                                <span class="hidden sm:inline">Tambah Pertanyaan</span>
+                                <span class="sm:hidden">Tambah</span>
+                            </Button>
+                        </div>
                     </div>
 
                     <!-- Empty State -->
@@ -247,6 +284,9 @@ const confirmDelete = (q) => {
                             </div>
                             <div class="flex-1 min-w-0">
                                 <p class="text-sm text-gray-800 font-medium leading-snug">{{ q.question_text }}</p>
+                                <div v-if="q.image" class="mt-2">
+                                    <img :src="`/storage/${q.image}`" alt="Soal Image" class="max-h-32 rounded-lg border border-gray-200" />
+                                </div>
                                 <div class="flex flex-wrap gap-2 mt-2">
                                     <span v-for="opt in q.options" :key="opt.id"
                                         class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs border"
@@ -258,7 +298,7 @@ const confirmDelete = (q) => {
                                     </span>
                                 </div>
                             </div>
-                            <div class="flex-shrink-0 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div v-if="!isPublished" class="flex-shrink-0 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button @click="openEdit(q)"
                                     class="p-1.5 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-gray-800 transition-colors">
                                     <LucidePencil class="h-4 w-4" />
@@ -308,6 +348,20 @@ const confirmDelete = (q) => {
                                     placeholder="Tuliskan pertanyaan di sini..."
                                     class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition resize-none"></textarea>
                                 <small v-if="questionForm.errors.question_text" class="text-red-500 text-xs">{{ questionForm.errors.question_text }}</small>
+                            </div>
+
+                            <!-- Gambar (Opsional) -->
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-medium text-gray-600">Gambar <span class="text-gray-400 font-normal">(Opsional)</span></label>
+                                <div v-if="imagePreview" class="relative inline-block mt-2 mb-2">
+                                    <img :src="imagePreview" alt="Preview" class="max-h-40 rounded-lg border border-gray-200" />
+                                    <button type="button" @click="removeImage" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 shadow-sm">
+                                        <X class="h-3 w-3" />
+                                    </button>
+                                </div>
+                                <input id="question_image" type="file" accept="image/*" @change="handleImageChange"
+                                    class="w-full px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition file:mr-4 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100" />
+                                <small v-if="questionForm.errors.image" class="text-red-500 text-xs">{{ questionForm.errors.image }}</small>
                             </div>
 
                             <!-- Pilihan Jawaban -->
