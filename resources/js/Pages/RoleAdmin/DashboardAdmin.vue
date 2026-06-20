@@ -9,8 +9,6 @@ const props = defineProps({
     recent_submissions: Array,
 });
 
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-
 // sweet alert toast
 const page = usePage();
 
@@ -73,40 +71,89 @@ watch(() => page.props.flash, () => {
         <!-- Chart + Recent Activity — stacked on mobile, side-by-side on lg -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4">
 
-            <!-- Statistik Chart -->
+            <!-- Informasi Modul & Mata Kuliah -->
             <div class="lg:col-span-2 bg-white border border-gray-200 rounded-xl p-4 sm:p-5">
-                <h2 class="text-sm font-semibold text-gray-800 mb-4">Statistik Evaluasi</h2>
-                <div class="relative h-40 sm:h-52">
-                    <svg viewBox="0 0 600 200" class="w-full h-full" preserveAspectRatio="none">
-                        <line x1="0" y1="40" x2="600" y2="40" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
-                        <line x1="0" y1="80" x2="600" y2="80" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
-                        <line x1="0" y1="120" x2="600" y2="120" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
-                        <line x1="0" y1="160" x2="600" y2="160" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
-                        <defs>
-                            <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="rgba(22,163,74,0.15)"/>
-                                <stop offset="100%" stop-color="rgba(22,163,74,0)"/>
-                            </linearGradient>
-                        </defs>
-                        <path d="M0,160 C40,155 70,140 100,120 C130,100 145,130 180,110 C215,90 240,60 280,50 C320,40 345,80 380,70 C415,60 440,40 480,30 C520,20 560,35 600,25 L600,200 L0,200 Z" fill="url(#areaGrad)"/>
-                        <path d="M0,160 C40,155 70,140 100,120 C130,100 145,130 180,110 C215,90 240,60 280,50 C320,40 345,80 380,70 C415,60 440,40 480,30 C520,20 560,35 600,25" fill="none" stroke="rgba(22,163,74,0.8)" stroke-width="1.5"/>
-                    </svg>
-                    <!-- Y-axis labels -->
-                    <div class="absolute left-0 top-0 h-full flex flex-col justify-between pr-2 text-right">
-                        <span class="text-[10px] text-gray-400 leading-none">100</span>
-                        <span class="text-[10px] text-gray-400 leading-none">80</span>
-                        <span class="text-[10px] text-gray-400 leading-none">60</span>
-                        <span class="text-[10px] text-gray-400 leading-none">40</span>
-                        <span class="text-[10px] text-gray-400 leading-none">0</span>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Left Column: Deskripsi & Tujuan -->
+                    <div class="flex flex-col justify-between">
+                        <div>
+                            <h2 class="text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                                <span class="p-1 rounded bg-green-50 text-green-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                                </span>
+                                Deskripsi Modul
+                            </h2>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                E-Modul Biologi ini disusun oleh Nakhlatul Faradisa, mahasiswa Universitas Abulyatama Aceh, 
+                                sebagai media pembelajaran untuk membantu mahasiswa memahami materi jaringan tumbuhan. Modul ini 
+                                menggunakan pendekatan Project Based Learning (PjBL) yang mendorong pembelajaran aktif, kreatif, 
+                                dan kontekstual guna meningkatkan kemampuan berpikir kritis, pemecahan masalah, serta kolaborasi. 
+                                Materi disajikan secara sistematis dengan memanfaatkan teknik grafting sebagai sarana untuk memahami 
+                                struktur dan fungsi jaringan tumbuhan secara lebih mendalam.
+                            </p>
+                        </div>
+                        <div class="mt-5 pt-4 border-t border-gray-100">
+                            <h3 class="text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">Tujuan Pembelajaran</h3>
+                            <ul class="space-y-1.5 text-xs text-gray-600">
+                                <li class="flex items-start gap-1.5">
+                                    <span class="text-green-500 font-bold">✓</span> 
+                                    Mendukung Pembelajaran Berbasis Proyek (PjBL)
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <span class="text-green-500 font-bold">✓</span> 
+                                    Meningkatkan Kemampuan Berpikir Kritis
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <span class="text-green-500 font-bold">✓</span> 
+                                    Memfasilitasi Pembelajaran Mandiri
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <span class="text-green-500 font-bold">✓</span> 
+                                    Pemahaman Materi secara Mendalam
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <!-- X-axis labels — show fewer on mobile -->
-                <div class="flex justify-between mt-2 px-6">
-                    <span
-                        v-for="(m, i) in months"
-                        :key="m"
-                        :class="['text-[10px] text-gray-400', { 'hidden sm:inline': i % 2 !== 0 }]"
-                    >{{ m }}</span>
+
+                    <!-- Right Column: Informasi Mata Kuliah -->
+                    <div class="border-t md:border-t-0 md:border-l border-gray-100 pt-5 md:pt-0 md:pl-6 flex flex-col">
+                        <h2 class="text-sm font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                            <span class="p-1 rounded bg-green-50 text-green-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                            </span>
+                            Informasi Mata Kuliah
+                        </h2>
+                        <div class="flex-1 divide-y divide-gray-100 text-xs">
+                            <div class="py-2 flex justify-between gap-4">
+                                <span class="text-gray-500 font-medium shrink-0">Nama Mata Kuliah</span>
+                                <span class="text-gray-800 font-semibold text-right">Anatomi Tumbuhan</span>
+                            </div>
+                            <div class="py-2 flex justify-between gap-4">
+                                <span class="text-gray-500 font-medium shrink-0">Kode Mata Kuliah</span>
+                                <span class="text-gray-800 font-semibold text-right">BIO112</span>
+                            </div>
+                            <div class="py-2 flex justify-between gap-4">
+                                <span class="text-gray-500 font-medium shrink-0">Jumlah SKS</span>
+                                <span class="text-gray-800 font-semibold text-right">3 SKS</span>
+                            </div>
+                            <div class="py-2 flex justify-between gap-4">
+                                <span class="text-gray-500 font-medium shrink-0">Jumlah Pertemuan</span>
+                                <span class="text-gray-800 font-semibold text-right">4 Kali</span>
+                            </div>
+                            <div class="py-2 flex justify-between gap-4">
+                                <span class="text-gray-500 font-medium shrink-0">Model Pembelajaran</span>
+                                <span class="text-gray-800 font-semibold text-right">PjBL</span>
+                            </div>
+                            <div class="py-2 flex flex-col gap-1">
+                                <span class="text-gray-500 font-medium">Tema Proyek</span>
+                                <span class="text-gray-800 font-semibold leading-relaxed">Teknik Grafting Sebagai Eksplorasi Jaringan Tumbuhan</span>
+                            </div>
+                            <div class="py-2 flex justify-between gap-4">
+                                <span class="text-gray-500 font-medium shrink-0">Dosen Pengampu</span>
+                                <span class="text-gray-800 font-semibold text-right">Samsuar, S.Pd., M.Pd</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

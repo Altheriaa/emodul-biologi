@@ -27,7 +27,6 @@ class QuizController extends Controller
                 $score = QuizScore::where('quiz_id', $quiz->id)
                     ->where('user_id', $userId)
                     ->first();
-
                 $activeAttempt = QuizAttempt::where('quiz_id', $quiz->id)
                     ->where('user_id', $userId)
                     ->where('is_submitted', false)
