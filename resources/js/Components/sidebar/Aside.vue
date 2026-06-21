@@ -169,12 +169,12 @@ const navigation = computed(() => {
     >
         <!-- Brand -->
         <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100">
-            <div class="flex items-center gap-2.5">
-                <!-- Logo icon -->
-                <div class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0">
-                    <img src="/asset/Logo Pals.png" alt="">
+            <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2 shrink-0">
+                    <img src="/asset/Logo Pals.png" alt="Logo Pals" class="h-8 w-auto">
+                    <img src="/asset/Logo Unaya.png" alt="Logo Unaya" class="h-8 w-auto">
                 </div>
-                <span class="font-semibold text-sm tracking-wide text-gray-800">E-Plant Anatomy Learning System</span>
+                <span class="font-semibold text-sm tracking-wide text-gray-800">E-PALS</span>
             </div>
             <!-- Close button (mobile only) -->
             <button

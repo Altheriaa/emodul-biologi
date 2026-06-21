@@ -63,6 +63,7 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('pembelajaran')->group(function () {
             Route::get('/materi', [MahasiswaMateriController::class, 'index']);
             Route::get('/materi/{materi}', [MahasiswaMateriController::class, 'show']);
+            Route::post('/materi/{materi}/essay', [MahasiswaMateriController::class, 'submitEssay']);
 
             // LKM Grafting
             Route::get('/lkm-grafting', [MahasiswaLKMGraftingController::class, 'index']);
@@ -102,6 +103,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/materi/{materi}', [DosenMateriController::class, 'show']);
             Route::get('/materi/{materi}/edit', [DosenMateriController::class, 'edit']);
             Route::put('/materi/{materi}', [DosenMateriController::class, 'update']);
+            Route::get('/materi/{materi}/essay', [DosenMateriController::class, 'essayMonitoring']);
 
             // LKM Grafting Submission for Dosen
             Route::get('/lkm-grafting/submissions', [DosenLKMGraftingController::class, 'indexSubmission']);
@@ -162,6 +164,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/materi/{materi}', [MateriController::class, 'show']);
             Route::get('/materi/{materi}/edit', [MateriController::class, 'edit']);
             Route::put('/materi/{materi}', [MateriController::class, 'update']);
+            Route::get('/materi/{materi}/essay', [MateriController::class, 'essayMonitoring']);
 
             // LKM-Grafting Settings
             Route::get('/lkm-grafting', [LKMGraftingController::class, 'index']);

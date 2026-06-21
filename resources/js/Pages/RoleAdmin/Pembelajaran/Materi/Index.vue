@@ -1,7 +1,7 @@
 <script setup>
 import Layout from '../../../../App.vue';
 import { Button } from '@/components/ui/button';
-import { Check, ArrowRight, StickyNote, Plus, Trash, Pencil } from 'lucide-vue-next';
+import { Check, ArrowRight, StickyNote, Plus, Trash, Pencil, NotepadText } from 'lucide-vue-next';
 import { router, usePage } from '@inertiajs/vue3';
 import { Toast } from '@/lib/toast';
 import Swal from 'sweetalert2';
@@ -22,6 +22,10 @@ const Show = (id) => {
 const OpenEdit = (id) => {
     router.visit(`/admin/pembelajaran/materi/${id}/edit`);
 }; 
+
+const OpenEssay = (id) => {
+    router.visit(`/admin/pembelajaran/materi/${id}/essay`);
+};
 
 
 // confirm delete
@@ -143,6 +147,10 @@ watch(() => page.props.flash, () => {
                         <Button variant="outline" @click="Show(item.id)" class="h-8 px-2 sm:h-9 sm:px-4 border-green-600 text-green-700 hover:bg-green-50 text-[10px] sm:text-sm font-medium">
                             <ArrowRight class="w-3.5 h-3.5 sm:w-4 sm:h-4 " />
                             <span class="inline">Mulai Belajar</span>
+                        </Button>
+                        <Button variant="outline" @click="OpenEssay(item.id)" class="h-8 px-2 sm:h-9 sm:px-4 border-green-600 text-green-700 hover:bg-green-50 text-[10px] sm:text-sm font-medium">
+                            <NotepadText class="w-3.5 h-3.5 sm:w-4 sm:h-4 " />
+                            <span class="inline">Essay</span>
                         </Button>
                     </div>
                 </div>

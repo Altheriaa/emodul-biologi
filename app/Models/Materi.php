@@ -14,6 +14,11 @@ class Materi extends Model
         'tanggal_rilis',
         'link_flipping',
         'cover_path',
-        'jumlah_halaman'
+        'jumlah_halaman',
     ];
+
+    public function essayQuestions()
+    {
+        return $this->hasMany(MateriEssayQuestion::class);
+    }
 }

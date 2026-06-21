@@ -12,7 +12,7 @@ import SignupForm from "@/components/signup-02/components/SignupForm.vue"
           <div class="text-primary-foreground flex size-6 items-center justify-center rounded-md">
             <img src="/asset/Logo Pals.png" alt="Logo">
           </div>
-          E-Plans.
+          E-Pals.
         </a>
       </div>
       <div class="flex flex-1 items-center justify-center">

@@ -11,9 +11,18 @@ const form = useForm({
     tanggal_rilis : '',
     link_flipping : '',
     jumlah_halaman: '',
+    pertanyaan_essay: [{ pertanyaan: '' }],
     cover_path: null,
     remove_cover_path: false,
 });
+
+const addQuestion = () => {
+    form.pertanyaan_essay.push({ pertanyaan: '' });
+};
+
+const removeQuestion = (index) => {
+    form.pertanyaan_essay.splice(index, 1);
+};
 
 
 const cancel = () => {
@@ -180,6 +189,43 @@ function store() {
                                 <small v-if="form.errors.deskripsi" class="text-red-500 text-xs mt-1 d-block">
                                     {{ form.errors.deskripsi }}
                                 </small>
+                            </div>
+
+                            <div class="space-y-3 col-span-1 sm:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700">Soal Essay</label>
+                                
+                                <div v-for="(question, index) in form.pertanyaan_essay" :key="index" class="flex gap-2 items-start">
+                                    <div class="flex-1">
+                                        <textarea
+                                            v-model="question.pertanyaan"
+                                            rows="2"
+                                            :placeholder="'Masukkan pertanyaan essay ke-' + (index + 1)"
+                                            class="w-full px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
+                                        />
+                                        <small v-if="form.errors[`pertanyaan_essay.${index}.pertanyaan`]" class="text-red-500 text-xs mt-1 block">
+                                            {{ form.errors[`pertanyaan_essay.${index}.pertanyaan`] }}
+                                        </small>
+                                    </div>
+                                    <Button 
+                                        type="button" 
+                                        variant="outline" 
+                                        @click="removeQuestion(index)" 
+                                        class="shrink-0 h-10 w-10 p-0 text-red-500 border-red-200 hover:bg-red-50 hover:text-red-600 rounded-lg transition"
+                                    >
+                                        <Trash class="w-4 h-4" />
+                                    </Button>
+                                </div>
+
+                                <Button 
+                                    type="button" 
+                                    variant="outline" 
+                                    @click="addQuestion" 
+                                    class="text-xs text-green-700 border-green-200 hover:bg-green-50"
+                                >
+                                    + Tambah Soal
+                                </Button>
+                                
+                                <p class="text-[11px] text-gray-400 mt-1">Mahasiswa akan menjawab essay ini setelah membaca materi.</p>
                             </div>
                         </div>
 

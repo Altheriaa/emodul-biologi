@@ -35,6 +35,9 @@ class MateriController extends Controller
             'jumlah_halaman' => 'required|integer',
             'cover_path' => 'nullable|file|mimes:jpeg,png,jpg,webp|max:2048',
             'remove_cover_path' => 'nullable|boolean',
+            'pertanyaan_essay' => 'nullable|array',
+            'pertanyaan_essay.*.id' => 'nullable',
+            'pertanyaan_essay.*.pertanyaan' => 'required|string',
         ]);
 
         if ($request->hasFile('cover_path')) {
@@ -45,7 +48,13 @@ class MateriController extends Controller
             unset($validated['cover_path']);
         }
 
-        Materi::create($validated);
+        $materi = Materi::create($validated);
+
+        if (!empty($validated['pertanyaan_essay'])) {
+            foreach ($validated['pertanyaan_essay'] as $q) {
+                $materi->essayQuestions()->create(['pertanyaan' => $q['pertanyaan']]);
+            }
+        }
 
         return redirect('/admin/pembelajaran/materi')->with('success', 'Data Materi berhasil ditambahkan!');
     }
@@ -70,7 +79,7 @@ class MateriController extends Controller
 
     public function edit(string $id)
     {
-        $materi = Materi::findOrFail($id);
+        $materi = Materi::with('essayQuestions')->findOrFail($id);
 
         return Inertia::render('RoleAdmin/Pembelajaran/Materi/Edit', [
             'materi' => $materi,
@@ -90,6 +99,9 @@ class MateriController extends Controller
             'jumlah_halaman' => 'nullable|integer',
             'cover_path' => 'nullable|file|mimes:jpeg,png,jpg,webp|max:2048',
             'remove_cover_path' => 'nullable|boolean',
+            'pertanyaan_essay' => 'nullable|array',
+            'pertanyaan_essay.*.id' => 'nullable',
+            'pertanyaan_essay.*.pertanyaan' => 'required|string',
         ]);
 
         if ($request->hasFile('cover_path')) {
@@ -102,6 +114,30 @@ class MateriController extends Controller
 
         $materi->update($validated);
 
+        if (isset($validated['pertanyaan_essay'])) {
+            $existingIds = collect($validated['pertanyaan_essay'])->pluck('id')->filter()->toArray();
+            $materi->essayQuestions()->whereNotIn('id', $existingIds)->delete();
+
+            foreach ($validated['pertanyaan_essay'] as $q) {
+                if (isset($q['id']) && $q['id']) {
+                    $materi->essayQuestions()->where('id', $q['id'])->update(['pertanyaan' => $q['pertanyaan']]);
+                } else {
+                    $materi->essayQuestions()->create(['pertanyaan' => $q['pertanyaan']]);
+                }
+            }
+        } else {
+            $materi->essayQuestions()->delete();
+        }
+
         return redirect('/admin/pembelajaran/materi')->with('success', 'Data Materi berhasil diubah!');
+    }
+
+    public function essayMonitoring(string $id)
+    {
+        $materi = Materi::with(['essayQuestions.answers.mahasiswa.user'])->findOrFail($id);
+
+        return Inertia::render('RoleAdmin/Pembelajaran/Materi/MonitoringEssay', [
+            'materi' => $materi,
+        ]);
     }
 }
