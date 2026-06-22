@@ -1,0 +1,1233 @@
+{
+  "_App-BOSt13d3.js": {
+    "file": "assets/App-BOSt13d3.js",
+    "name": "App",
+    "imports": [
+      "resources/js/app.js",
+      "_createLucideIcon-De2nEyfe.js"
+    ],
+    "css": [
+      "assets/App-D6_roTdC.css"
+    ]
+  },
+  "_App-D6_roTdC.css": {
+    "file": "assets/App-D6_roTdC.css",
+    "src": "_App-D6_roTdC.css"
+  },
+  "_Presence-Bn2hO5sa.js": {
+    "file": "assets/Presence-Bn2hO5sa.js",
+    "name": "Presence",
+    "imports": [
+      "resources/js/app.js",
+      "_dist-CCc5V17O.js",
+      "_Primitive-DzKUqKep.js"
+    ]
+  },
+  "_Primitive-DzKUqKep.js": {
+    "file": "assets/Primitive-DzKUqKep.js",
+    "name": "Primitive",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "_accordion-Dkl_59O-.js": {
+    "file": "assets/accordion-Dkl_59O-.js",
+    "name": "accordion",
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_dist-CCc5V17O.js",
+      "_Primitive-DzKUqKep.js",
+      "_Presence-Bn2hO5sa.js",
+      "_useForwardExpose-DLEYIj2u.js"
+    ]
+  },
+  "_archive-BJlK1Ynq.js": {
+    "file": "assets/archive-BJlK1Ynq.js",
+    "name": "archive",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_arrow-left-B9AMfrdA.js": {
+    "file": "assets/arrow-left-B9AMfrdA.js",
+    "name": "arrow-left",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_arrow-right-BWCGNeXD.js": {
+    "file": "assets/arrow-right-BWCGNeXD.js",
+    "name": "arrow-right",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_badge-CJfJCMAf.js": {
+    "file": "assets/badge-CJfJCMAf.js",
+    "name": "badge",
+    "imports": [
+      "resources/js/app.js",
+      "_dist-CCc5V17O.js",
+      "_button-BfsRFNkM.js",
+      "_Primitive-DzKUqKep.js"
+    ]
+  },
+  "_button-BfsRFNkM.js": {
+    "file": "assets/button-BfsRFNkM.js",
+    "name": "button",
+    "imports": [
+      "resources/js/app.js",
+      "_Primitive-DzKUqKep.js"
+    ]
+  },
+  "_card-MB3JVlAV.js": {
+    "file": "assets/card-MB3JVlAV.js",
+    "name": "card",
+    "imports": [
+      "resources/js/app.js",
+      "_Primitive-DzKUqKep.js"
+    ]
+  },
+  "_check-Dsc08Cm8.js": {
+    "file": "assets/check-Dsc08Cm8.js",
+    "name": "check",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_chevron-right-BgO1r4Qy.js": {
+    "file": "assets/chevron-right-BgO1r4Qy.js",
+    "name": "chevron-right",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_circle-check-DaFBb5Wh.js": {
+    "file": "assets/circle-check-DaFBb5Wh.js",
+    "name": "circle-check",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_circle-dashed-XXc6MBCi.js": {
+    "file": "assets/circle-dashed-XXc6MBCi.js",
+    "name": "circle-dashed",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_circle-x-CJj_fxXa.js": {
+    "file": "assets/circle-x-CJj_fxXa.js",
+    "name": "circle-x",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_clock-DNI3p-p2.js": {
+    "file": "assets/clock-DNI3p-p2.js",
+    "name": "clock",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_createLucideIcon-De2nEyfe.js": {
+    "file": "assets/createLucideIcon-De2nEyfe.js",
+    "name": "createLucideIcon",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "_dist-CCc5V17O.js": {
+    "file": "assets/dist-CCc5V17O.js",
+    "name": "dist",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "_dropdown-menu-Db6ZtJHS.js": {
+    "file": "assets/dropdown-menu-Db6ZtJHS.js",
+    "name": "dropdown-menu",
+    "imports": [
+      "resources/js/app.js",
+      "_dist-CCc5V17O.js",
+      "_Primitive-DzKUqKep.js",
+      "_Presence-Bn2hO5sa.js",
+      "_useForwardExpose-DLEYIj2u.js"
+    ]
+  },
+  "_ellipsis-Bee9eLHz.js": {
+    "file": "assets/ellipsis-Bee9eLHz.js",
+    "name": "ellipsis",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_field-BiiMwpSn.js": {
+    "file": "assets/field-BiiMwpSn.js",
+    "name": "field",
+    "imports": [
+      "resources/js/app.js",
+      "_dist-CCc5V17O.js",
+      "_button-BfsRFNkM.js",
+      "_Primitive-DzKUqKep.js",
+      "_label-C1MTkPh3.js"
+    ]
+  },
+  "_history-De_BXjOY.js": {
+    "file": "assets/history-De_BXjOY.js",
+    "name": "history",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_id-V_6mYL0N.js": {
+    "file": "assets/id-V_6mYL0N.js",
+    "name": "id",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "_input-BLs5Ycw7.js": {
+    "file": "assets/input-BLs5Ycw7.js",
+    "name": "input",
+    "imports": [
+      "resources/js/app.js",
+      "_dist-CCc5V17O.js",
+      "_Primitive-DzKUqKep.js"
+    ]
+  },
+  "_label-C1MTkPh3.js": {
+    "file": "assets/label-C1MTkPh3.js",
+    "name": "label",
+    "imports": [
+      "resources/js/app.js",
+      "_dist-CCc5V17O.js",
+      "_Primitive-DzKUqKep.js",
+      "_useForwardExpose-DLEYIj2u.js"
+    ]
+  },
+  "_monitor-BZ-xpzzD.js": {
+    "file": "assets/monitor-BZ-xpzzD.js",
+    "name": "monitor",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_pencil-DcnbeuB6.js": {
+    "file": "assets/pencil-DcnbeuB6.js",
+    "name": "pencil",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_plus-D59foP1c.js": {
+    "file": "assets/plus-D59foP1c.js",
+    "name": "plus",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_search-lIgLaQZX.js": {
+    "file": "assets/search-lIgLaQZX.js",
+    "name": "search",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_sticky-note-qR0ZE0op.js": {
+    "file": "assets/sticky-note-qR0ZE0op.js",
+    "name": "sticky-note",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_switch-CK0qiZ6P.js": {
+    "file": "assets/switch-CK0qiZ6P.js",
+    "name": "switch",
+    "imports": [
+      "resources/js/app.js",
+      "_dropdown-menu-Db6ZtJHS.js",
+      "_dist-CCc5V17O.js",
+      "_Primitive-DzKUqKep.js",
+      "_Presence-Bn2hO5sa.js",
+      "_useForwardExpose-DLEYIj2u.js"
+    ]
+  },
+  "_toast-D9ccvScT.js": {
+    "file": "assets/toast-D9ccvScT.js",
+    "name": "toast",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "_trash-2-UA092Hla.js": {
+    "file": "assets/trash-2-UA092Hla.js",
+    "name": "trash-2",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_trash-BYrojpnh.js": {
+    "file": "assets/trash-BYrojpnh.js",
+    "name": "trash",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_trophy-BwwdGnrm.js": {
+    "file": "assets/trophy-BwwdGnrm.js",
+    "name": "trophy",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_useForwardExpose-DLEYIj2u.js": {
+    "file": "assets/useForwardExpose-DLEYIj2u.js",
+    "name": "useForwardExpose",
+    "imports": [
+      "resources/js/app.js",
+      "_dist-CCc5V17O.js"
+    ]
+  },
+  "_user-round-cog-CIs35CZV.js": {
+    "file": "assets/user-round-cog-CIs35CZV.js",
+    "name": "user-round-cog",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "_x-DUO1Pd-D.js": {
+    "file": "assets/x-DUO1Pd-D.js",
+    "name": "x",
+    "imports": [
+      "_createLucideIcon-De2nEyfe.js"
+    ]
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-QVZ_X99X.css",
+    "name": "app",
+    "names": [
+      "app.css"
+    ],
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/Pages/Auth/ForgotPassword.vue": {
+    "file": "assets/ForgotPassword-lCK2E22S.js",
+    "name": "ForgotPassword",
+    "src": "resources/js/Pages/Auth/ForgotPassword.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_Primitive-DzKUqKep.js",
+      "_field-BiiMwpSn.js",
+      "_input-BLs5Ycw7.js"
+    ]
+  },
+  "resources/js/Pages/Auth/Login.vue": {
+    "file": "assets/Login-BvamrGwe.js",
+    "name": "Login",
+    "src": "resources/js/Pages/Auth/Login.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_Primitive-DzKUqKep.js",
+      "_field-BiiMwpSn.js",
+      "_input-BLs5Ycw7.js"
+    ]
+  },
+  "resources/js/Pages/Auth/Register.vue": {
+    "file": "assets/Register-DlPj-gLu.js",
+    "name": "Register",
+    "src": "resources/js/Pages/Auth/Register.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_Primitive-DzKUqKep.js",
+      "_field-BiiMwpSn.js",
+      "_input-BLs5Ycw7.js"
+    ]
+  },
+  "resources/js/Pages/Auth/ResetPassword.vue": {
+    "file": "assets/ResetPassword-DkLHzy70.js",
+    "name": "ResetPassword",
+    "src": "resources/js/Pages/Auth/ResetPassword.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_field-BiiMwpSn.js",
+      "_input-BLs5Ycw7.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/DashboardAdmin.vue": {
+    "file": "assets/DashboardAdmin-Cc7_gZJA.js",
+    "name": "DashboardAdmin",
+    "src": "resources/js/Pages/RoleAdmin/DashboardAdmin.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_toast-D9ccvScT.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Evaluasi/BankSoal/Create.vue": {
+    "file": "assets/Create-_G_rLGpT.js",
+    "name": "Create",
+    "src": "resources/js/Pages/RoleAdmin/Evaluasi/BankSoal/Create.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Evaluasi/BankSoal/Edit.vue": {
+    "file": "assets/Edit-ByJv6hCz.js",
+    "name": "Edit",
+    "src": "resources/js/Pages/RoleAdmin/Evaluasi/BankSoal/Edit.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_circle-check-DaFBb5Wh.js",
+      "_pencil-DcnbeuB6.js",
+      "_plus-D59foP1c.js",
+      "_trash-2-UA092Hla.js",
+      "_x-DUO1Pd-D.js",
+      "_toast-D9ccvScT.js"
+    ],
+    "css": [
+      "assets/Edit-C25UF0DG.css"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Evaluasi/BankSoal/Index.vue": {
+    "file": "assets/Index-Cex2zLNE.js",
+    "name": "Index",
+    "src": "resources/js/Pages/RoleAdmin/Evaluasi/BankSoal/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_dropdown-menu-Db6ZtJHS.js",
+      "_button-BfsRFNkM.js",
+      "_archive-BJlK1Ynq.js",
+      "_circle-check-DaFBb5Wh.js",
+      "_clock-DNI3p-p2.js",
+      "_ellipsis-Bee9eLHz.js",
+      "_plus-D59foP1c.js",
+      "_search-lIgLaQZX.js",
+      "_user-round-cog-CIs35CZV.js",
+      "_toast-D9ccvScT.js",
+      "_badge-CJfJCMAf.js",
+      "_card-MB3JVlAV.js",
+      "_input-BLs5Ycw7.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Evaluasi/Monitoring/Index.vue": {
+    "file": "assets/Index-BouewreX.js",
+    "name": "Index",
+    "src": "resources/js/Pages/RoleAdmin/Evaluasi/Monitoring/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_id-V_6mYL0N.js",
+      "_monitor-BZ-xpzzD.js",
+      "_circle-check-DaFBb5Wh.js",
+      "_circle-x-CJj_fxXa.js",
+      "_search-lIgLaQZX.js",
+      "_badge-CJfJCMAf.js",
+      "_card-MB3JVlAV.js",
+      "_input-BLs5Ycw7.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Evaluasi/Monitoring/Show.vue": {
+    "file": "assets/Show-Bn3fdx5f.js",
+    "name": "Show",
+    "src": "resources/js/Pages/RoleAdmin/Evaluasi/Monitoring/Show.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_id-V_6mYL0N.js",
+      "_arrow-left-B9AMfrdA.js",
+      "_check-Dsc08Cm8.js",
+      "_circle-check-DaFBb5Wh.js",
+      "_circle-x-CJj_fxXa.js",
+      "_x-DUO1Pd-D.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/InformasiModul/CplCpmk.vue": {
+    "file": "assets/CplCpmk-DmRLq4KH.js",
+    "name": "CplCpmk",
+    "src": "resources/js/Pages/RoleAdmin/InformasiModul/CplCpmk.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_accordion-Dkl_59O-.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/InformasiModul/IdentitasModul.vue": {
+    "file": "assets/IdentitasModul-hmtEcyVC.js",
+    "name": "IdentitasModul",
+    "src": "resources/js/Pages/RoleAdmin/InformasiModul/IdentitasModul.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_check-Dsc08Cm8.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/KelolaDosen/Create.vue": {
+    "file": "assets/Create-CxvvhQjp.js",
+    "name": "Create",
+    "src": "resources/js/Pages/RoleAdmin/KelolaDosen/Create.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/KelolaDosen/Edit.vue": {
+    "file": "assets/Edit-BeIrdpJX.js",
+    "name": "Edit",
+    "src": "resources/js/Pages/RoleAdmin/KelolaDosen/Edit.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/KelolaDosen/Index.vue": {
+    "file": "assets/Index-BA31CyFJ.js",
+    "name": "Index",
+    "src": "resources/js/Pages/RoleAdmin/KelolaDosen/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_dropdown-menu-Db6ZtJHS.js",
+      "_button-BfsRFNkM.js",
+      "_ellipsis-Bee9eLHz.js",
+      "_plus-D59foP1c.js",
+      "_search-lIgLaQZX.js",
+      "_user-round-cog-CIs35CZV.js",
+      "_toast-D9ccvScT.js",
+      "_card-MB3JVlAV.js",
+      "_input-BLs5Ycw7.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/KelolaMahasiswa/Create.vue": {
+    "file": "assets/Create-CQkcezUp.js",
+    "name": "Create",
+    "src": "resources/js/Pages/RoleAdmin/KelolaMahasiswa/Create.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/KelolaMahasiswa/Edit.vue": {
+    "file": "assets/Edit-BSoMMayV.js",
+    "name": "Edit",
+    "src": "resources/js/Pages/RoleAdmin/KelolaMahasiswa/Edit.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/KelolaMahasiswa/Index.vue": {
+    "file": "assets/Index-CDUM5esY.js",
+    "name": "Index",
+    "src": "resources/js/Pages/RoleAdmin/KelolaMahasiswa/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_dropdown-menu-Db6ZtJHS.js",
+      "_button-BfsRFNkM.js",
+      "_ellipsis-Bee9eLHz.js",
+      "_plus-D59foP1c.js",
+      "_search-lIgLaQZX.js",
+      "_user-round-cog-CIs35CZV.js",
+      "_toast-D9ccvScT.js",
+      "_card-MB3JVlAV.js",
+      "_input-BLs5Ycw7.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Index.vue": {
+    "file": "assets/Index-DXbG7TUg.js",
+    "name": "Index",
+    "src": "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_dropdown-menu-Db6ZtJHS.js",
+      "_button-BfsRFNkM.js",
+      "_toast-D9ccvScT.js",
+      "_card-MB3JVlAV.js",
+      "_input-BLs5Ycw7.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSettings/Create.vue": {
+    "file": "assets/Create-CFTWhJzP.js",
+    "name": "Create",
+    "src": "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSettings/Create.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_label-C1MTkPh3.js",
+      "_switch-CK0qiZ6P.js",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Index.vue"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSettings/Edit.vue": {
+    "file": "assets/Edit-kgJRWg-8.js",
+    "name": "Edit",
+    "src": "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSettings/Edit.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_label-C1MTkPh3.js",
+      "_switch-CK0qiZ6P.js",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Index.vue"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSettings/Index.vue": {
+    "file": "assets/Index-CKM2MNGI.js",
+    "name": "Index",
+    "src": "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSettings/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_dropdown-menu-Db6ZtJHS.js",
+      "_button-BfsRFNkM.js",
+      "_circle-check-DaFBb5Wh.js",
+      "_circle-x-CJj_fxXa.js",
+      "_ellipsis-Bee9eLHz.js",
+      "_plus-D59foP1c.js",
+      "_search-lIgLaQZX.js",
+      "_toast-D9ccvScT.js",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Index.vue",
+      "_badge-CJfJCMAf.js",
+      "_card-MB3JVlAV.js",
+      "_input-BLs5Ycw7.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSubmissions/Create.vue": {
+    "file": "assets/Create-BuLIXvEQ.js",
+    "name": "Create",
+    "src": "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSubmissions/Create.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_label-C1MTkPh3.js",
+      "_switch-CK0qiZ6P.js",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Index.vue"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSubmissions/Edit.vue": {
+    "file": "assets/Edit-CvaLTX3J.js",
+    "name": "Edit",
+    "src": "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSubmissions/Edit.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_label-C1MTkPh3.js",
+      "_switch-CK0qiZ6P.js",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Index.vue"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSubmissions/Index.vue": {
+    "file": "assets/Index-DzWNtgQ0.js",
+    "name": "Index",
+    "src": "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSubmissions/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_dropdown-menu-Db6ZtJHS.js",
+      "_button-BfsRFNkM.js",
+      "_ellipsis-Bee9eLHz.js",
+      "_search-lIgLaQZX.js",
+      "_toast-D9ccvScT.js",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Index.vue",
+      "_badge-CJfJCMAf.js",
+      "_card-MB3JVlAV.js",
+      "_input-BLs5Ycw7.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSubmissions/ShowMahasiswa.vue": {
+    "file": "assets/ShowMahasiswa-BYjR8nux.js",
+    "name": "ShowMahasiswa",
+    "src": "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSubmissions/ShowMahasiswa.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_arrow-left-B9AMfrdA.js",
+      "_circle-check-DaFBb5Wh.js",
+      "_circle-dashed-XXc6MBCi.js",
+      "_circle-x-CJj_fxXa.js",
+      "_toast-D9ccvScT.js",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Index.vue",
+      "_badge-CJfJCMAf.js",
+      "_card-MB3JVlAV.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Pembelajaran/Materi/Create.vue": {
+    "file": "assets/Create-DegmN305.js",
+    "name": "Create",
+    "src": "resources/js/Pages/RoleAdmin/Pembelajaran/Materi/Create.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_x-DUO1Pd-D.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Pembelajaran/Materi/Detail.vue": {
+    "file": "assets/Detail-00gsbr2m.js",
+    "name": "Detail",
+    "src": "resources/js/Pages/RoleAdmin/Pembelajaran/Materi/Detail.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_arrow-right-BWCGNeXD.js",
+      "_check-Dsc08Cm8.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Pembelajaran/Materi/Edit.vue": {
+    "file": "assets/Edit-iLizqS7K.js",
+    "name": "Edit",
+    "src": "resources/js/Pages/RoleAdmin/Pembelajaran/Materi/Edit.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_x-DUO1Pd-D.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Pembelajaran/Materi/Index.vue": {
+    "file": "assets/Index-Bq2fsiCo.js",
+    "name": "Index",
+    "src": "resources/js/Pages/RoleAdmin/Pembelajaran/Materi/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_arrow-right-BWCGNeXD.js",
+      "_pencil-DcnbeuB6.js",
+      "_plus-D59foP1c.js",
+      "_sticky-note-qR0ZE0op.js",
+      "_trash-BYrojpnh.js",
+      "_toast-D9ccvScT.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Pembelajaran/Materi/MonitoringEssay.vue": {
+    "file": "assets/MonitoringEssay-CACdCkso.js",
+    "name": "MonitoringEssay",
+    "src": "resources/js/Pages/RoleAdmin/Pembelajaran/Materi/MonitoringEssay.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_arrow-left-B9AMfrdA.js",
+      "_search-lIgLaQZX.js"
+    ]
+  },
+  "resources/js/Pages/RoleAdmin/Settings.vue": {
+    "file": "assets/Settings-rlq4yWCX.js",
+    "name": "Settings",
+    "src": "resources/js/Pages/RoleAdmin/Settings.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_toast-D9ccvScT.js"
+    ]
+  },
+  "resources/js/Pages/RoleDosen/DashboardDosen.vue": {
+    "file": "assets/DashboardDosen-DGB9s9yx.js",
+    "name": "DashboardDosen",
+    "src": "resources/js/Pages/RoleDosen/DashboardDosen.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_toast-D9ccvScT.js"
+    ]
+  },
+  "resources/js/Pages/RoleDosen/Evaluasi/BankSoal/Create.vue": {
+    "file": "assets/Create-Cq509-dp.js",
+    "name": "Create",
+    "src": "resources/js/Pages/RoleDosen/Evaluasi/BankSoal/Create.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js"
+    ]
+  },
+  "resources/js/Pages/RoleDosen/Evaluasi/BankSoal/Edit.vue": {
+    "file": "assets/Edit-YCemWYCT.js",
+    "name": "Edit",
+    "src": "resources/js/Pages/RoleDosen/Evaluasi/BankSoal/Edit.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_circle-check-DaFBb5Wh.js",
+      "_pencil-DcnbeuB6.js",
+      "_plus-D59foP1c.js",
+      "_trash-2-UA092Hla.js",
+      "_x-DUO1Pd-D.js",
+      "_toast-D9ccvScT.js"
+    ],
+    "css": [
+      "assets/Edit-Dia2ev7d.css"
+    ]
+  },
+  "resources/js/Pages/RoleDosen/Evaluasi/BankSoal/Index.vue": {
+    "file": "assets/Index-8WM4GwMO.js",
+    "name": "Index",
+    "src": "resources/js/Pages/RoleDosen/Evaluasi/BankSoal/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_dropdown-menu-Db6ZtJHS.js",
+      "_button-BfsRFNkM.js",
+      "_archive-BJlK1Ynq.js",
+      "_circle-check-DaFBb5Wh.js",
+      "_clock-DNI3p-p2.js",
+      "_ellipsis-Bee9eLHz.js",
+      "_plus-D59foP1c.js",
+      "_search-lIgLaQZX.js",
+      "_user-round-cog-CIs35CZV.js",
+      "_toast-D9ccvScT.js",
+      "_badge-CJfJCMAf.js",
+      "_card-MB3JVlAV.js",
+      "_input-BLs5Ycw7.js"
+    ]
+  },
+  "resources/js/Pages/RoleDosen/Evaluasi/Monitoring/Index.vue": {
+    "file": "assets/Index-C2MzASzH.js",
+    "name": "Index",
+    "src": "resources/js/Pages/RoleDosen/Evaluasi/Monitoring/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_id-V_6mYL0N.js",
+      "_monitor-BZ-xpzzD.js",
+      "_circle-check-DaFBb5Wh.js",
+      "_circle-x-CJj_fxXa.js",
+      "_search-lIgLaQZX.js",
+      "_badge-CJfJCMAf.js",
+      "_card-MB3JVlAV.js",
+      "_input-BLs5Ycw7.js"
+    ]
+  },
+  "resources/js/Pages/RoleDosen/Evaluasi/Monitoring/Show.vue": {
+    "file": "assets/Show-DhDz_LGX.js",
+    "name": "Show",
+    "src": "resources/js/Pages/RoleDosen/Evaluasi/Monitoring/Show.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_id-V_6mYL0N.js",
+      "_arrow-left-B9AMfrdA.js",
+      "_check-Dsc08Cm8.js",
+      "_circle-check-DaFBb5Wh.js",
+      "_circle-x-CJj_fxXa.js",
+      "_x-DUO1Pd-D.js"
+    ]
+  },
+  "resources/js/Pages/RoleDosen/InformasiModul/CplCpmk.vue": {
+    "file": "assets/CplCpmk-DiL3rSjX.js",
+    "name": "CplCpmk",
+    "src": "resources/js/Pages/RoleDosen/InformasiModul/CplCpmk.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_accordion-Dkl_59O-.js"
+    ]
+  },
+  "resources/js/Pages/RoleDosen/InformasiModul/IdentitasModul.vue": {
+    "file": "assets/IdentitasModul-Dbr8Uhc_.js",
+    "name": "IdentitasModul",
+    "src": "resources/js/Pages/RoleDosen/InformasiModul/IdentitasModul.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_check-Dsc08Cm8.js"
+    ]
+  },
+  "resources/js/Pages/RoleDosen/Pembelajaran/Create.vue": {
+    "file": "assets/Create-BS5aHhOA.js",
+    "name": "Create",
+    "src": "resources/js/Pages/RoleDosen/Pembelajaran/Create.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_x-DUO1Pd-D.js"
+    ]
+  },
+  "resources/js/Pages/RoleDosen/Pembelajaran/Detail.vue": {
+    "file": "assets/Detail-C7kkjirl.js",
+    "name": "Detail",
+    "src": "resources/js/Pages/RoleDosen/Pembelajaran/Detail.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_arrow-right-BWCGNeXD.js",
+      "_check-Dsc08Cm8.js"
+    ]
+  },
+  "resources/js/Pages/RoleDosen/Pembelajaran/Edit.vue": {
+    "file": "assets/Edit-HI2Datop.js",
+    "name": "Edit",
+    "src": "resources/js/Pages/RoleDosen/Pembelajaran/Edit.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_x-DUO1Pd-D.js"
+    ]
+  },
+  "resources/js/Pages/RoleDosen/Pembelajaran/Index.vue": {
+    "file": "assets/Index-C-GMPwYu.js",
+    "name": "Index",
+    "src": "resources/js/Pages/RoleDosen/Pembelajaran/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_arrow-right-BWCGNeXD.js",
+      "_pencil-DcnbeuB6.js",
+      "_plus-D59foP1c.js",
+      "_sticky-note-qR0ZE0op.js",
+      "_trash-BYrojpnh.js",
+      "_toast-D9ccvScT.js"
+    ]
+  },
+  "resources/js/Pages/RoleDosen/Pembelajaran/LKMGrafting/ShowMahasiswa.vue": {
+    "file": "assets/ShowMahasiswa-DpAQjbCd.js",
+    "name": "ShowMahasiswa",
+    "src": "resources/js/Pages/RoleDosen/Pembelajaran/LKMGrafting/ShowMahasiswa.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_arrow-left-B9AMfrdA.js",
+      "_circle-check-DaFBb5Wh.js",
+      "_circle-dashed-XXc6MBCi.js",
+      "_circle-x-CJj_fxXa.js",
+      "_toast-D9ccvScT.js",
+      "_badge-CJfJCMAf.js",
+      "_card-MB3JVlAV.js"
+    ]
+  },
+  "resources/js/Pages/RoleDosen/Pembelajaran/LKMGrafting/Submissions.vue": {
+    "file": "assets/Submissions-DJvSlgUa.js",
+    "name": "Submissions",
+    "src": "resources/js/Pages/RoleDosen/Pembelajaran/LKMGrafting/Submissions.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_dropdown-menu-Db6ZtJHS.js",
+      "_button-BfsRFNkM.js",
+      "_ellipsis-Bee9eLHz.js",
+      "_search-lIgLaQZX.js",
+      "_toast-D9ccvScT.js",
+      "_card-MB3JVlAV.js",
+      "_input-BLs5Ycw7.js"
+    ]
+  },
+  "resources/js/Pages/RoleDosen/Pembelajaran/MonitoringEssay.vue": {
+    "file": "assets/MonitoringEssay-BhDo0bm8.js",
+    "name": "MonitoringEssay",
+    "src": "resources/js/Pages/RoleDosen/Pembelajaran/MonitoringEssay.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_arrow-left-B9AMfrdA.js",
+      "_search-lIgLaQZX.js"
+    ]
+  },
+  "resources/js/Pages/RoleDosen/Settings.vue": {
+    "file": "assets/Settings-C0rTlIzr.js",
+    "name": "Settings",
+    "src": "resources/js/Pages/RoleDosen/Settings.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_toast-D9ccvScT.js"
+    ]
+  },
+  "resources/js/Pages/RoleMahasiswa/Dashboard.vue": {
+    "file": "assets/Dashboard-B1IFlLuh.js",
+    "name": "Dashboard",
+    "src": "resources/js/Pages/RoleMahasiswa/Dashboard.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js"
+    ]
+  },
+  "resources/js/Pages/RoleMahasiswa/InformasiModul/CplCpmk.vue": {
+    "file": "assets/CplCpmk-PJoSf5b6.js",
+    "name": "CplCpmk",
+    "src": "resources/js/Pages/RoleMahasiswa/InformasiModul/CplCpmk.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_accordion-Dkl_59O-.js"
+    ]
+  },
+  "resources/js/Pages/RoleMahasiswa/InformasiModul/IdentitasModul.vue": {
+    "file": "assets/IdentitasModul-DQWX4QM7.js",
+    "name": "IdentitasModul",
+    "src": "resources/js/Pages/RoleMahasiswa/InformasiModul/IdentitasModul.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_check-Dsc08Cm8.js"
+    ]
+  },
+  "resources/js/Pages/RoleMahasiswa/Pembelajaran/LKMGrafting/Form.vue": {
+    "file": "assets/Form-BtiRWtLe.js",
+    "name": "Form",
+    "src": "resources/js/Pages/RoleMahasiswa/Pembelajaran/LKMGrafting/Form.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_createLucideIcon-De2nEyfe.js",
+      "_arrow-left-B9AMfrdA.js",
+      "_x-DUO1Pd-D.js",
+      "_toast-D9ccvScT.js",
+      "_badge-CJfJCMAf.js"
+    ]
+  },
+  "resources/js/Pages/RoleMahasiswa/Pembelajaran/LKMGrafting/Index.vue": {
+    "file": "assets/Index-B_LTdbay.js",
+    "name": "Index",
+    "src": "resources/js/Pages/RoleMahasiswa/Pembelajaran/LKMGrafting/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_createLucideIcon-De2nEyfe.js",
+      "_arrow-right-BWCGNeXD.js",
+      "_clock-DNI3p-p2.js",
+      "_pencil-DcnbeuB6.js",
+      "_x-DUO1Pd-D.js",
+      "_toast-D9ccvScT.js"
+    ]
+  },
+  "resources/js/Pages/RoleMahasiswa/Pembelajaran/Materi/Detail.vue": {
+    "file": "assets/Detail-BqIp-ede.js",
+    "name": "Detail",
+    "src": "resources/js/Pages/RoleMahasiswa/Pembelajaran/Materi/Detail.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_arrow-right-BWCGNeXD.js",
+      "_check-Dsc08Cm8.js",
+      "_toast-D9ccvScT.js"
+    ]
+  },
+  "resources/js/Pages/RoleMahasiswa/Pembelajaran/Materi/Index.vue": {
+    "file": "assets/Index-CT75lJZ-.js",
+    "name": "Index",
+    "src": "resources/js/Pages/RoleMahasiswa/Pembelajaran/Materi/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_button-BfsRFNkM.js",
+      "_arrow-right-BWCGNeXD.js",
+      "_sticky-note-qR0ZE0op.js",
+      "_toast-D9ccvScT.js"
+    ]
+  },
+  "resources/js/Pages/RoleMahasiswa/Quiz.vue": {
+    "file": "assets/Quiz-sHhsv-ul.js",
+    "name": "Quiz",
+    "src": "resources/js/Pages/RoleMahasiswa/Quiz.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_chevron-right-BgO1r4Qy.js",
+      "_circle-check-DaFBb5Wh.js",
+      "_clock-DNI3p-p2.js",
+      "_history-De_BXjOY.js",
+      "_sticky-note-qR0ZE0op.js",
+      "_trophy-BwwdGnrm.js"
+    ]
+  },
+  "resources/js/Pages/RoleMahasiswa/QuizHistory.vue": {
+    "file": "assets/QuizHistory-Di_mtZjI.js",
+    "name": "QuizHistory",
+    "src": "resources/js/Pages/RoleMahasiswa/QuizHistory.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_createLucideIcon-De2nEyfe.js",
+      "_arrow-left-B9AMfrdA.js",
+      "_chevron-right-BgO1r4Qy.js",
+      "_circle-check-DaFBb5Wh.js",
+      "_circle-x-CJj_fxXa.js",
+      "_history-De_BXjOY.js"
+    ]
+  },
+  "resources/js/Pages/RoleMahasiswa/QuizResult.vue": {
+    "file": "assets/QuizResult-BK5uqjIi.js",
+    "name": "QuizResult",
+    "src": "resources/js/Pages/RoleMahasiswa/QuizResult.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_arrow-left-B9AMfrdA.js",
+      "_check-Dsc08Cm8.js",
+      "_circle-check-DaFBb5Wh.js",
+      "_circle-x-CJj_fxXa.js",
+      "_trophy-BwwdGnrm.js",
+      "_x-DUO1Pd-D.js"
+    ]
+  },
+  "resources/js/Pages/RoleMahasiswa/QuizStart.vue": {
+    "file": "assets/QuizStart-Zmf9obAL.js",
+    "name": "QuizStart",
+    "src": "resources/js/Pages/RoleMahasiswa/QuizStart.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_createLucideIcon-De2nEyfe.js",
+      "_chevron-right-BgO1r4Qy.js",
+      "_clock-DNI3p-p2.js",
+      "_toast-D9ccvScT.js"
+    ]
+  },
+  "resources/js/Pages/RoleMahasiswa/Settings.vue": {
+    "file": "assets/Settings-BRMSDpfU.js",
+    "name": "Settings",
+    "src": "resources/js/Pages/RoleMahasiswa/Settings.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_App-BOSt13d3.js",
+      "resources/js/app.js",
+      "_toast-D9ccvScT.js"
+    ]
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BIuwKUaV.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/Pages/Auth/ForgotPassword.vue",
+      "resources/js/Pages/Auth/Login.vue",
+      "resources/js/Pages/Auth/Register.vue",
+      "resources/js/Pages/Auth/ResetPassword.vue",
+      "resources/js/Pages/RoleAdmin/DashboardAdmin.vue",
+      "resources/js/Pages/RoleAdmin/Evaluasi/BankSoal/Create.vue",
+      "resources/js/Pages/RoleAdmin/Evaluasi/BankSoal/Edit.vue",
+      "resources/js/Pages/RoleAdmin/Evaluasi/BankSoal/Index.vue",
+      "resources/js/Pages/RoleAdmin/Evaluasi/Monitoring/Index.vue",
+      "resources/js/Pages/RoleAdmin/Evaluasi/Monitoring/Show.vue",
+      "resources/js/Pages/RoleAdmin/InformasiModul/CplCpmk.vue",
+      "resources/js/Pages/RoleAdmin/InformasiModul/IdentitasModul.vue",
+      "resources/js/Pages/RoleAdmin/KelolaDosen/Create.vue",
+      "resources/js/Pages/RoleAdmin/KelolaDosen/Edit.vue",
+      "resources/js/Pages/RoleAdmin/KelolaDosen/Index.vue",
+      "resources/js/Pages/RoleAdmin/KelolaMahasiswa/Create.vue",
+      "resources/js/Pages/RoleAdmin/KelolaMahasiswa/Edit.vue",
+      "resources/js/Pages/RoleAdmin/KelolaMahasiswa/Index.vue",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Index.vue",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSettings/Create.vue",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSettings/Edit.vue",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSettings/Index.vue",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSubmissions/Create.vue",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSubmissions/Edit.vue",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSubmissions/Index.vue",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/LKMGrafting/Tabs/LKMSubmissions/ShowMahasiswa.vue",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/Materi/Create.vue",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/Materi/Detail.vue",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/Materi/Edit.vue",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/Materi/Index.vue",
+      "resources/js/Pages/RoleAdmin/Pembelajaran/Materi/MonitoringEssay.vue",
+      "resources/js/Pages/RoleAdmin/Settings.vue",
+      "resources/js/Pages/RoleDosen/DashboardDosen.vue",
+      "resources/js/Pages/RoleDosen/Evaluasi/BankSoal/Create.vue",
+      "resources/js/Pages/RoleDosen/Evaluasi/BankSoal/Edit.vue",
+      "resources/js/Pages/RoleDosen/Evaluasi/BankSoal/Index.vue",
+      "resources/js/Pages/RoleDosen/Evaluasi/Monitoring/Index.vue",
+      "resources/js/Pages/RoleDosen/Evaluasi/Monitoring/Show.vue",
+      "resources/js/Pages/RoleDosen/InformasiModul/CplCpmk.vue",
+      "resources/js/Pages/RoleDosen/InformasiModul/IdentitasModul.vue",
+      "resources/js/Pages/RoleDosen/Pembelajaran/Create.vue",
+      "resources/js/Pages/RoleDosen/Pembelajaran/Detail.vue",
+      "resources/js/Pages/RoleDosen/Pembelajaran/Edit.vue",
+      "resources/js/Pages/RoleDosen/Pembelajaran/Index.vue",
+      "resources/js/Pages/RoleDosen/Pembelajaran/LKMGrafting/ShowMahasiswa.vue",
+      "resources/js/Pages/RoleDosen/Pembelajaran/LKMGrafting/Submissions.vue",
+      "resources/js/Pages/RoleDosen/Pembelajaran/MonitoringEssay.vue",
+      "resources/js/Pages/RoleDosen/Settings.vue",
+      "resources/js/Pages/RoleMahasiswa/Dashboard.vue",
+      "resources/js/Pages/RoleMahasiswa/InformasiModul/CplCpmk.vue",
+      "resources/js/Pages/RoleMahasiswa/InformasiModul/IdentitasModul.vue",
+      "resources/js/Pages/RoleMahasiswa/Pembelajaran/LKMGrafting/Form.vue",
+      "resources/js/Pages/RoleMahasiswa/Pembelajaran/LKMGrafting/Index.vue",
+      "resources/js/Pages/RoleMahasiswa/Pembelajaran/Materi/Detail.vue",
+      "resources/js/Pages/RoleMahasiswa/Pembelajaran/Materi/Index.vue",
+      "resources/js/Pages/RoleMahasiswa/Quiz.vue",
+      "resources/js/Pages/RoleMahasiswa/QuizHistory.vue",
+      "resources/js/Pages/RoleMahasiswa/QuizResult.vue",
+      "resources/js/Pages/RoleMahasiswa/QuizStart.vue",
+      "resources/js/Pages/RoleMahasiswa/Settings.vue"
+    ]
+  }
+}
