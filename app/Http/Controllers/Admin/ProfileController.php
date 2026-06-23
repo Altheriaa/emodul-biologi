@@ -13,7 +13,7 @@ class ProfileController extends Controller
     {
         $admin = Auth::user();
 
-        if (!$admin->isAdmin()) {
+        if (! $admin->isAdmin()) {
             return abort(404);
         }
 
@@ -26,7 +26,7 @@ class ProfileController extends Controller
     {
         $admin = Auth::user();
 
-        if (!$admin->isAdmin()) {
+        if (! $admin->isAdmin()) {
             return abort(404);
         }
 
@@ -43,7 +43,7 @@ class ProfileController extends Controller
 
         if ($request->filled('password')) {
             $admin->update([
-                'password' => bcrypt($request->password),
+                'password' => $request->password,
             ]);
         }
 

@@ -245,7 +245,7 @@ const navigation = computed(() => {
 
         <!-- User Profile -->
         <div class="px-2 py-3 border-t border-gray-100">
-            <Link href="/logout" method="get" as="button" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors group">
+            <Link href="/logout" method="post" as="button" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors group">
                 <div class="w-7 h-7 rounded-full bg-gradient-to-br from-green-600 to-emerald-700 flex items-center justify-center text-xs font-semibold text-white shrink-0">
                     {{ user?.name?.charAt(0) || 'U' }}
                 </div>

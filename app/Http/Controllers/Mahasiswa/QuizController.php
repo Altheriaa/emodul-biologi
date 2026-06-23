@@ -148,10 +148,14 @@ class QuizController extends Controller
             return redirect("/mahasiswa/evaluasi/quiz/{$quizId}/result");
         }
 
-        $request->validate([
-            'answers' => 'required|array',
-            'answers.*' => 'nullable|integer',
-        ]);
+        // Cek apakah waktu pengerjaan masih valid
+        $attempt = QuizAttempt::where('quiz_id', $quizId)
+            ->where('user_id', $userId)
+            ->first();
+
+        if (! $attempt || now()->greaterThan($attempt->end_at)) {
+            return back()->with('error', 'Waktu pengerjaan sudah habis.');
+        }
 
         $userAnswers = $request->answers; // { question_id => option_id }
 

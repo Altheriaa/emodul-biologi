@@ -9,8 +9,7 @@ import {
   FieldSeparator,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { reactive } from 'vue';
-import { router, usePage, Link } from '@inertiajs/vue3';
+import { useForm, usePage, Link } from '@inertiajs/vue3';
 
 const props = defineProps({
   class: {
@@ -20,17 +19,17 @@ const props = defineProps({
   },
 });
 
-const post = reactive({
+const form = useForm({
     name : '',
     email : '',
     password : '',
+    password_confirmation: '',
     nim : '',
     angkatan : '',
-    
 })
 
 function store() {
-    router.post('/register', post)
+    form.post('/register')
 }
 </script>
 
@@ -45,29 +44,39 @@ function store() {
       </div>
       <Field>
         <FieldLabel for="name"> Nama Lengkap </FieldLabel>
-        <Input id="name" type="text" placeholder="John Doe" v-model="post.name" required />
+        <Input id="name" type="text" placeholder="John Doe" v-model="form.name" required />
+        <small v-if="form.errors.name" class="text-red-500 text-xs">{{ form.errors.name }}</small>
       </Field>
       <Field>
         <FieldLabel for="email"> Email </FieldLabel>
-        <Input id="email" type="email" placeholder="m@example.com" v-model="post.email" required />
+        <Input id="email" type="email" placeholder="m@example.com" v-model="form.email" required />
+        <small v-if="form.errors.email" class="text-red-500 text-xs">{{ form.errors.email }}</small>
       </Field>
       <Field>
         <FieldLabel for="password"> Password </FieldLabel>
-        <Input id="password" type="password" required v-model="post.password" />
+        <Input id="password" type="password" required v-model="form.password" />
+        <small v-if="form.errors.password" class="text-red-500 text-xs">{{ form.errors.password }}</small>
         <FieldDescription>
           Password Minimal 8 Karakter.
         </FieldDescription>
       </Field>
       <Field>
+        <FieldLabel for="password_confirmation"> Konfirmasi Password </FieldLabel>
+        <Input id="password_confirmation" type="password" required v-model="form.password_confirmation" />
+        <small v-if="form.errors.password_confirmation" class="text-red-500 text-xs">{{ form.errors.password_confirmation }}</small>
+      </Field>
+      <Field>
         <FieldLabel for="nim"> NIM </FieldLabel>
-        <Input id="nim" type="number" v-model="post.nim" required />
+        <Input id="nim" type="number" v-model="form.nim" required />
+        <small v-if="form.errors.nim" class="text-red-500 text-xs">{{ form.errors.nim }}</small>
         <FieldDescription>
           ex. 22999999
         </FieldDescription>
       </Field>
       <Field>
         <FieldLabel for="angkatan"> Angkatan </FieldLabel>
-        <Input id="angkatan" type="string" placeholder="2024" v-model="post.angkatan" required />
+        <Input id="angkatan" type="string" placeholder="2024" v-model="form.angkatan" required />
+        <small v-if="form.errors.angkatan" class="text-red-500 text-xs">{{ form.errors.angkatan }}</small>
         <FieldDescription>
           ex. 2024
         </FieldDescription>

@@ -23,12 +23,6 @@ class LoginController extends Controller
 
         $credentials = $request->only('email', 'password');
 
-        if (! $credentials) {
-            return back()->withErrors([
-                'email' => 'Email atau password salah',
-            ]);
-        }
-
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
@@ -41,6 +35,12 @@ class LoginController extends Controller
             if (Auth::user()->isMahasiswa()) {
                 return redirect()->route('dashboard.mahasiswa')->with('success', 'Login berhasil.');
             }
+
+            // Role tidak dikenali — logout dan tolak akses
+            Auth::logout();
+            $request->session()->invalidate();
+
+            return back()->withErrors(['email' => 'Akun Anda tidak memiliki role yang valid.']);
         }
 
         return back()->withErrors(['email' => 'Email atau Password salah']);

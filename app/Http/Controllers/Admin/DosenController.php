@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Dosen;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class DosenController extends Controller
@@ -17,17 +18,17 @@ class DosenController extends Controller
     {
         $search = $request->input('search');
         $dosens = User::with('dosen')->where('role', 'dosen')
-                    ->when($search, function ($query, $search) {
-                        $query->where(function ($q) use ($search) {
-                            $q->where('name', 'like', "%{$search}%")
-                            ->orWhereHas('dosen', function ($dosen) use ($search) {
-                                $dosen->where('nuptk', 'like', "%{$search}%");
-                            });
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                        ->orWhereHas('dosen', function ($dosen) use ($search) {
+                            $dosen->where('nuptk', 'like', "%{$search}%");
                         });
-                    })
-                    ->orderBy('created_at', 'desc')
-                    ->simplePaginate(10)
-                    ->withQueryString();
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->simplePaginate(10)
+            ->withQueryString();
 
         return Inertia::render('RoleAdmin/KelolaDosen/Index', [
             'dosens' => $dosens,
@@ -57,18 +58,20 @@ class DosenController extends Controller
             'jabatan' => 'string|required|max:50',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'role' => 'dosen',
-        ]);
+        DB::transaction(function () use ($request) {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'role' => 'dosen',
+            ]);
 
-        Dosen::create([
-            'user_id' => $user->id,
-            'nuptk' => $request->nuptk,
-            'jabatan' => $request->jabatan,
-        ]);
+            Dosen::create([
+                'user_id' => $user->id,
+                'nuptk' => $request->nuptk,
+                'jabatan' => $request->jabatan,
+            ]);
+        });
 
         return redirect('/admin/dosen')->with('success', 'Data Dosen berhasil ditambahkan!');
 
@@ -116,7 +119,7 @@ class DosenController extends Controller
 
         if ($request->filled('password')) {
             $dosen->user->update([
-                'password' => bcrypt($request->password),
+                'password' => $request->password,
             ]);
         }
 
@@ -135,7 +138,8 @@ class DosenController extends Controller
     {
         $dosen = Dosen::with('user')->findOrFail($id);
 
-        $dosen->user->delete($dosen->user_id);
+        $dosen->user->delete();
+        $dosen->delete();
 
         return redirect('/admin/dosen')->with('success', 'Data Dosen berhasil dihapus!');
     }

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\User;
-use Inertia\Inertia;
 use App\Models\Mahasiswa;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class MahasiswaController extends Controller
 {
@@ -17,17 +18,17 @@ class MahasiswaController extends Controller
     {
         $search = $request->input('search');
         $mahasiswas = User::with('mahasiswa')->where('role', 'mahasiswa')
-                    ->when($search, function ($query, $search) {
-                        $query->where(function ($q) use ($search) {
-                            $q->where('name', 'like', "%{$search}%")
-                            ->orWhereHas('mahasiswa', function ($mahasiswa) use ($search) {
-                                $mahasiswa->where('nim', 'like', "%{$search}%");
-                            });
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                        ->orWhereHas('mahasiswa', function ($mahasiswa) use ($search) {
+                            $mahasiswa->where('nim', 'like', "%{$search}%");
                         });
-                    })
-                    ->orderBy('created_at', 'desc')
-                    ->simplePaginate(10)
-                    ->withQueryString();
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->simplePaginate(10)
+            ->withQueryString();
 
         return Inertia::render('RoleAdmin/KelolaMahasiswa/Index', [
             'mahasiswas' => $mahasiswas,
@@ -57,18 +58,20 @@ class MahasiswaController extends Controller
             'angkatan' => 'integer|required',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'role' => 'mahasiswa',
-        ]);
+        DB::transaction(function () use ($request) {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'role' => 'mahasiswa',
+            ]);
 
-        Mahasiswa::create([
-            'user_id' => $user->id,
-            'nim' => $request->nim,
-            'angkatan' => $request->angkatan,
-        ]);
+            Mahasiswa::create([
+                'user_id' => $user->id,
+                'nim' => $request->nim,
+                'angkatan' => $request->angkatan,
+            ]);
+        });
 
         return redirect('/admin/mahasiswa')->with('success', 'Data Mahasiswa berhasil ditambahkan!');
     }
@@ -115,7 +118,7 @@ class MahasiswaController extends Controller
 
         if ($request->filled('password')) {
             $mahasiswa->user->update([
-                'password' => bcrypt($request->password),
+                'password' => $request->password,
             ]);
         }
 
@@ -134,7 +137,8 @@ class MahasiswaController extends Controller
     {
         $mahasiswa = Mahasiswa::with('user')->findOrFail($id);
 
-        $mahasiswa->user->delete($mahasiswa->user_id);
+        $mahasiswa->user->delete();
+        $mahasiswa->delete();
 
         return redirect('/admin/mahasiswa')->with('success', 'Data Mahasiswa berhasil dihapus!');
     }

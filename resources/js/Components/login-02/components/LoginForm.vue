@@ -9,8 +9,7 @@ import {
   FieldSeparator,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { reactive } from 'vue';
-import { router, usePage, Link } from '@inertiajs/vue3';
+import { useForm, usePage, Link } from '@inertiajs/vue3';
 
 const props = defineProps({
   class: {
@@ -20,13 +19,13 @@ const props = defineProps({
   },
 });
 
-const post = reactive({
+const form = useForm({
     email : '',
     password : ''
 })
 
 function store() {
-    router.post('/login', post)
+    form.post('/login')
 }
 
 const page = usePage();
@@ -43,7 +42,8 @@ const page = usePage();
       </div>
       <Field>
         <FieldLabel for="email"> Email </FieldLabel>
-        <Input id="email" type="email" placeholder="m@example.com" required v-model="post.email"/>
+        <Input id="email" type="email" placeholder="m@example.com" required v-model="form.email"/>
+        <small v-if="form.errors.email" class="text-red-500 text-xs">{{ form.errors.email }}</small>
       </Field>
       <Field>
         <div class="flex items-center">
@@ -55,7 +55,8 @@ const page = usePage();
             Lupa Password Anda?
           </Link>
         </div>
-        <Input id="password" type="password" required v-model="post.password"/>
+        <Input id="password" type="password" required v-model="form.password"/>
+        <small v-if="form.errors.password" class="text-red-500 text-xs">{{ form.errors.password }}</small>
       </Field>
       <Field>
         <Button type="submit"> Login </Button>

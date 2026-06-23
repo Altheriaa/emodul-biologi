@@ -38,7 +38,7 @@ class QuizController extends Controller
 
         $admin = Auth::user();
 
-        if (! $admin->role == 'admin') {
+        if ($admin->role !== 'admin') {
             return redirect('/admin/evaluasi/bank-soal')->with('error', 'Anda tidak memiliki akses untuk membuat bank soal');
         }
 

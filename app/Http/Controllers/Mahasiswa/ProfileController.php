@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
-use App\Models\Mahasiswa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,28 +10,30 @@ use Inertia\Inertia;
 
 class ProfileController extends Controller
 {
-    public function index() {
+    public function index()
+    {
 
         $mahasiswa = Auth::user();
 
         $user = User::with('mahasiswa')->where('id', $mahasiswa->id)->first();
 
-        if (!$user) {
+        if (! $user) {
             return abort(404);
         }
 
         return Inertia::render('RoleMahasiswa/Settings', [
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
 
         $mahasiswa = Auth::user();
 
         $user = User::with('mahasiswa')->where('id', $mahasiswa->id)->first();
 
-        if (!$user) {
+        if (! $user) {
             return abort(404);
         }
 
@@ -51,7 +52,7 @@ class ProfileController extends Controller
 
         if ($request->filled('password')) {
             $user->update([
-                'password' => bcrypt($request->password),
+                'password' => $request->password,
             ]);
         }
 

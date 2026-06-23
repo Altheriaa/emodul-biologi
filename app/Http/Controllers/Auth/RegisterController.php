@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Mahasiswa;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
-use App\Models\Mahasiswa;
 
 class RegisterController extends Controller
 {
@@ -15,28 +16,30 @@ class RegisterController extends Controller
         return Inertia::render('Auth/Register');
     }
 
-    public function store(Request $request) {
-
+    public function store(Request $request)
+    {
         $request->validate([
             'name' => 'string|required',
             'email' => 'email|required|unique:users,email',
-            'password' => 'min:8|required',
+            'password' => 'min:8|required|confirmed',
             'nim' => 'integer|required|unique:mahasiswa,nim',
             'angkatan' => 'string|required|max:4',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'role' => 'mahasiswa',
-        ]);
+        DB::transaction(function () use ($request) {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'role' => 'mahasiswa',
+            ]);
 
-        Mahasiswa::create([
-            'user_id' => $user->id,
-            'nim' => $request->nim,
-            'angkatan' => $request->angkatan,
-        ]);
+            Mahasiswa::create([
+                'user_id' => $user->id,
+                'nim' => $request->nim,
+                'angkatan' => $request->angkatan,
+            ]);
+        });
 
         return redirect()->route('login')->with('success', 'Registrasi berhasil.');
     }
