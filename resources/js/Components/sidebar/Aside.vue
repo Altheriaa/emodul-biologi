@@ -9,7 +9,8 @@ import {
     Settings,
     LogOut,
     ChevronDown,
-    NotepadText
+    NotepadText,
+    GraduationCap
 } from 'lucide-vue-next';
 
 const props = defineProps({
@@ -26,7 +27,7 @@ const isUrl = (...urls) => {
     if (urls[0] === '/') {
         return currentUrl === '/';
     }
-    return urls.filter(url => url && currentUrl.startsWith(url)).length > 0;
+    return urls.some(url => url && (currentUrl === url || currentUrl.startsWith(url + '/')));
 };
 
 // Dropdown biar ga nutup pas ditekan
@@ -34,6 +35,7 @@ const dropdowns = ref({
     informasiModul: isUrl('/mahasiswa/informasi-modul', '/admin/informasi-modul', '/dosen/informasi-modul'),
     pembelajaran: isUrl('/mahasiswa/pembelajaran', '/admin/pembelajaran', '/dosen/pembelajaran/'),
     evaluasi: isUrl('/mahasiswa/evaluasi', '/admin/evaluasi', '/dosen/evaluasi'),
+    kelolaPengguna: isUrl('/admin/mahasiswa', '/admin/dosen', '/admin/mahasiswa-eligible'),
 });
 
 const toggleDropdown = (key) => {
@@ -73,8 +75,16 @@ const navigation = computed(() => {
                     { label: 'Hasil Quiz', href: '/admin/evaluasi/monitoring' },
                 ]
             },
-            { label: 'Kelola Mahasiswa', href: '/admin/mahasiswa', icon: Users },
-            { label: 'Kelola Dosen', href: '/admin/dosen', icon: Users },
+            { 
+                label: 'Kelola Pengguna', 
+                icon: Users,
+                id: 'kelolaPengguna',
+                children: [
+                    { label: 'Mahasiswa', href: '/admin/mahasiswa' },
+                    { label: 'Dosen', href: '/admin/dosen' },
+                    { label: 'Master Mahasiswa Eligible', href: '/admin/mahasiswa-eligible' },
+                ]
+            },
             { label: 'Settings', href: '/admin/settings', icon: Settings },
         ];
     }
@@ -233,7 +243,7 @@ const navigation = computed(() => {
                                 isUrl(child.href)
                                     ? 'text-green-700 bg-green-50 font-medium'
                                     : 'text-gray-500 hover:text-gray-800 hover:bg-gray-50', 
-                                'block px-3 py-2 rounded-md text-sm transition-colors'
+                                'block px-3 py-2 rounded-md text-sm transition-colors whitespace-normal break-words leading-snug'
                             ]"
                         >
                             {{ child.label }}

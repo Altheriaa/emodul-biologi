@@ -137,6 +137,10 @@ onUnmounted(() => {
                                 <span class="text-gray-500 font-medium shrink-0">Dosen Pengampu</span>
                                 <span class="text-gray-800 font-semibold text-right">Samsuar, S.Pd., M.Pd</span>
                             </div>
+                            <div class="py-2 flex justify-between gap-4">
+                                <span class="text-gray-500 font-medium shrink-0">Penyusun</span>
+                                <span class="text-gray-800 font-semibold text-right">Nakhlatul Faradisa</span>
+                            </div>
                         </div>
                     </div>
                 </div>

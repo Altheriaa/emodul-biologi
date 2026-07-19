@@ -19,6 +19,9 @@ import LoginForm from "@/components/login-02/components/LoginForm.vue"
           <LoginForm />
         </div>
       </div>
+      <div class="text-center text-sm text-gray-500 mt-auto">
+        &copy; 2026 Nakhlatul Faradisa
+      </div>
     </div>
     <div class="bg-muted relative hidden lg:block">
       <img

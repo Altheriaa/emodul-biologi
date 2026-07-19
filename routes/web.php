@@ -199,6 +199,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         Route::resource('/mahasiswa', MahasiswaController::class);
+        Route::resource('/mahasiswa-eligible', \App\Http\Controllers\Admin\MahasiswaEligibleController::class);
         Route::resource('/dosen', DosenController::class);
         Route::get('/settings', [AdminProfileController::class, 'index']);
         Route::put('/settings', [AdminProfileController::class, 'update']);

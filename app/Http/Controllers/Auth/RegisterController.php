@@ -22,8 +22,10 @@ class RegisterController extends Controller
             'name' => 'string|required',
             'email' => 'email|required|unique:users,email',
             'password' => 'min:8|required|confirmed',
-            'nim' => 'integer|required|unique:mahasiswa,nim',
+            'nim' => 'integer|required|unique:mahasiswa,nim|exists:mahasiswa_eligibles,nim',
             'angkatan' => 'string|required|max:4',
+        ], [
+            'nim.exists' => 'NIM Anda tidak eligible untuk mendaftar.',
         ]);
 
         DB::transaction(function () use ($request) {
