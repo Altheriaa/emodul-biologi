@@ -86,9 +86,9 @@ watch(() => page.props.flash, () => {
                             <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
                                 E-Modul Biologi ini disusun oleh Nakhlatul Faradisa, mahasiswa Universitas Abulyatama Aceh, 
                                 sebagai media pembelajaran untuk membantu mahasiswa memahami materi jaringan tumbuhan. Modul ini 
-                                menggunakan pendekatan Project Based Learning (PjBL) yang mendorong pembelajaran aktif, kreatif, 
+                                menggunakan pendekatan <i>Project Based Learning</i> (PjBL) yang mendorong pembelajaran aktif, kreatif, 
                                 dan kontekstual guna meningkatkan kemampuan berpikir kritis, pemecahan masalah, serta kolaborasi. 
-                                Materi disajikan secara sistematis dengan memanfaatkan teknik grafting sebagai sarana untuk memahami 
+                                Materi disajikan secara sistematis dengan memanfaatkan teknik <i>grafting</i> sebagai sarana untuk memahami 
                                 struktur dan fungsi jaringan tumbuhan secara lebih mendalam.
                             </p>
                         </div>
@@ -146,14 +146,14 @@ watch(() => page.props.flash, () => {
                             </div>
                             <div class="py-2 flex flex-col gap-1">
                                 <span class="text-gray-500 font-medium">Tema Proyek</span>
-                                <span class="text-gray-800 font-semibold leading-relaxed">Teknik Grafting Sebagai Eksplorasi Jaringan Tumbuhan</span>
+                                <span class="text-gray-800 font-semibold leading-relaxed">Teknik <i>Grafting</i> Sebagai Eksplorasi Jaringan Tumbuhan</span>
                             </div>
                             <div class="py-2 flex justify-between gap-4">
                                 <span class="text-gray-500 font-medium shrink-0">Dosen Pengampu</span>
                                 <span class="text-gray-800 font-semibold text-right">Samsuar, S.Pd., M.Pd</span>
                             </div>
                             <div class="py-2 flex justify-between gap-4">
-                                <span class="text-gray-500 font-medium shrink-0">Penyusun</span>
+                                <span class="text-gray-500 font-medium shrink-0">Pengembang</span>
                                 <span class="text-gray-800 font-semibold text-right">Nakhlatul Faradisa</span>
                             </div>
                         </div>

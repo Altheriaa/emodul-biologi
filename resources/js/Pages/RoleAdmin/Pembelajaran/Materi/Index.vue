@@ -150,7 +150,7 @@ watch(() => page.props.flash, () => {
                         </Button>
                         <Button variant="outline" @click="OpenEssay(item.id)" class="h-8 px-2 sm:h-9 sm:px-4 border-green-600 text-green-700 hover:bg-green-50 text-[10px] sm:text-sm font-medium">
                             <NotepadText class="w-3.5 h-3.5 sm:w-4 sm:h-4 " />
-                            <span class="inline">Essay</span>
+                            <span class="inline">Quiz</span>
                         </Button>
                     </div>
                 </div>

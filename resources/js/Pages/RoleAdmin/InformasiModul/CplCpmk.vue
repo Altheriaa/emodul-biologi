@@ -58,7 +58,7 @@ import { Check } from 'lucide-vue-next';
                 <hr class="border-gray-200 mt-2 mb-4">
                 <Accordion type="single" collapsible>
                     <AccordionItem value="item-1">
-                        <AccordionTrigger>CPMK 1: Mampu menjelaskan dan mengintegrasikan konsep, prinsip, dan proses anatomi tumbuhan secara komprehensif, meliputi struktur sel, jaringan (dasar, pembuluh, dermal, meristem), organ (akar, batang, daun, bunga, buah, biji), serta proses embriologi tumbuhan secara ilmiah dan logis (CPL-4).</AccordionTrigger>
+                        <AccordionTrigger><span class="text-left">CPMK 1: Mampu menjelaskan dan mengintegrasikan konsep, prinsip, dan proses anatomi tumbuhan secara komprehensif, meliputi struktur sel, jaringan (dasar, pembuluh, dermal, meristem), organ (akar, batang, daun, bunga, buah, biji), serta proses embriologi tumbuhan secara ilmiah dan logis (CPL-4).</span></AccordionTrigger>
                         <AccordionContent>
                             <ul class="list-inside lg:text-xs xl:text-sm text-sm sm:text-base space-y-2 px-2">
                                 <li>
@@ -77,36 +77,36 @@ import { Check } from 'lucide-vue-next';
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-2">
-                        <AccordionTrigger>CPMK 3: Mampu mengaplikasikan konsep anatomi tumbuhan (jaringan tumbuhan) dalam praktik lapangan melalui teknik grafting, serta menganalisis keterkaitan struktur jaringan dengan keberhasilan penyambungan tanaman (CPL-4 & CPL-7).</AccordionTrigger>
+                        <AccordionTrigger><span class="text-left">CPMK 3: Mampu mengaplikasikan konsep anatomi tumbuhan (jaringan tumbuhan) dalam praktik lapangan melalui teknik <i>grafting</i>, serta menganalisis keterkaitan struktur jaringan dengan keberhasilan penyambungan tanaman (CPL-4 & CPL-7).</span></AccordionTrigger>
                         <AccordionContent>
                             <ul class="list-inside lg:text-xs xl:text-sm text-sm sm:text-base space-y-2 px-2">
                                 <li>
-                                    3.1 Menjelaskan prinsip grafting berdasarkan konsep anatomi tumbuhan (khususnya kambium)
+                                    3.1 Menjelaskan prinsip <i>grafting</i> berdasarkan konsep anatomi tumbuhan (khususnya kambium)
                                 </li>
                                 <li>
-                                    3.2 Menerapkan teknik grafting secara tepat dan sistematis
+                                    3.2 Menerapkan teknik <i>grafting</i> secara tepat dan sistematis
                                 </li>
                                 <li>
-                                    3.3 Menganalisis faktor keberhasilan dan kegagalan grafting berdasarkan penyatuan jaringan
+                                    3.3 Menganalisis faktor keberhasilan dan kegagalan <i>grafting</i> berdasarkan penyatuan jaringan
                                 </li>
                                 <li>
-                                    3.4 Mengaitkan hasil grafting dengan konsep struktur dan fungsi anatomi tumbuhan
+                                    3.4 Mengaitkan hasil <i>grafting</i> dengan konsep struktur dan fungsi anatomi tumbuhan
                                 </li>
                             </ul>
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-3">
-                        <AccordionTrigger>CPMK 4: Mampu merancang dan mengembangkan proyek berbasis anatomi tumbuhan (grafting) yang inovatif dengan mempertimbangkan analisis kebutuhan dan potensi kewirausahaan untuk menghasilkan nilai tambah ekonomi, sosial, dan lingkungan (CPL-7).</AccordionTrigger>
+                        <AccordionTrigger><span class="text-left">CPMK 4: Mampu merancang dan mengembangkan proyek berbasis anatomi tumbuhan (<i>grafting</i>) yang inovatif dengan mempertimbangkan analisis kebutuhan dan potensi kewirausahaan untuk menghasilkan nilai tambah ekonomi, sosial, dan lingkungan (CPL-7).</span></AccordionTrigger>
                         <AccordionContent>
                             <ul class="list-inside lg:text-xs xl:text-sm text-sm sm:text-base space-y-2 px-2">
                                 <li>
-                                    4.1 Menganalisis potensi pemanfaatan grafting dalam konteks kebutuhan nyata (ekonomi/lingkungan)
+                                    4.1 Menganalisis potensi pemanfaatan <i>grafting</i> dalam konteks kebutuhan nyata (ekonomi/lingkungan)
                                 </li>
                                 <li>
-                                    4.2 Merancang proyek grafting berbasis inovasi dan analisis kebutuhan
+                                    4.2 Merancang proyek <i>grafting</i> berbasis inovasi dan analisis kebutuhan
                                 </li>
                                 <li>
-                                    4.3 Mengembangkan produk tanaman hasil grafting yang bernilai tambah
+                                    4.3 Mengembangkan produk tanaman hasil <i>grafting</i> yang bernilai tambah
                                 </li>
                                 <li>
                                     4.4 Mengevaluasi kelayakan dan manfaat produk (ekonomi, sosial, lingkungan)
@@ -115,11 +115,11 @@ import { Check } from 'lucide-vue-next';
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-4">
-                        <AccordionTrigger>CPMK 5: Mampu mengomunikasikan hasil pembelajaran (teori, praktikum, dan proyek grafting) dalam bentuk laporan ilmiah, presentasi, dan refleksi secara kolaboratif, sistematis, dan bertanggung jawab (CPL-8).</AccordionTrigger>
+                        <AccordionTrigger><span class="text-left">CPMK 5: Mampu mengomunikasikan hasil pembelajaran (teori, praktikum, dan proyek <i>grafting</i>) dalam bentuk laporan ilmiah, presentasi, dan refleksi secara kolaboratif, sistematis, dan bertanggung jawab (CPL-8).</span></AccordionTrigger>
                         <AccordionContent>
                             <ul class="list-inside lg:text-xs xl:text-sm text-sm sm:text-base space-y-2 px-2">
                                 <li>
-                                    5.1 Menyusun laporan ilmiah hasil praktikum dan proyek grafting secara sistematis
+                                    5.1 Menyusun laporan ilmiah hasil praktikum dan proyek <i>grafting</i> secara sistematis
                                 </li>
                                 <li>
                                     5.2 Menyajikan data dan hasil analisis dalam bentuk visual dan naratif ilmiah

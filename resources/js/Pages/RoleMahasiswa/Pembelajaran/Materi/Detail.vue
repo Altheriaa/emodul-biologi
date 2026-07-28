@@ -117,7 +117,7 @@ const toggleFullScreen = () => {
             <div class="bg-white border border-gray-200 rounded-xl p-5 sm:p-6 shadow-sm">
                 <h2 class="text-xl font-bold text-gray-800 tracking-tight mb-4 flex items-center gap-2">
                     <NotepadText class="w-5 h-5 text-green-600" />
-                    Tugas Essay
+                    Quiz
                 </h2>
 
                 <form @submit.prevent="submitEssay" class="space-y-6">

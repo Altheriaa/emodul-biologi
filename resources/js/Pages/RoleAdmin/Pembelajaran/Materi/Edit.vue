@@ -199,7 +199,7 @@ const submit = () => {
                             </div>
 
                             <div class="space-y-3 col-span-1 sm:col-span-2">
-                                <label class="block text-sm font-medium text-gray-700">Soal Essay</label>
+                                <label class="block text-sm font-medium text-gray-700">Soal Quiz</label>
                                 
                                 <div v-for="(question, index) in form.pertanyaan_essay" :key="index" class="flex gap-2 items-start">
                                     <div class="flex-1">

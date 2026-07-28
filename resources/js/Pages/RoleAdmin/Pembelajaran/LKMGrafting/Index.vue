@@ -118,8 +118,8 @@ watch(() => page.props.flash, () => {
     <Layout>
         <div class="grid grid-cols-1 gap-3 sm:gap-4 mb-2 sm:mb-4">
             <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4 shadow-sm">
-                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">Daftar LKM Grafting</p>
-                <p class="text-xs sm:text-sm text-green-600 mt-1">Daftar LKM yang akan dipelajari pada mata kuliah Grafting</p>
+                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">Daftar LKM <i>Grafting</i></p>
+                <p class="text-xs sm:text-sm text-green-600 mt-1">Daftar LKM yang akan dipelajari pada mata kuliah <i>Grafting</i></p>
                 <!-- <Button variant="outline" @click="CreateMateri" class="text-xs sm:text-sm justify-self-end border-green-600 text-green-700 hover:bg-green-50 mt-3">
                     <Plus class="w-4 h-4 sm:w-2 sm:h-2" />
                     Tambah LKM

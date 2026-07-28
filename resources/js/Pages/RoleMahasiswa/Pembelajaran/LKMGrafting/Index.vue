@@ -98,8 +98,8 @@ watch(() => page.props.flash, () => {
     <Layout>
         <div class="grid grid-cols-1 gap-3 sm:gap-4 mb-2 sm:mb-4">
             <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">
-                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">LKM Grafting</p>
-                <p class="text-xs sm:text-sm text-green-600 mt-1">Daftar LKM Grafting</p>
+                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">LKM <i>Grafting</i></p>
+                <p class="text-xs sm:text-sm text-green-600 mt-1">Daftar LKM <i>Grafting</i></p>
             </div>
         </div>
 

@@ -79,8 +79,8 @@ const openDetail = (id) => {
     <Layout>
         <div class="grid grid-cols-1 gap-3 sm:gap-4 mb-2 sm:mb-4">
             <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4 shadow-sm">
-                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">Daftar LKM Grafting Mahasiswa</p>
-                <p class="text-xs sm:text-sm text-green-600 mt-1">Monitoring pengerjaan Lembar Kerja Mahasiswa (LKM) pada mata kuliah Grafting</p>
+                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">Daftar LKM <i>Grafting</i> Mahasiswa</p>
+                <p class="text-xs sm:text-sm text-green-600 mt-1">Monitoring pengerjaan Lembar Kerja Mahasiswa (LKM) pada mata kuliah <i>Grafting</i></p>
             </div>
         </div>
 

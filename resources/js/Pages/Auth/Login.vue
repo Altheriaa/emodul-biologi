@@ -11,7 +11,7 @@ import LoginForm from "@/components/login-02/components/LoginForm.vue"
           <div class="flex size-6 items-center justify-center rounded-md">
             <img src="/asset/Logo Pals.png" alt="Logo">
           </div>
-          E-Pals.
+          Electronic Plant Anatomy Learning System (E-PALS)
         </a>
       </div>
       <div class="flex flex-1 items-center justify-center">

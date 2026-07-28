@@ -62,8 +62,9 @@ const navigation = computed(() => {
                 icon: BookOpen,
                 id: 'pembelajaran',
                 children: [
-                    { label: 'Materi', href: '/admin/pembelajaran/materi' },
-                    { label: 'LKM-Grafting', href: '/admin/pembelajaran/lkm-grafting' },
+                    { label: 'Materi Pembelajaran', href: '/admin/pembelajaran/materi' },
+                    { label: 'LKM-<i>Grafting</i>', href: '/admin/pembelajaran/lkm-grafting' },
+                    { label: 'Video <i>Grafting</i>', href: 'https://youtu.be/mkKjlcoUSW8?si=Ko0wUBkBeVwdBK8v' },
                 ]
             },
             { 
@@ -106,8 +107,9 @@ const navigation = computed(() => {
                 icon: BookOpen,
                 id: 'pembelajaran',
                 children: [
-                    { label: 'Materi', href: '/dosen/pembelajaran/materi' },
-                    { label: 'LKM-Grafting', href: '/dosen/pembelajaran/lkm-grafting/submissions' },
+                    { label: 'Materi Pembelajaran', href: '/dosen/pembelajaran/materi' },
+                    { label: 'LKM-<i>Grafting</i>', href: '/dosen/pembelajaran/lkm-grafting/submissions' },
+                    { label: 'Video <i>Grafting</i>', href: 'https://youtu.be/mkKjlcoUSW8?si=Ko0wUBkBeVwdBK8v' },
                 ]
             },
             { 
@@ -141,8 +143,9 @@ const navigation = computed(() => {
                 icon: BookOpen,
                 id: 'pembelajaran',
                 children: [
-                    { label: 'Materi', href: '/mahasiswa/pembelajaran/materi' },
-                    { label: 'LKM-Grafting', href: '/mahasiswa/pembelajaran/lkm-grafting' },
+                    { label: 'Materi Pembelajaran', href: '/mahasiswa/pembelajaran/materi' },
+                    { label: 'LKM-<i>Grafting</i>', href: '/mahasiswa/pembelajaran/lkm-grafting' },
+                    { label: 'Video <i>Grafting</i>', href: 'https://youtu.be/mkKjlcoUSW8?si=Ko0wUBkBeVwdBK8v' },
                 ]
             },
             { 
@@ -150,7 +153,7 @@ const navigation = computed(() => {
                 icon: NotepadText,
                 id: 'evaluasi',
                 children: [
-                    { label: 'Quiz', href: '/mahasiswa/evaluasi/quiz' },
+                    { label: 'Soal Evaluasi Akhir', href: '/mahasiswa/evaluasi/quiz' },
                 ]
             },
             { label: 'Settings', href: '/mahasiswa/settings', icon: Settings },
@@ -235,19 +238,29 @@ const navigation = computed(() => {
                         />
                     </button>
                     <div v-show="dropdowns[item.id]" class="mt-0.5 ml-5 pl-3 border-l-1 border-gray-200 space-y-0.5">
-                        <Link 
-                            v-for="child in item.children" 
-                            :key="child.label"
-                            :href="child.href" 
-                            :class="[
-                                isUrl(child.href)
-                                    ? 'text-green-700 bg-green-50 font-medium'
-                                    : 'text-gray-500 hover:text-gray-800 hover:bg-gray-50', 
-                                'block px-3 py-2 rounded-md text-sm transition-colors whitespace-normal break-words leading-snug'
-                            ]"
-                        >
-                            {{ child.label }}
-                        </Link>
+                        <template v-for="child in item.children" :key="child.label">
+                            <a
+                                v-if="child.href.startsWith('http')"
+                                :href="child.href"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="block px-3 py-2 rounded-md text-sm transition-colors whitespace-normal break-words leading-snug text-gray-500 hover:text-gray-800 hover:bg-gray-50"
+                            >
+                                <span v-html="child.label"></span>
+                            </a>
+                            <Link 
+                                v-else
+                                :href="child.href" 
+                                :class="[
+                                    isUrl(child.href)
+                                        ? 'text-green-700 bg-green-50 font-medium'
+                                        : 'text-gray-500 hover:text-gray-800 hover:bg-gray-50', 
+                                    'block px-3 py-2 rounded-md text-sm transition-colors whitespace-normal break-words leading-snug'
+                                ]"
+                            >
+                                <span v-html="child.label"></span>
+                            </Link>
+                        </template>
                     </div>
                 </div>
             </template>

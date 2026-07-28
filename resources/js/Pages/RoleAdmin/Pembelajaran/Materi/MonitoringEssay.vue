@@ -67,7 +67,7 @@ const goBack = () => {
             <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
                 <h3 class="font-semibold text-sm text-gray-800 mb-4 flex items-center gap-2">
                     <NotepadText class="w-4 h-4 text-green-600" />
-                    Daftar Soal Essay:
+                    Daftar Soal Quiz:
                 </h3>
                 <div v-if="materi.essay_questions && materi.essay_questions.length > 0" class="space-y-3">
                     <div v-for="(question, index) in materi.essay_questions" :key="question.id" class="flex gap-3">
@@ -78,7 +78,7 @@ const goBack = () => {
                     </div>
                 </div>
                 <div v-else class="text-sm text-gray-500 italic">
-                    Tidak ada soal essay untuk materi ini.
+                    Tidak ada quiz untuk materi ini.
                 </div>
             </div>
 

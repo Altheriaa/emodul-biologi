@@ -7,7 +7,7 @@ import { Check } from 'lucide-vue-next';
     <Layout>
         <div class="grid grid-cols-1 gap-3 sm:gap-4 mb-4 sm:mb-6">
             <div class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4">
-                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">E-Plant Anatomy Learning System (E-PALS)</p>
+                <p class="text-lg sm:text-2xl font-bold text-gray-800 tracking-tight">Electronic Plant Anatomy Learning System (E-PALS)</p>
                 <p class="text-xs sm:text-sm text-green-600 mt-1">Berisi petunjuk modul, deskripsi modul, tujuan modul</p>
             </div>
         </div>
@@ -18,9 +18,9 @@ import { Check } from 'lucide-vue-next';
                 <p class="text-xs sm:text-sm text-gray-800 mt-2">
                     E-Modul Biologi ini disusun oleh Nakhlatul Faradisa, mahasiswa Universitas Abulyatama Aceh, 
                     sebagai media pembelajaran untuk membantu mahasiswa memahami materi jaringan tumbuhan. Modul ini 
-                    menggunakan pendekatan Project Based Learning (PjBL) yang mendorong pembelajaran aktif, kreatif, 
+                    menggunakan pendekatan <i>Project Based Learning</i> (PjBL) yang mendorong pembelajaran aktif, kreatif, 
                     dan kontekstual guna meningkatkan kemampuan berpikir kritis, pemecahan masalah, serta kolaborasi. 
-                    Materi disajikan secara sistematis dengan memanfaatkan teknik grafting sebagai sarana untuk memahami 
+                    Materi disajikan secara sistematis dengan memanfaatkan teknik <i>grafting</i> sebagai sarana untuk memahami 
                     struktur dan fungsi jaringan tumbuhan secara lebih mendalam.</p>
             </div>
             <div class="md:col-span-3 md:row-span-2 md:col-start-1 md:row-start-4 bg-white border border-gray-200 rounded-xl p-4 sm:p-5">
@@ -29,7 +29,7 @@ import { Check } from 'lucide-vue-next';
                 <ol class="lg:text-xs xl:text-sm text-sm sm:text-base space-y-2 px-2">
                     <li class="flex items-start gap-2">
                         <Check class="w-4 h-4 text-green-500 shrink-0 mt-0.5" /> 
-                        Mendukung Pembelajaran Berbasis Proyek ( Projek Based Learning /PjBL)
+                        Mendukung Pembelajaran Berbasis Proyek (<i>Project Based Learning</i>/PjBL)
                     </li>
                     <li class="flex items-start gap-2">
                         <Check class="w-4 h-4 text-green-500 shrink-0 mt-0.5" /> 
@@ -90,7 +90,7 @@ import { Check } from 'lucide-vue-next';
                         </div>
                         <div class="pb-5">
                             <p class="text-sm font-semibold text-gray-800">3. Kerjakan Lembar Kerja (LKM)</p>
-                            <p class="text-xs text-gray-500 mt-0.5">Selesaikan LKM-Grafting sebagai evaluasi pemahaman.</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Selesaikan LKM-<i>Grafting</i> sebagai evaluasi pemahaman.</p>
                         </div>
                     </div>
 
@@ -105,6 +105,19 @@ import { Check } from 'lucide-vue-next';
                             <p class="text-sm font-semibold text-gray-800">4. Ikuti Evaluasi Akhir</p>
                             <p class="text-xs text-gray-500 mt-0.5">Kerjakan kuis interaktif di akhir setiap bab.</p>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Video Petunjuk Penggunaan -->
+                <div class="mt-5 pt-4 border-t border-gray-100">
+                    <p class="text-xs font-semibold text-gray-700 mb-2">Video Petunjuk Penggunaan:</p>
+                    <div class="relative w-full overflow-hidden rounded-xl border border-gray-200 shadow-sm aspect-video">
+                        <iframe 
+                            src="https://drive.google.com/file/d/1YiMLKKyqiD95oPH6qHkGECQFCon6Xfxu/preview" 
+                            class="absolute top-0 left-0 w-full h-full border-0"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen
+                        ></iframe>
                     </div>
                 </div>
             </div>

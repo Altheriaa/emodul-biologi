@@ -61,8 +61,8 @@ const form = useForm({
     specs: props.submission.p1_specs?.length > 0
         ? props.submission.p1_specs
         : [
-            { variabel: 'Nama Spesies Batang Bawah (rootstock)', tanaman_a: '', tanaman_b: '', alasan_pemilihan: '' },
-            { variabel: 'Nama Spesies Batang Atas (scion)', tanaman_a: '', tanaman_b: '', alasan_pemilihan: '' },
+            { variabel: 'Nama Spesies Batang Bawah (<i>rootstock</i>)', tanaman_a: '', tanaman_b: '', alasan_pemilihan: '' },
+            { variabel: 'Nama Spesies Batang Atas (<i>scion</i>)', tanaman_a: '', tanaman_b: '', alasan_pemilihan: '' },
             { variabel: 'Usia Tanaman', tanaman_a: '', tanaman_b: '', alasan_pemilihan: '' },
             { variabel: 'Diameter Batang', tanaman_a: '', tanaman_b: '', alasan_pemilihan: '' },
             { variabel: 'Kondisi Kambium', tanaman_a: '', tanaman_b: '', alasan_pemilihan: '' },
@@ -236,10 +236,10 @@ const form = useForm({
         ? props.submission.p4_self_assessments
         : [
             { aspek: 'Pemahaman konsep jaringan tumbuhan', skor: null, catatan: '' },
-            { aspek: 'Pemahaman prinsip dasar grafting', skor: null, catatan: '' },
+            { aspek: 'Pemahaman prinsip dasar <i>grafting</i>', skor: null, catatan: '' },
             { aspek: 'Kemampuan memilih tanaman yang kompatibel', skor: null, catatan: '' },
-            { aspek: 'Keterampilan melaksanakan teknik grafting', skor: null, catatan: '' },
-            { aspek: 'Kemampuan memonitor perkembangan grafting', skor: null, catatan: '' },
+            { aspek: 'Keterampilan melaksanakan teknik <i>grafting</i>', skor: null, catatan: '' },
+            { aspek: 'Kemampuan memonitor perkembangan <i>grafting</i>', skor: null, catatan: '' },
             { aspek: 'Kemampuan menganalisis keberhasilan/kegagalan', skor: null, catatan: '' },
             { aspek: 'Kemampuan menghubungkan teori anatomi dengan praktik', skor: null, catatan: '' },
             { aspek: 'Kemampuan bekerja secara mandiri dan kelompok', skor: null, catatan: '' },
@@ -495,17 +495,17 @@ watch(() => page.props.flash, () => {
                     <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
                         <div class="p-5 border-b border-gray-100 bg-gray-50">
                             <h2 class="text-lg font-bold text-gray-800">Sintak 1: Pertanyaan Esensial</h2>
-                            <p class="text-xs text-gray-500 mt-1">Jawablah pertanyaan-pertanyaan berikut berdasarkan pemahaman Anda tentang teknik grafting dan jaringan tumbuhan.</p>
+                            <p class="text-xs text-gray-500 mt-1">Jawablah pertanyaan-pertanyaan berikut berdasarkan pemahaman Anda tentang teknik <i>grafting</i> dan jaringan tumbuhan.</p>
                         </div>
                         <div class="p-5 space-y-6">
                             <!-- Skenario Pemantik Box -->
                             <div class="border-2 border-green-300 rounded-xl p-5 bg-green-50/10">
                                 <h3 class="text-sm font-bold text-gray-800 tracking-wider text-center uppercase mb-3">Skenario Pemantik</h3>
                                 <p class="text-sm text-gray-700 leading-relaxed text-justify mb-4">
-                                    Bayangkan Anda adalah seorang petani buah yang ingin menghasilkan mangga harum manis dengan sistem perakaran yang kuat dan tahan terhadap penyakit. Salah satu cara yang dapat ditempuh adalah dengan teknik grafting menyambungkan batang mangga harum manis (scion) ke batang pohon kuwini yang kuat (rootstock).
+                                    Bayangkan Anda adalah seorang petani buah yang ingin menghasilkan mangga harum manis dengan sistem perakaran yang kuat dan tahan terhadap penyakit. Salah satu cara yang dapat ditempuh adalah dengan teknik <i>grafting</i> menyambungkan batang mangga harum manis (<i>scion</i>) ke batang pohon kuwini yang kuat (<i>rootstock</i>).
                                 </p>
                                 <p class="text-sm text-green-600 font-medium leading-relaxed text-justify">
-                                    Namun, mengapa tidak semua grafting berhasil? Apa yang terjadi di tingkat jaringan saat dua batang disambungkan? Bagaimana kambium berperan? Faktor lingkungan apa yang memengaruhi proses ini?
+                                    Namun, mengapa tidak semua <i>grafting</i> berhasil? Apa yang terjadi di tingkat jaringan saat dua batang disambungkan? Bagaimana kambium berperan? Faktor lingkungan apa yang memengaruhi proses ini?
                                 </p>
                             </div>
 
@@ -517,7 +517,7 @@ watch(() => page.props.flash, () => {
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q1:</span>
-                                    Bagaimana jenis tumbuhan yang cocok untuk grafting sehingga grafting yang dilakukan berhasil?
+                                    Bagaimana jenis tumbuhan yang cocok untuk <i>grafting</i> sehingga <i>grafting</i> yang dilakukan berhasil?
                                 </label>
                                 <textarea 
                                     v-model="form.questions.q1_jenis_tumbuhan_cocok" 
@@ -529,7 +529,7 @@ watch(() => page.props.flash, () => {
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q2:</span>
-                                    Jelaskan jaringan-jaringan tumbuhan yang terlibat dalam teknik grafting!
+                                    Jelaskan jaringan-jaringan tumbuhan yang terlibat dalam teknik <i>grafting</i>!
                                 </label>
                                 <textarea 
                                     v-model="form.questions.q2_jaringan_terlibat" 
@@ -541,7 +541,7 @@ watch(() => page.props.flash, () => {
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q3:</span>
-                                    Bagaimana pemilihan batang bawah yang tepat dapat menentukan pertumbuhan dan produktivitas tanaman yang di grafting?
+                                    Bagaimana pemilihan batang bawah yang tepat dapat menentukan pertumbuhan dan produktivitas tanaman yang di-<i>grafting</i>?
                                 </label>
                                 <textarea 
                                     v-model="form.questions.q3_pemilihan_batang_bawah" 
@@ -553,7 +553,7 @@ watch(() => page.props.flash, () => {
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q4:</span>
-                                    Bagaimana struktur jaringan kambium berperan dalam proses grafting?
+                                    Bagaimana struktur jaringan kambium berperan dalam proses <i>grafting</i>?
                                 </label>
                                 <textarea 
                                     v-model="form.questions.q4_peran_kambium" 
@@ -565,7 +565,7 @@ watch(() => page.props.flash, () => {
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q5:</span>
-                                    Bagaimana kondisi lingkungan, seperti suhu dan kelembapan, mempengaruhi keberhasilan grafting?
+                                    Bagaimana kondisi lingkungan, seperti suhu dan kelembapan, mempengaruhi keberhasilan <i>grafting</i>?
                                 </label>
                                 <textarea 
                                     v-model="form.questions.q5_kondisi_lingkungan" 
@@ -581,7 +581,7 @@ watch(() => page.props.flash, () => {
                     <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
                         <div class="p-5 border-b border-gray-100 bg-gray-50">
                             <h2 class="text-lg font-bold text-gray-800">Sintak 2: Perencanaan Proyek - Pemilihan Tanaman</h2>
-                            <p class="text-xs text-gray-500 mt-1">Bandingkan dua jenis tanaman yang akan digunakan untuk grafting. Isilah data berikut untuk Tanaman A dan Tanaman B.</p>
+                            <p class="text-xs text-gray-500 mt-1">Bandingkan dua jenis tanaman yang akan digunakan untuk <i>grafting</i>. Isilah data berikut untuk Tanaman A dan Tanaman B.</p>
                         </div>
                         <div class="p-5 overflow-x-auto">
                             <table class="w-full text-left border-collapse border border-gray-200">
@@ -595,8 +595,7 @@ watch(() => page.props.flash, () => {
                                 </thead>
                                 <tbody>
                                     <tr v-for="(spec, index) in form.specs" :key="index">
-                                        <td class="p-3 border border-gray-200 text-sm font-medium text-gray-700 bg-gray-50/50">
-                                            {{ spec.variabel }}
+                                        <td class="p-3 border border-gray-200 text-sm font-medium text-gray-700 bg-gray-50/50" v-html="spec.variabel">
                                         </td>
                                         <td class="p-3 border border-gray-200">
                                             <textarea 
@@ -632,7 +631,7 @@ watch(() => page.props.flash, () => {
                     <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
                         <div class="p-5 border-b border-gray-100 bg-gray-50">
                             <h2 class="text-lg font-bold text-gray-800">Persiapan Alat dan Bahan</h2>
-                            <p class="text-xs text-gray-500 mt-1">Uraikan alat dan bahan apa saja yang digunakan untuk melakukan grafting tanaman!</p>
+                            <p class="text-xs text-gray-500 mt-1">Uraikan alat dan bahan apa saja yang digunakan untuk melakukan <i>grafting</i> tanaman!</p>
                         </div>
                         <div class="p-5 overflow-x-auto">
                             <table class="w-full text-left border-collapse border border-gray-200">
@@ -673,8 +672,8 @@ watch(() => page.props.flash, () => {
                     <!-- Sintak 3: Prosedur Kerja -->
                     <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
                         <div class="p-5 border-b border-gray-100 bg-gray-50">
-                            <h2 class="text-lg font-bold text-gray-800">Sintak 3: Prosedur Kerja Grafting</h2>
-                            <p class="text-xs text-gray-500 mt-1">Uraikan tahap-tahap yang dilaksanakan untuk melakukan grafting dari awal sampai akhir!</p>
+                            <h2 class="text-lg font-bold text-gray-800">Sintak 3: Prosedur Kerja <i>Grafting</i></h2>
+                            <p class="text-xs text-gray-500 mt-1">Uraikan tahap-tahap yang dilaksanakan untuk melakukan <i>grafting</i> dari awal sampai akhir!</p>
                         </div>
                         <div class="p-5 overflow-x-auto">
                             <table class="w-full text-left border-collapse border border-gray-200">
@@ -755,14 +754,14 @@ watch(() => page.props.flash, () => {
                     <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
                         <div class="p-5 border-b border-gray-100 bg-gray-50">
                             <h2 class="text-lg font-bold text-gray-800">Sintak 4: Persiapan Alat dan Bahan</h2>
-                            <p class="text-xs text-gray-500 mt-1">Tuliskan alat dan bahan yang digunakan untuk pelaksanaan grafting!</p>
+                            <p class="text-xs text-gray-500 mt-1">Tuliskan alat dan bahan yang digunakan untuk pelaksanaan <i>grafting</i>!</p>
                         </div>
                         <div class="p-5 space-y-6">
                             <!-- Petunjuk Pelaksanaan Box -->
                             <div class="border-2 border-green-300 rounded-xl p-5 bg-green-50/10">
                                 <h3 class="text-sm font-bold text-gray-800 tracking-wider mb-2">Petunjuk Pelaksanaan</h3>
                                 <p class="text-sm text-gray-700 leading-relaxed text-justify">
-                                    Pada pertemuan ini, Anda akan melaksanakan teknik grafting sesuai dengan rancangan yang telah dibuat pada Pertemuan 1. Ikuti prosedur dengan teliti, dokumentasikan setiap langkah, dan catat semua pengamatan secara jujur dan sistematis.
+                                    Pada pertemuan ini, Anda akan melaksanakan teknik <i>grafting</i> sesuai dengan rancangan yang telah dibuat pada Pertemuan 1. Ikuti prosedur dengan teliti, dokumentasikan setiap langkah, dan catat semua pengamatan secara jujur dan sistematis.
                                 </p>
                             </div>
 
@@ -798,15 +797,15 @@ watch(() => page.props.flash, () => {
                     <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
                         <div class="p-5 border-b border-gray-100 bg-gray-50">
                             <h2 class="text-lg font-bold text-gray-800">Identifikasi Spesimen Tanaman</h2>
-                            <p class="text-xs text-gray-500 mt-1">Sebutkan dan identifikasi jenis tumbuhan yang digunakan untuk grafting!</p>
+                            <p class="text-xs text-gray-500 mt-1">Sebutkan dan identifikasi jenis tumbuhan yang digunakan untuk <i>grafting</i>!</p>
                         </div>
                         <div class="p-5 overflow-x-auto">
                             <table class="w-full text-left border-collapse border border-gray-200">
                                 <thead>
                                     <tr class="bg-gray-50 text-sm text-gray-600">
                                         <th class="p-3 border border-gray-200 font-semibold w-1/5">Keterangan</th>
-                                        <th class="p-3 border border-gray-200 font-semibold w-1/4">Batang Bawah (Rootstock)</th>
-                                        <th class="p-3 border border-gray-200 font-semibold w-1/4">Batang Atas (Scion)</th>
+                                        <th class="p-3 border border-gray-200 font-semibold w-1/4">Batang Bawah (<i>Rootstock</i>)</th>
+                                        <th class="p-3 border border-gray-200 font-semibold w-1/4">Batang Atas (<i>Scion</i>)</th>
                                         <th class="p-3 border border-gray-200 font-semibold w-1/4">Alasan</th>
                                     </tr>
                                 </thead>
@@ -848,8 +847,8 @@ watch(() => page.props.flash, () => {
                     <!-- Prosedur Pelaksanaan -->
                     <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
                         <div class="p-5 border-b border-gray-100 bg-gray-50">
-                            <h2 class="text-lg font-bold text-gray-800">Prosedur Pelaksanaan Grafting</h2>
-                            <p class="text-xs text-gray-500 mt-1">Uraikan prosedur pelaksanaan grafting beserta kondisi jaringan yang teramati!</p>
+                            <h2 class="text-lg font-bold text-gray-800">Prosedur Pelaksanaan <i>Grafting</i></h2>
+                            <p class="text-xs text-gray-500 mt-1">Uraikan prosedur pelaksanaan <i>grafting</i> beserta kondisi jaringan yang teramati!</p>
                         </div>
                         <div class="p-5 overflow-x-auto">
                             <table class="w-full text-left border-collapse border border-gray-200">
@@ -924,13 +923,13 @@ watch(() => page.props.flash, () => {
                     <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
                         <div class="p-5 border-b border-gray-100 bg-gray-50">
                             <h2 class="text-lg font-bold text-gray-800">Pertanyaan Esensial</h2>
-                            <p class="text-xs text-gray-500 mt-1">Jawablah pertanyaan berikut berdasarkan pengalaman pelaksanaan grafting Anda!</p>
+                            <p class="text-xs text-gray-500 mt-1">Jawablah pertanyaan berikut berdasarkan pengalaman pelaksanaan <i>grafting</i> Anda!</p>
                         </div>
                         <div class="p-5 space-y-6">
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q1:</span>
-                                    Mengapa sambungan grafting harus ditutup rapat setelah penyambungan dilakukan?
+                                    Mengapa sambungan <i>grafting</i> harus ditutup rapat setelah penyambungan dilakukan?
                                 </label>
                                 <textarea v-model="form.p2questions.q1_ditutup_rapat" :disabled="isReadOnly" class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" rows="3" placeholder="Jawaban Anda..."></textarea>
                             </div>
@@ -944,42 +943,42 @@ watch(() => page.props.flash, () => {
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q3:</span>
-                                    Mengapa lokasi penyimpanan tanaman setelah grafting perlu diperhatikan?
+                                    Mengapa lokasi penyimpanan tanaman setelah <i>grafting</i> perlu diperhatikan?
                                 </label>
                                 <textarea v-model="form.p2questions.q3_lokasi_penyimpanan" :disabled="isReadOnly" class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" rows="3" placeholder="Jawaban Anda..."></textarea>
                             </div>
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q4:</span>
-                                    Apa yang terjadi jika kekuatan sambungan lemah pada tanaman hasil grafting?
+                                    Apa yang terjadi jika kekuatan sambungan lemah pada tanaman hasil <i>grafting</i>?
                                 </label>
                                 <textarea v-model="form.p2questions.q4_kekuatan_lemah" :disabled="isReadOnly" class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" rows="3" placeholder="Jawaban Anda..."></textarea>
                             </div>
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q5:</span>
-                                    Apa indikator awal yang menunjukkan keberhasilan atau kegagalan grafting pada minggu pertama?
+                                    Apa indikator awal yang menunjukkan keberhasilan atau kegagalan <i>grafting</i> pada minggu pertama?
                                 </label>
                                 <textarea v-model="form.p2questions.q5_keberhasilan_kegagalan" :disabled="isReadOnly" class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" rows="3" placeholder="Jawaban Anda..."></textarea>
                             </div>
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q6:</span>
-                                    Bagaimana peran xilem dan floem dalam mendukung keberhasilan grafting?
+                                    Bagaimana peran xilem dan floem dalam mendukung keberhasilan <i>grafting</i>?
                                 </label>
                                 <textarea v-model="form.p2questions.q6_peran_xilem" :disabled="isReadOnly" class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" rows="3" placeholder="Jawaban Anda..."></textarea>
                             </div>
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q7:</span>
-                                    Bagaimana peran jaringan epidermis dalam melindungi area sambungan grafting?
+                                    Bagaimana peran jaringan epidermis dalam melindungi area sambungan <i>grafting</i>?
                                 </label>
                                 <textarea v-model="form.p2questions.q7_peran_epidermis" :disabled="isReadOnly" class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" rows="3" placeholder="Jawaban Anda..."></textarea>
                             </div>
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q8:</span>
-                                    Mengapa aktivitas jaringan meristem penting dalam proses penyembuhan grafting?
+                                    Mengapa aktivitas jaringan meristem penting dalam proses penyembuhan <i>grafting</i>?
                                 </label>
                                 <textarea v-model="form.p2questions.q8_aktivitas_meristem" :disabled="isReadOnly" class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" rows="3" placeholder="Jawaban Anda..."></textarea>
                             </div>
@@ -996,14 +995,14 @@ watch(() => page.props.flash, () => {
                     <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
                         <div class="p-5 border-b border-gray-100 bg-gray-50">
                             <h2 class="text-lg font-bold text-gray-800">Sintak 5: Pengamatan Pertumbuhan Tunas dan Daun</h2>
-                            <p class="text-xs text-gray-500 mt-1">Amati dan catat perkembangan tunas serta daun pada tanaman hasil grafting.</p>
+                            <p class="text-xs text-gray-500 mt-1">Amati dan catat perkembangan tunas serta daun pada tanaman hasil <i>grafting</i>.</p>
                         </div>
                         <div class="p-5 space-y-6">
                             <!-- Tujuan Pertemuan Ini Box -->
                             <div class="border-2 border-green-300 rounded-xl p-5 bg-green-50/10">
                                 <h3 class="text-sm font-bold text-gray-800 tracking-wider mb-2">Tujuan Pertemuan Ini</h3>
                                 <p class="text-sm text-gray-700 leading-relaxed text-justify">
-                                    Pada pertemuan ini, Anda akan mengamati dan mendokumentasikan perkembangan tanaman hasil grafting yang telah dilakukan pada Pertemuan 2. Amati secara cermat setiap perubahan yang terjadi, baik pada scion, rootstock, maupun sambungan antar keduanya. Data yang dikumpulkan akan menjadi dasar analisis pada Pertemuan 4.
+                                    Pada pertemuan ini, Anda akan mengamati dan mendokumentasikan perkembangan tanaman hasil <i>grafting</i> yang telah dilakukan pada Pertemuan 2. Amati secara cermat setiap perubahan yang terjadi, baik pada <i>scion</i>, <i>rootstock</i>, maupun sambungan antar keduanya. Data yang dikumpulkan akan menjadi dasar analisis pada Pertemuan 4.
                                 </p>
                             </div>
 
@@ -1047,7 +1046,7 @@ watch(() => page.props.flash, () => {
                     <!-- Pengamatan Kondisi Batang Atas (Scion) -->
                     <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
                         <div class="p-5 border-b border-gray-100 bg-gray-50">
-                            <h2 class="text-lg font-bold text-gray-800">Pengamatan Kondisi Batang Atas (Scion)</h2>
+                            <h2 class="text-lg font-bold text-gray-800">Pengamatan Kondisi Batang Atas (<i>Scion</i>)</h2>
                         </div>
                         <div class="p-5 overflow-x-auto">
                             <table class="w-full text-left border-collapse border border-gray-200">
@@ -1120,7 +1119,7 @@ watch(() => page.props.flash, () => {
                     <!-- Pengamatan Kondisi Batang Bawah (Rootstock) -->
                     <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
                         <div class="p-5 border-b border-gray-100 bg-gray-50">
-                            <h2 class="text-lg font-bold text-gray-800">Pengamatan Kondisi Batang Bawah (Rootstock)</h2>
+                            <h2 class="text-lg font-bold text-gray-800">Pengamatan Kondisi Batang Bawah (<i>Rootstock</i>)</h2>
                         </div>
                         <div class="p-5 overflow-x-auto">
                             <table class="w-full text-left border-collapse border border-gray-200">
@@ -1239,7 +1238,7 @@ watch(() => page.props.flash, () => {
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q1:</span>
-                                    Apakah grafting yang dilakukan berhasil? Jelaskan!
+                                    Apakah <i>grafting</i> yang dilakukan berhasil? Jelaskan!
                                 </label>
                                 <textarea v-model="form.p3questions.q1_apakah_berhasil" :disabled="isReadOnly" class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" rows="3" placeholder="Jawaban Anda..."></textarea>
                             </div>
@@ -1253,7 +1252,7 @@ watch(() => page.props.flash, () => {
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q3:</span>
-                                    Mengapa tunas baru bisa muncul dari batang atas setelah grafting berhasil?
+                                    Mengapa tunas baru bisa muncul dari batang atas setelah <i>grafting</i> berhasil?
                                 </label>
                                 <textarea v-model="form.p3questions.q3_tunas_baru_muncul" :disabled="isReadOnly" class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" rows="3" placeholder="Jawaban Anda..."></textarea>
                             </div>
@@ -1267,7 +1266,7 @@ watch(() => page.props.flash, () => {
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q5:</span>
-                                    Apa faktor anatomi yang mungkin menyebabkan kegagalan grafting pada tanaman Anda?
+                                    Apa faktor anatomi yang mungkin menyebabkan kegagalan <i>grafting</i> pada tanaman Anda?
                                 </label>
                                 <textarea v-model="form.p3questions.q5_faktor_penyebab_gagal" :disabled="isReadOnly" class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" rows="3" placeholder="Jawaban Anda..."></textarea>
                             </div>
@@ -1283,15 +1282,15 @@ watch(() => page.props.flash, () => {
                     <!-- Analisis Keberhasilan -->
                     <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
                         <div class="p-5 border-b border-gray-100 bg-gray-50">
-                            <h1 class="text-xl font-bold text-gray-800">Sintak 6: Analisis Keberhasilan Tanaman Hasil Grafting</h1>
-                            <p class="text-xs text-gray-500 mt-1">Analisis keberhasilan tanaman grafting Anda berdasarkan variabel-variabel berikut.</p>
+                            <h1 class="text-xl font-bold text-gray-800">Sintak 6: Analisis Keberhasilan Tanaman Hasil <i>Grafting</i></h1>
+                            <p class="text-xs text-gray-500 mt-1">Analisis keberhasilan tanaman <i>grafting</i> Anda berdasarkan variabel-variabel berikut.</p>
                         </div>
                         <div class="p-5 space-y-6">
                             <!-- Tujuan Pertemuan Ini Box -->
                             <div class="border-2 border-green-300 rounded-xl p-5 bg-green-50/10">
                                 <h3 class="text-sm font-bold text-gray-800 tracking-wider mb-2">Tujuan Pertemuan Ini</h3>
                                 <p class="text-sm text-gray-700 leading-relaxed text-justify">
-                                    Pada pertemuan akhir ini, kelompok Anda akan menganalisis secara menyeluruh keberhasilan proyek grafting, mempresentasikan hasil proyek kepada kelas, dan merefleksikan proses pembelajaran yang telah dilalui. Sintak ini bertujuan untuk mengintegrasikan pengetahuan anatomi tumbuhan dengan pengalaman praktis grafting.
+                                    Pada pertemuan akhir ini, kelompok Anda akan menganalisis secara menyeluruh keberhasilan proyek <i>grafting</i>, mempresentasikan hasil proyek kepada kelas, dan merefleksikan proses pembelajaran yang telah dilalui. Sintak ini bertujuan untuk mengintegrasikan pengetahuan anatomi tumbuhan dengan pengalaman praktis <i>grafting</i>.
                                 </p>
                             </div>
 
@@ -1332,35 +1331,35 @@ watch(() => page.props.flash, () => {
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q1:</span>
-                                    Apa tujuan dilakukan grafting dan bagaimana kaitannya dengan anatomi tumbuhan?
+                                    Apa tujuan dilakukan <i>grafting</i> dan bagaimana kaitannya dengan anatomi tumbuhan?
                                 </label>
                                 <textarea v-model="form.deepQuestions.q1_tujuan_grafting" :disabled="isReadOnly" class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" rows="3" placeholder="Jawaban Anda..."></textarea>
                             </div>
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q2:</span>
-                                    Bagaimana karakteristik anatomi batang yang mempengaruhi keberhasilan grafting antara batang bawah dengan batang atas?
+                                    Bagaimana karakteristik anatomi batang yang mempengaruhi keberhasilan <i>grafting</i> antara batang bawah dengan batang atas?
                                 </label>
                                 <textarea v-model="form.deepQuestions.q2_karakteristik_anatomi" :disabled="isReadOnly" class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" rows="3" placeholder="Jawaban Anda..."></textarea>
                             </div>
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q3:</span>
-                                    Mengapa kesejajaran jaringan kambium sangat penting dalam teknik grafting?
+                                    Mengapa kesejajaran jaringan kambium sangat penting dalam teknik <i>grafting</i>?
                                 </label>
                                 <textarea v-model="form.deepQuestions.q3_kesejajaran_kambium" :disabled="isReadOnly" class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" rows="3" placeholder="Jawaban Anda..."></textarea>
                             </div>
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q4:</span>
-                                    Apa faktor anatomi yang menyebabkan ketidakcocokan (inkompatibilitas) antara dua spesies yang dicoba untuk digrafting?
+                                    Apa faktor anatomi yang menyebabkan ketidakcocokan (inkompatibilitas) antara dua spesies yang dicoba untuk di-<i>grafting</i>?
                                 </label>
                                 <textarea v-model="form.deepQuestions.q4_faktor_anatomi_inkompatibilitas" :disabled="isReadOnly" class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" rows="3" placeholder="Jawaban Anda..."></textarea>
                             </div>
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-gray-800 flex gap-2">
                                     <span class="text-green-600">Q5:</span>
-                                    Bagaimana tumbuhan dapat pulih pada tempat terjadi grafting (proses penyembuhan)?
+                                    Bagaimana tumbuhan dapat pulih pada tempat terjadi <i>grafting</i> (proses penyembuhan)?
                                 </label>
                                 <textarea v-model="form.deepQuestions.q5_proses_penyembuhan" :disabled="isReadOnly" class="p-4 w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-600" rows="3" placeholder="Jawaban Anda..."></textarea>
                             </div>
@@ -1384,8 +1383,7 @@ watch(() => page.props.flash, () => {
                                 </thead>
                                 <tbody>
                                     <tr v-for="(assessment, index) in form.selfAssessments" :key="index">
-                                        <td class="p-3 border border-gray-200 text-sm font-medium text-gray-700 bg-gray-50/50">
-                                            {{ assessment.aspek }}
+                                        <td class="p-3 border border-gray-200 text-sm font-medium text-gray-700 bg-gray-50/50" v-html="assessment.aspek">
                                         </td>
                                         <td class="p-3 border border-gray-200 text-center">
                                             <div class="flex justify-center gap-1">

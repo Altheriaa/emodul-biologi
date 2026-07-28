@@ -33,7 +33,7 @@ const submit = () => {
           <div class="flex size-6 items-center justify-center rounded-md">
             <img src="/asset/Logo Pals.png" alt="Logo">
           </div>
-          E-Plans.
+          Electronic Plant Anatomy Learning System (E-PALS)
         </a>
       </div>
       <div class="flex flex-1 items-center justify-center">

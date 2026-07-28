@@ -23,7 +23,7 @@ const statusColor = (quiz) => {
         <div class="mb-6">
             <div class="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                    <p class="text-xl sm:text-2xl font-bold text-gray-800 tracking-tight">Evaluasi Quiz</p>
+                    <p class="text-xl sm:text-2xl font-bold text-gray-800 tracking-tight">Evaluasi Akhir</p>
                     <p class="text-xs sm:text-sm text-green-600 mt-1">Kerjakan quiz sebagai bagian dari evaluasi akhir pembelajaran</p>
                 </div>
                 <button @click="router.visit('/mahasiswa/evaluasi/quiz/history')"
