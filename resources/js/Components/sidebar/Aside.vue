@@ -65,6 +65,7 @@ const navigation = computed(() => {
                     { label: 'Materi Pembelajaran', href: '/admin/pembelajaran/materi' },
                     { label: 'LKM-<i>Grafting</i>', href: '/admin/pembelajaran/lkm-grafting' },
                     { label: 'Video <i>Grafting</i>', href: 'https://youtu.be/mkKjlcoUSW8?si=Ko0wUBkBeVwdBK8v' },
+                    { label: 'Format Laporan', href: '/asset/Template Laporan Praktikum Grafting Tumbuhan.docx', download: true },
                 ]
             },
             { 
@@ -110,6 +111,7 @@ const navigation = computed(() => {
                     { label: 'Materi Pembelajaran', href: '/dosen/pembelajaran/materi' },
                     { label: 'LKM-<i>Grafting</i>', href: '/dosen/pembelajaran/lkm-grafting/submissions' },
                     { label: 'Video <i>Grafting</i>', href: 'https://youtu.be/mkKjlcoUSW8?si=Ko0wUBkBeVwdBK8v' },
+                    { label: 'Format Laporan', href: '/asset/Template Laporan Praktikum Grafting Tumbuhan.docx', download: true },
                 ]
             },
             { 
@@ -146,6 +148,7 @@ const navigation = computed(() => {
                     { label: 'Materi Pembelajaran', href: '/mahasiswa/pembelajaran/materi' },
                     { label: 'LKM-<i>Grafting</i>', href: '/mahasiswa/pembelajaran/lkm-grafting' },
                     { label: 'Video <i>Grafting</i>', href: 'https://youtu.be/mkKjlcoUSW8?si=Ko0wUBkBeVwdBK8v' },
+                    { label: 'Format Laporan', href: '/asset/Template Laporan Praktikum Grafting Tumbuhan.docx', download: true },
                 ]
             },
             { 
@@ -240,9 +243,10 @@ const navigation = computed(() => {
                     <div v-show="dropdowns[item.id]" class="mt-0.5 ml-5 pl-3 border-l-1 border-gray-200 space-y-0.5">
                         <template v-for="child in item.children" :key="child.label">
                             <a
-                                v-if="child.href.startsWith('http')"
+                                v-if="child.href.startsWith('http') || child.download"
                                 :href="child.href"
-                                target="_blank"
+                                :target="child.download ? undefined : '_blank'"
+                                :download="child.download ? '' : undefined"
                                 rel="noopener noreferrer"
                                 class="block px-3 py-2 rounded-md text-sm transition-colors whitespace-normal break-words leading-snug text-gray-500 hover:text-gray-800 hover:bg-gray-50"
                             >

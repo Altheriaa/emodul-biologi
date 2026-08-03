@@ -49,67 +49,8 @@ import { Check } from 'lucide-vue-next';
                 <h2 class="font-bold text-base text-gray-800">Petunjuk Penggunaan</h2>
                 <hr class="border-gray-200 mt-3 mb-5">
 
-                <!-- Stepper -->
-                <div class="flex-1 space-y-0">
-
-                    <!-- Step 1 — active -->
-                    <div class="flex gap-3">
-                        <div class="flex flex-col items-center">
-                            <div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center shrink-0 mt-0.5">
-                                <div class="w-2 h-2 rounded-full bg-white"></div>
-                            </div>
-                            <div class="w-0.5 bg-gray-200 flex-1 my-1"></div>
-                        </div>
-                        <div class="pb-5">
-                            <p class="text-sm font-semibold text-gray-800">1. Pelajari Materi Konseptual</p>
-                            <p class="text-xs text-gray-500 mt-0.5">Baca dan pahami materi yang tersedia pada setiap bab.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 2 -->
-                    <div class="flex gap-3">
-                        <div class="flex flex-col items-center">
-                            <div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center shrink-0 mt-0.5">
-                                <div class="w-2 h-2 rounded-full bg-white"></div>
-                            </div>
-                            <div class="w-0.5 bg-gray-200 flex-1 my-1"></div>
-                        </div>
-                        <div class="pb-5">
-                            <p class="text-sm font-semibold text-gray-800">2. Eksplorasi Virtual Lab</p>
-                            <p class="text-xs text-gray-500 mt-0.5">Lakukan praktikum virtual untuk memperdalam pemahaman.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 3 -->
-                    <div class="flex gap-3">
-                        <div class="flex flex-col items-center">
-                            <div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center shrink-0 mt-0.5">
-                                <div class="w-2 h-2 rounded-full bg-white"></div>
-                            </div>
-                            <div class="w-0.5 bg-gray-200 flex-1 my-1"></div>
-                        </div>
-                        <div class="pb-5">
-                            <p class="text-sm font-semibold text-gray-800">3. Kerjakan Lembar Kerja (LKM)</p>
-                            <p class="text-xs text-gray-500 mt-0.5">Selesaikan LKM-<i>Grafting</i> sebagai evaluasi pemahaman.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 4 -->
-                    <div class="flex gap-3">
-                        <div class="flex flex-col items-center">
-                            <div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center shrink-0 mt-0.5">
-                                <div class="w-2 h-2 rounded-full bg-white"></div>
-                            </div>
-                        </div>
-                        <div class="pb-2">
-                            <p class="text-sm font-semibold text-gray-800">4. Ikuti Evaluasi Akhir</p>
-                            <p class="text-xs text-gray-500 mt-0.5">Kerjakan kuis interaktif di akhir setiap bab.</p>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Video Petunjuk Penggunaan -->
-                <div class="mt-5 pt-4 border-t border-gray-100">
+                <div>
                     <p class="text-xs font-semibold text-gray-700 mb-2">Video Petunjuk Penggunaan:</p>
                     <div class="relative w-full overflow-hidden rounded-xl border border-gray-200 shadow-sm aspect-video">
                         <iframe 
